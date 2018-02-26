@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {PasswordConfirmValidator} from './password.match.validator';
+import {User} from '../entity/user';
+import {UserService} from '../service/user.service';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +12,8 @@ import {PasswordConfirmValidator} from './password.match.validator';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private userService: UserService) {
     this.registerForm = this.formBuilder.group({
       'username': new FormControl('', [Validators.required]),
       'password': new FormControl('', [Validators.required]),
@@ -28,8 +31,32 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(form) {
-    console.log('Submit is triggered');
+  onSubmit(userForm) {
+    const user: User = userForm.value;
+    this.userService.createUser(user)
+      .then(() => {
+        alert('Registration successful!');
+      })
+      .catch(errors => this.showValidationErrors(errors));
+  }
+
+  showValidationErrors(errors: any) {
+    //TODO Should be automized
+    if (errors.username) {
+      this.registerForm.get('username').setErrors({server: errors.username});
+    }
+    if (errors.email) {
+      this.registerForm.get('email').setErrors({server: errors.email});
+    }
+    if (errors.password) {
+      this.registerForm.get('password').setErrors({server: errors.password});
+    }
+    if (errors.birthday) {
+      this.registerForm.get('birthday').setErrors({server: errors.birthday});
+    }
+    if (errors.gender) {
+      this.registerForm.get('gender').setErrors({server: errors.gender});
+    }
   }
 
   get username() {
