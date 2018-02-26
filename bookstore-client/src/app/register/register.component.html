@@ -65,6 +65,9 @@
         <div *ngIf="birthday.errors.required">
           Birthday is required.
         </div>
+        <div *ngIf="birthday.errors.pattern">
+          Not a well-formed date
+        </div>
         {{birthday.errors.server}}
       </div>
     </div>
