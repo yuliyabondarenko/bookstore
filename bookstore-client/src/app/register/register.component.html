@@ -36,6 +36,9 @@
         <div *ngIf="passwordConfirm.errors.required">
           Confirm password is required.
         </div>
+        <div *ngIf="passwordConfirm.errors.mismatch">
+          Should match with password.
+        </div>
         {{passwordConfirm.errors.server}}
       </div>
     </div>
