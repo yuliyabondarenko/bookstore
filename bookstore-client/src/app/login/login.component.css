@@ -1,0 +1,13 @@
+form{
+  width: 400px;
+  margin: 0 auto;
+}
+
+#registerLink {
+  width: 100%;
+  text-align: right;
+}
+
+#btn-login{
+  margin-top: 10px;
+}

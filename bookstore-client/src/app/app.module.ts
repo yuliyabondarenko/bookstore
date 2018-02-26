@@ -9,8 +9,10 @@ import {RegisterComponent} from './register/register.component';
 import {UserService} from './service/user.service';
 import {HttpClientModule} from '@angular/common/http';
 import {HomeComponent} from './home/home.component';
+import {LoginComponent} from './login/login.component';
 import {BookComponent} from './book/book.component';
 import {BookService} from './service/book.service';
+
 
 
 @NgModule({
@@ -18,6 +20,7 @@ import {BookService} from './service/book.service';
     AppComponent,
     RegisterComponent,
     HomeComponent,
+    LoginComponent,
     BookComponent
   ],
   imports: [
