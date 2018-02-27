@@ -1,7 +1,6 @@
 package com.nixsolutions.bondarenko.bookstore.entity;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,14 +9,19 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Pattern;
+import com.nixsolutions.bondarenko.bookstore.entity.Order;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @ManyToOne(optional = false)
+    private UserRole role; //TODO Can user have several roles?
 
     @Pattern(regexp = "^[a-zA-Z](([._-][a-zA-Z0-9])|[a-zA-Z0-9]){2,14}$",
             message = "3-15 characters, beginning with letter. Can include letters, numbers, dashes, and underscores")
@@ -37,14 +41,24 @@ public class User {
     //TODO Add Date validation
     //TODO ? Change to string ?
     @Column(nullable = false)
-    private Date birthday;
+    private String birthday;
 
     @Column(nullable = false)
     private String gender;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-        mappedBy = "user", orphanRemoval = true)
-    private List<Order> orders;
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+      mappedBy = "user", orphanRemoval = true)
+  private List<Order> orders;
+
+    public UserRole getRole()
+    {
+        return role;
+    }
+
+    public void setRole(UserRole role)
+    {
+        this.role = role;
+    }
 
     public String getUsername()
     {
@@ -74,11 +88,11 @@ public class User {
         this.email = email;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
