@@ -6,9 +6,23 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import com.nixsolutions.bondarenko.bookstore.security.SecurityUserDetailsService;
+
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
+  private SecurityUserDetailsService userDetailsService;
+
+  public SecurityConfig(SecurityUserDetailsService userDetailsService)
+  {
+    this.userDetailsService = userDetailsService;
+  }
+
+  @Autowired
+  public void configAuthBuilder(AuthenticationManagerBuilder builder) throws Exception
+  {
+    builder.userDetailsService(userDetailsService);
+  }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception
@@ -18,14 +32,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         .anyRequest().authenticated()
         .and().httpBasic()
         .and().csrf().disable();
-  }
-
-  @Autowired
-  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception
-  {
-    auth
-        .inMemoryAuthentication()
-        .withUser("user").password("password").roles("USER")
-        .and().withUser("admin").password("password").roles("ADMIN");
   }
 }
