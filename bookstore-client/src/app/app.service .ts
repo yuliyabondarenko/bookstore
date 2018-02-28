@@ -10,7 +10,7 @@ export class AppService {
   constructor(private http: HttpClient) {
   }
 
-  authenticate(credentials, callback) {
+  authenticate(credentials, successCallback, failedCallback) {
     const auth64 = btoa(credentials.username + ':' + credentials.password);
 
     const httpOptions = {
@@ -23,15 +23,12 @@ export class AppService {
     const authUrl = `${Config.host}/user`;
     this.http.get(authUrl, httpOptions).toPromise()
       .then(response => {
-        const userName = response['name'];
-        this.authenticated = !!userName;
-        alert('Authentication successful! UserName: ' + userName);
-
-        return callback && callback();
+        this.authenticated = !!response['name'];
+        return successCallback && successCallback();
       })
       .catch(response => {
         console.log(response.error);
-        alert(response.error.message);
+        return failedCallback && failedCallback(response.error);
       });
   }
 }

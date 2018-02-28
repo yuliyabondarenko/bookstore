@@ -1,6 +1,11 @@
 <div class="container">
   <h1>Sing up</h1>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)" (ngModelChange)="onChanges()">
+
+    <div *ngIf="loginFormError" class="alert alert-danger">
+      {{loginFormError}}
+    </div>
+
     <div class="form-group">
       <label for="email">Email</label>
       <input id="email" class="form-control"
