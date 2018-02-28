@@ -9,6 +9,7 @@ import {RegisterComponent} from './register/register.component';
 import {UserService} from './service/user.service';
 import {HttpClientModule} from '@angular/common/http';
 import {LoginComponent} from './login/login.component';
+import {AppService} from './app.service ';
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import {LoginComponent} from './login/login.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [UserService],
+  providers: [UserService, AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
