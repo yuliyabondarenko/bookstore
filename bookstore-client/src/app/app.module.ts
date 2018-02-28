@@ -8,6 +8,7 @@ import {AppRoutingModule} from './/app-routing.module';
 import {RegisterComponent} from './register/register.component';
 import {UserService} from './service/user.service';
 import {HttpClientModule} from '@angular/common/http';
+import {HomeComponent} from './home/home.component';
 import {BookComponent} from './book/book.component';
 import {BookService} from './service/book.service';
 
@@ -16,6 +17,7 @@ import {BookService} from './service/book.service';
   declarations: [
     AppComponent,
     RegisterComponent,
+    HomeComponent,
     BookComponent
   ],
   imports: [
@@ -27,4 +29,4 @@ import {BookService} from './service/book.service';
   providers: [UserService, BookService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
