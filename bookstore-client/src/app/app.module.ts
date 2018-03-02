@@ -8,6 +8,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { RegisterComponent } from './register/register.component';
 import {UserService} from './service/user.service';
 import {HttpClientModule} from '@angular/common/http';
+import {RegisterService} from './service/register.user.service';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import {HttpClientModule} from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [UserService],
+  providers: [UserService, RegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

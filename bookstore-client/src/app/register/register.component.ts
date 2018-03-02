@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {PasswordConfirmValidator} from './password.match.validator';
 import {User} from '../entity/user';
-import {UserService} from '../service/user.service';
+import {RegisterService} from '../service/register.user.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private userService: UserService) {
+              private registerService: RegisterService) {
     this.registerForm = this.formBuilder.group({
       'username': new FormControl('', [Validators.required]),
       'password': new FormControl('', [Validators.required]),
@@ -33,11 +33,14 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(userForm) {
     const user: User = userForm.value;
-    this.userService.createUser(user)
+    this.registerService.registerUser(user)
       .then(() => {
         alert('Registration successful!');
       })
-      .catch(errors => this.showValidationErrors(errors));
+      .catch(errors => {
+        alert('Registration failed!');
+        this.showValidationErrors(errors);
+      });
   }
 
   showValidationErrors(errors: any) {
