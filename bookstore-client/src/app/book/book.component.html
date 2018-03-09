@@ -1,0 +1,14 @@
+<div class="container">
+  <h3>Books</h3>
+
+  <table class="table table-bordered">
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+    </tr>
+    <tr *ngFor="let book of books">
+      <td>{{ book.name }}</td>
+      <td>{{ book.price }}</td>
+    </tr>
+  </table>
+</div>
