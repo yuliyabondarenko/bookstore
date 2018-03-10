@@ -29,9 +29,13 @@ public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, Us
 
     if (!isValid)
     {
+      String defaultMessage = validatorContext.getDefaultConstraintMessageTemplate();
+
       validatorContext
-          .buildConstraintViolationWithTemplate(validatorContext.getDefaultConstraintMessageTemplate())
-          .addPropertyNode("email");
+          .disableDefaultConstraintViolation();
+      validatorContext.buildConstraintViolationWithTemplate(defaultMessage)
+          .addPropertyNode("email")
+          .addConstraintViolation();
     }
 
     return isValid;

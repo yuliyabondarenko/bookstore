@@ -10,6 +10,14 @@ import {RegisterService} from '../service/register.user.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  static formFields = [
+    'username',
+    'email',
+    'password',
+    'birthday',
+    'gender'
+  ];
+
   registerForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
@@ -38,28 +46,25 @@ export class RegisterComponent implements OnInit {
         alert('Registration successful!');
       })
       .catch(errors => {
-        alert('Registration failed!');
         this.showValidationErrors(errors);
       });
   }
 
   showValidationErrors(errors: any) {
-    //TODO Should be automized
-    if (errors.username) {
-      this.registerForm.get('username').setErrors({server: errors.username});
-    }
-    if (errors.email) {
-      this.registerForm.get('email').setErrors({server: errors.email});
-    }
-    if (errors.password) {
-      this.registerForm.get('password').setErrors({server: errors.password});
-    }
-    if (errors.birthday) {
-      this.registerForm.get('birthday').setErrors({server: errors.birthday});
-    }
-    if (errors.gender) {
-      this.registerForm.get('gender').setErrors({server: errors.gender});
-    }
+    let self = this;
+
+    Object.keys(errors.fieldErrors).forEach(fieldPath => {
+      RegisterComponent.formFields.forEach(function (field) {
+        if (fieldPath.endsWith(field)) {
+          self.setFieldError(field, errors.fieldErrors[fieldPath])
+        }
+      });
+    });
+  }
+
+  setFieldError(field: string, errorMessage: string): void {
+    this.registerForm.get(field)
+      .setErrors({server: errorMessage});
   }
 
   get username() {
