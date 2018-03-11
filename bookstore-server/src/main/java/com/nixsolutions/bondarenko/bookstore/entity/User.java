@@ -1,13 +1,17 @@
 package com.nixsolutions.bondarenko.bookstore.entity;
 
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Past;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Pattern;
-import java.util.Date;
 
 @Entity
 public class User {
@@ -32,13 +36,15 @@ public class User {
 
     //TODO Add Date validation
     //TODO ? Change to string ?
-    @Past
     @Column(nullable = false)
     private Date birthday;
 
     @Column(nullable = false)
     private String gender;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+        mappedBy = "user", orphanRemoval = true)
+    private List<Order> orders;
 
     public String getUsername()
     {
@@ -82,5 +88,13 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

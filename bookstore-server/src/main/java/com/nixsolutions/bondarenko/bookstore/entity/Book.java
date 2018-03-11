@@ -16,6 +16,12 @@ public class Book
   @Column(nullable = false)
   private String name;
 
+  @Column(nullable = true)
+  private String photo;
+
+  @Column(columnDefinition = "boolean default true", nullable = false)
+  private boolean visible;
+
   @Column(nullable = false)
   private Double price;
 
@@ -27,6 +33,22 @@ public class Book
   public void setName(String name)
   {
     this.name = name;
+  }
+
+  public String getPhoto() {
+    return photo;
+  }
+
+  public void setPhoto(String photo) {
+    this.photo = photo;
+  }
+
+  public boolean isVisible() {
+    return visible;
+  }
+
+  public void setVisible(boolean visible) {
+    this.visible = visible;
   }
 
   public Double getPrice()
