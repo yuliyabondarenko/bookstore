@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Config} from './config';
+import {Config} from '../config';
 
 @Injectable()
-export class AppService {
+export class AuthService {
 
   authenticated = false;
 
@@ -11,12 +11,12 @@ export class AppService {
   }
 
   authenticate(credentials, successCallback, failedCallback) {
-    const auth64 = btoa(credentials.username + ':' + credentials.password);
+    const basicAuth = 'Basic ' + btoa(credentials.username + ':' + credentials.password);
 
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + auth64
+        'Authorization': basicAuth
       })
     };
 
@@ -24,9 +24,14 @@ export class AppService {
     this.http.get(authUrl, httpOptions).toPromise()
       .then(response => {
         this.authenticated = !!response['name'];
+        if ( this.authenticated ) {
+          localStorage.authorization = basicAuth;
+        }
         return successCallback && successCallback();
       })
       .catch(response => {
+        localStorage.authorization = null;
+
         console.log(response.error);
         return failedCallback && failedCallback(response.error);
       });

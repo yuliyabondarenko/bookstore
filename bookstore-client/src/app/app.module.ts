@@ -10,9 +10,9 @@ import {UserService} from './service/user.service';
 import {HttpClientModule} from '@angular/common/http';
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
-import {AppService} from './app.service ';
 import {BookComponent} from './book/book.component';
 import {BookService} from './service/book.service';
+import {AuthService} from './service/auth.service ';
 
 
 
@@ -30,7 +30,7 @@ import {BookService} from './service/book.service';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [UserService, AppService, BookService],
+  providers: [UserService, AuthService, BookService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

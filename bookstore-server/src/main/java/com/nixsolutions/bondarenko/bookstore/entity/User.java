@@ -1,6 +1,6 @@
 package com.nixsolutions.bondarenko.bookstore.entity;
 
-import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Pattern;
-import com.nixsolutions.bondarenko.bookstore.entity.Order;
 
 @Entity
 public class User {
