@@ -1,10 +1,14 @@
 package com.nixsolutions.bondarenko.bookstore.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Book
@@ -25,6 +29,9 @@ public class Book
   @Column(nullable = false)
   private Double price;
 
+  @ManyToMany(targetEntity = Order.class)
+  private List<Order> orders = new ArrayList<>();
+
   public String getName()
   {
     return name;
@@ -35,19 +42,23 @@ public class Book
     this.name = name;
   }
 
-  public String getPhoto() {
+  public String getPhoto()
+  {
     return photo;
   }
 
-  public void setPhoto(String photo) {
+  public void setPhoto(String photo)
+  {
     this.photo = photo;
   }
 
-  public boolean isVisible() {
+  public boolean isVisible()
+  {
     return visible;
   }
 
-  public void setVisible(boolean visible) {
+  public void setVisible(boolean visible)
+  {
     this.visible = visible;
   }
 
@@ -59,5 +70,15 @@ public class Book
   public void setPrice(Double price)
   {
     this.price = price;
+  }
+
+  public List<Order> getOrders()
+  {
+    return orders;
+  }
+
+  public void setOrders(List<Order> orders)
+  {
+    this.orders = orders;
   }
 }

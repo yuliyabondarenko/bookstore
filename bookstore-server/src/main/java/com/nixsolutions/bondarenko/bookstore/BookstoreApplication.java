@@ -64,12 +64,13 @@ public class BookstoreApplication
     book2.setName("2984, George Orwell");
     book2.setPrice(23.55);
 
+		bookRepository.save(book2);
 
 		Book book3 = new Book();
     book3.setName("3984, George Orwell");
     book3.setPrice(33.55);
 
-		bookRepository.save(book2);
+		bookRepository.save(book3);
 
 		// -------------ORDERS--------------
 		Order order1 = new Order();

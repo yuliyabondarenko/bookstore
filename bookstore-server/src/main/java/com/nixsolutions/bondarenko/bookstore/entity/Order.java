@@ -1,9 +1,13 @@
 package com.nixsolutions.bondarenko.bookstore.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -15,37 +19,44 @@ public class Order
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
-  @ManyToOne(optional = false)
-  private Book book;
+  @ManyToMany(targetEntity = Book.class)
+  private List<Book> books = new ArrayList<>();
 
   @ManyToOne(optional = false)
   private User user;
 
-  public Order() {
+  public Order()
+  {
   }
 
-  public Order(Book book, User user) {
-    this.book = book;
+  public Order(List<Book> books, User user)
+  {
+    this.books = books;
     this.user = user;
   }
 
-  public long getId() {
+  public long getId()
+  {
     return id;
   }
 
-  public Book getBook() {
-    return book;
+  public List<Book> getBooks()
+  {
+    return books;
   }
 
-  public void setBook(Book book) {
-    this.book = book;
+  public void setBooks(List<Book> books)
+  {
+    this.books = books;
   }
 
-  public User getUser() {
+  public User getUser()
+  {
     return user;
   }
 
-  public void setUser(User user) {
+  public void setUser(User user)
+  {
     this.user = user;
   }
 }
