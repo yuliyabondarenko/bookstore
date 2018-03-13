@@ -12,14 +12,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "book_order")
+@Table(name = "user_order")
 public class Order
 {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
-  @ManyToMany(targetEntity = Book.class)
+  @ManyToMany
   private List<Book> books = new ArrayList<>();
 
   @ManyToOne(optional = false)
