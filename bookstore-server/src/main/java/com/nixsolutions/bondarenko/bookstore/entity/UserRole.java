@@ -1,7 +1,11 @@
 package com.nixsolutions.bondarenko.bookstore.entity;
 
+import com.nixsolutions.bondarenko.bookstore.entity.enums.Role;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,26 +17,27 @@ public class UserRole
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
+  @Enumerated(EnumType.STRING)
   @Column(unique = true, nullable = false)
-  private String name;
+  private Role name;
 
   public UserRole()
   {
   }
 
-  public UserRole(long id, String name)
+  public UserRole(long id, Role role)
   {
     this.id = id;
-    this.name = name;
+    this.name = role;
   }
 
-  public String getName()
+  public Role getName()
   {
     return name;
   }
 
-  public void setName(String name)
+  public void setName(Role role)
   {
-    this.name = name;
+    this.name = role;
   }
 }

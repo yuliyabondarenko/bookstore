@@ -1,12 +1,12 @@
 package com.nixsolutions.bondarenko.bookstore;
 
 import java.util.Arrays;
-import java.util.Date;
 import javax.annotation.PostConstruct;
 
 import com.nixsolutions.bondarenko.bookstore.entity.Order;
 import com.nixsolutions.bondarenko.bookstore.entity.User;
 import com.nixsolutions.bondarenko.bookstore.entity.UserRole;
+import com.nixsolutions.bondarenko.bookstore.entity.enums.Role;
 import com.nixsolutions.bondarenko.bookstore.repository.OrderRepository;
 import com.nixsolutions.bondarenko.bookstore.repository.UserRepository;
 import com.nixsolutions.bondarenko.bookstore.repository.UserRoleRepository;
@@ -36,8 +36,8 @@ public class BookstoreApplication
 	public @PostConstruct
 	void init()
 	{
-		UserRole roleUser = userRoleRepository.save(new UserRole(1, "USER"));
-		UserRole roleAdmin = userRoleRepository.save(new UserRole(2, "ADMIN"));
+		UserRole roleUser = userRoleRepository.save(new UserRole(1, Role.USER));
+		UserRole roleAdmin = userRoleRepository.save(new UserRole(2, Role.ADMIN));
 		// -------------USERS--------------
 
 		User userUser = new User();
