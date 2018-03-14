@@ -1,26 +1,33 @@
 package com.nixsolutions.bondarenko.bookstore.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "user_order")
-public class Order
+public class Order implements Serializable
 {
+  private static final long serialVersionUID = -4304333239034772283L;
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
-  @ManyToMany
-  private List<Book> books = new ArrayList<>();
+  private Date date;
+
+  @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "order")
+  private List<OrderBookPrice> orderBookPrices = new ArrayList<>();
 
   @ManyToOne(optional = false)
   private User user;
@@ -29,10 +36,11 @@ public class Order
   {
   }
 
-  public Order(List<Book> books, User user)
+  public Order(Date date, User user, List<OrderBookPrice> orderBookPrice)
   {
-    this.books = books;
+    this.date = date;
     this.user = user;
+    this.orderBookPrices = orderBookPrice;
   }
 
   public long getId()
@@ -40,14 +48,14 @@ public class Order
     return id;
   }
 
-  public List<Book> getBooks()
+  public Date getDate()
   {
-    return books;
+    return date;
   }
 
-  public void setBooks(List<Book> books)
+  public void setDate(Date date)
   {
-    this.books = books;
+    this.date = date;
   }
 
   public User getUser()
@@ -58,5 +66,15 @@ public class Order
   public void setUser(User user)
   {
     this.user = user;
+  }
+
+  public List<OrderBookPrice> getOrderBookPrices()
+  {
+    return orderBookPrices;
+  }
+
+  public void setOrderBookPrices(List<OrderBookPrice> orderBookPrices)
+  {
+    this.orderBookPrices = orderBookPrices;
   }
 }

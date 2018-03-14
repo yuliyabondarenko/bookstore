@@ -1,19 +1,18 @@
 package com.nixsolutions.bondarenko.bookstore.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 @Entity
-public class Book
+public class Book implements Serializable
 {
+  private static final long serialVersionUID = 5404904932186585449L;
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
@@ -29,9 +28,6 @@ public class Book
 
   @Column(nullable = false)
   private Double price;
-
-  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "books")
-  private List<Order> orders = new ArrayList<>();
 
   public String getName()
   {
@@ -71,15 +67,5 @@ public class Book
   public void setPrice(Double price)
   {
     this.price = price;
-  }
-
-  public List<Order> getOrders()
-  {
-    return orders;
-  }
-
-  public void setOrders(List<Order> orders)
-  {
-    this.orders = orders;
   }
 }
