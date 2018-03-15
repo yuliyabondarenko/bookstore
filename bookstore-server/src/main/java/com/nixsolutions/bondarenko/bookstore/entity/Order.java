@@ -77,4 +77,11 @@ public class Order implements Serializable
   {
     this.orderBookPrices = orderBookPrices;
   }
+
+  public Double getPrice()
+  {
+    return getOrderBookPrices().stream()
+        .mapToDouble(OrderBookPrice::getBookPrice)
+        .sum();
+  }
 }

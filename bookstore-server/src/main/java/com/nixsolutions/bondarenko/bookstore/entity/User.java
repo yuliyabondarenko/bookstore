@@ -1,5 +1,6 @@
 package com.nixsolutions.bondarenko.bookstore.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,9 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Pattern;
 
 @Entity
-public class User {
+public class User  implements Serializable{
+    private static final long serialVersionUID = -8521008567463876822L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
