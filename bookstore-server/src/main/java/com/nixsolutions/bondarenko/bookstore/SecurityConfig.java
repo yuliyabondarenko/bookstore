@@ -42,6 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         .authorizeRequests()
         .anyRequest().authenticated()
       .and()
+        .logout().logoutUrl("logout")
+      .and()
         .csrf().disable();
   }
 }
