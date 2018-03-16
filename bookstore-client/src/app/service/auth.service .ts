@@ -8,7 +8,11 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  authenticate(credentials, successCallback, failedCallback) {
+  isAuthorized(): boolean {
+    return localStorage.authorization || false;
+  }
+
+  authenticate(credentials): Promise<any> {
     const basicAuth = 'Basic ' + btoa(credentials.username + ':' + credentials.password);
 
     const httpOptions = {
@@ -18,20 +22,23 @@ export class AuthService {
       })
     };
 
-    const authUrl = `${Config.host}/user`;
-    this.http.get(authUrl, httpOptions).toPromise()
+    return this.http.get(`${Config.host}/user`, httpOptions)
+      .toPromise()
       .then(response => {
-        if ( !!response['name'] ) {
-          localStorage.authorization = basicAuth;
+          if ( !!response['name'] ) {
+            localStorage.authorization = basicAuth;
+          }
         }
-        return successCallback && successCallback();
-      })
+      )
       .catch(response => {
+        alert('error cautched in Catch');
         this.clearAuthorization();
-
-        console.log(response.error);
-        return failedCallback && failedCallback(response.error);
+        return Promise.reject(response.error);
       });
+  }
+
+  clearAuthorization() {
+    localStorage.removeItem('authorization');
   }
 
   logout(): Promise<void> {
@@ -52,13 +59,5 @@ export class AuthService {
         this.clearAuthorization(); // because something went wrong
         console.log('Failed logout: ' + response.error.error);
       });
-  }
-
-  isAuthorized(): boolean {
-    return localStorage.authorization || false;
-  }
-
-  clearAuthorization() {
-    localStorage.removeItem('authorization');
   }
 }

@@ -29,26 +29,16 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(loginForm) {
-
     this.credentials.username = loginForm.get('email').value;
     this.credentials.password = loginForm.get('password').value;
 
-    this.authService.authenticate(this.credentials,
-      () => {
-        this.successLogin();
-      },
-      (error) => {
-        this.failedLogin(error);
+    this.authService.authenticate(this.credentials)
+      .then(() => {
+        this.router.navigateByUrl('/');
+      })
+      .catch((error) => {
+        this.loginFormError = error.message ? error.message : 'Login failed';
       });
-    return false;
-  }
-
-  successLogin() {
-    this.router.navigateByUrl('/');
-  }
-
-  failedLogin(error: any) {
-    this.loginFormError = error.message ? error.message : 'Login failed';
   }
 
   get email() {
