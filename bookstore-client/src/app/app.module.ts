@@ -13,6 +13,7 @@ import {LoginComponent} from './login/login.component';
 import {BookComponent} from './book/book.component';
 import {BookService} from './service/book.service';
 import {AuthService} from './service/auth.service ';
+import {RegisterService} from './service/register.user.service';
 
 
 
@@ -30,7 +31,12 @@ import {AuthService} from './service/auth.service ';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [UserService, AuthService, BookService],
+  providers: [
+    UserService,
+    AuthService,
+    BookService,
+    RegisterService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

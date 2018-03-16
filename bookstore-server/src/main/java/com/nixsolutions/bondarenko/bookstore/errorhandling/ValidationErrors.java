@@ -8,21 +8,25 @@ public class ValidationErrors implements Serializable
 {
   private static final long serialVersionUID = -4902389794332906691L;
 
-  //TODO rename this field
-  private Map<String, String> validationErrors; //TODO change to Map<String, List<String>>
+  private Map<String, String> fieldErrors;
 
   public ValidationErrors()
   {
-    validationErrors = new HashMap<>();
+    fieldErrors = new HashMap<>();
   }
 
-  public ValidationErrors(Map<String, String> validationErrors)
+  public ValidationErrors(Map<String, String> fieldErrors)
   {
-    this.validationErrors = validationErrors;
+    this.fieldErrors = fieldErrors;
   }
 
-  public Map<String, String> getValidationErrors()
+  public Map<String, String> getFieldErrors()
   {
-    return validationErrors;
+    return fieldErrors;
+  }
+
+  public void setFieldErrors(Map<String, String> fieldErrors)
+  {
+    this.fieldErrors = fieldErrors;
   }
 }

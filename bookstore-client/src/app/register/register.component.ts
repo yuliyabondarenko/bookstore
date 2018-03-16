@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {PasswordConfirmValidator} from './password.match.validator';
 import {User} from '../entity/user';
-import {UserService} from '../service/user.service';
+import {RegisterService} from '../service/register.user.service';
 
 @Component({
   selector: 'app-register',
@@ -10,10 +10,18 @@ import {UserService} from '../service/user.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  static formFields = [
+    'username',
+    'email',
+    'password',
+    'birthday',
+    'gender'
+  ];
+
   registerForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private userService: UserService) {
+              private registerService: RegisterService) {
     this.registerForm = this.formBuilder.group({
       'username': new FormControl('', [Validators.required]),
       'password': new FormControl('', [Validators.required]),
@@ -33,30 +41,30 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(userForm) {
     const user: User = userForm.value;
-    this.userService.createUser(user)
+    this.registerService.registerUser(user)
       .then(() => {
         alert('Registration successful!');
       })
-      .catch(errors => this.showValidationErrors(errors));
+      .catch(errors => {
+        this.showValidationErrors(errors);
+      });
   }
 
   showValidationErrors(errors: any) {
-    //TODO Should be automized
-    if (errors.username) {
-      this.registerForm.get('username').setErrors({server: errors.username});
-    }
-    if (errors.email) {
-      this.registerForm.get('email').setErrors({server: errors.email});
-    }
-    if (errors.password) {
-      this.registerForm.get('password').setErrors({server: errors.password});
-    }
-    if (errors.birthday) {
-      this.registerForm.get('birthday').setErrors({server: errors.birthday});
-    }
-    if (errors.gender) {
-      this.registerForm.get('gender').setErrors({server: errors.gender});
-    }
+    let self = this;
+
+    Object.keys(errors.fieldErrors).forEach(fieldPath => {
+      RegisterComponent.formFields.forEach(function (field) {
+        if (fieldPath.endsWith(field)) {
+          self.setFieldError(field, errors.fieldErrors[fieldPath])
+        }
+      });
+    });
+  }
+
+  setFieldError(field: string, errorMessage: string): void {
+    this.registerForm.get(field)
+      .setErrors({server: errorMessage});
   }
 
   get username() {
