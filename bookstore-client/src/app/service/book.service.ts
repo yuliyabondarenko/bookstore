@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Config} from '../config';
 
 @Injectable()
@@ -11,8 +11,14 @@ export class BookService {
 
   getBooks(): Promise<any> {
 
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.authorization
+      })
+    };
+
     return this.http
-      .get(this.bookUrl)
+      .get(this.bookUrl, httpOptions)
       .toPromise()
       .then(response => {
           return response;

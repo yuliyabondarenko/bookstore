@@ -7,8 +7,11 @@ import javax.annotation.PostConstruct;
 import com.nixsolutions.bondarenko.bookstore.entity.Order;
 import com.nixsolutions.bondarenko.bookstore.entity.OrderBookPrice;
 import com.nixsolutions.bondarenko.bookstore.entity.User;
+import com.nixsolutions.bondarenko.bookstore.entity.UserRole;
+import com.nixsolutions.bondarenko.bookstore.entity.enums.Role;
 import com.nixsolutions.bondarenko.bookstore.repository.OrderRepository;
 import com.nixsolutions.bondarenko.bookstore.repository.UserRepository;
+import com.nixsolutions.bondarenko.bookstore.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +25,8 @@ public class BookstoreApplication
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
+	private UserRoleRepository userRoleRepository;
+	@Autowired
 	private BookRepository bookRepository;
 	@Autowired
 	private OrderRepository orderRepository;
@@ -33,22 +38,26 @@ public class BookstoreApplication
 	public @PostConstruct
 	void init()
 	{
+		UserRole roleUser = userRoleRepository.save(new UserRole(1, Role.USER));
+		UserRole roleAdmin = userRoleRepository.save(new UserRole(2, Role.ADMIN));
 		// -------------USERS--------------
 
 		User userUser = new User();
+		userUser.setRole(roleUser);
 		userUser.setUsername("user");
 		userUser.setEmail("user@mail.ru");
 		userUser.setPassword("Qwerty123");
-		userUser.setBirthday(new Date());
+		userUser.setBirthday("1991-09-09");
 		userUser.setGender("FEMALE");
 
 		userRepository.save(userUser);
 
 		User userAdmin = new User();
+		userAdmin.setRole(roleAdmin);
 		userAdmin.setUsername("admin");
 		userAdmin.setEmail("admin@mail.ru");
 		userAdmin.setPassword("Qwerty123");
-		userAdmin.setBirthday(new Date());
+		userAdmin.setBirthday("1991-09-09");
 		userAdmin.setGender("MALE");
 
 		userRepository.save(userAdmin);
