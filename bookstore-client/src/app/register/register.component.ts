@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {PasswordConfirmValidator} from './password.match.validator';
 import {User} from '../entity/user';
 import {RegisterService} from '../service/register.user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +22,8 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private registerService: RegisterService) {
+              private registerService: RegisterService,
+              private router: Router) {
     this.registerForm = this.formBuilder.group({
       'username': new FormControl('', [Validators.required]),
       'password': new FormControl('', [Validators.required]),
@@ -43,7 +45,8 @@ export class RegisterComponent implements OnInit {
     const user: User = userForm.value;
     this.registerService.registerUser(user)
       .then(() => {
-        alert('Registration successful!');
+        alert('Registration successful! Please login');
+        this.router.navigateByUrl('login');
       })
       .catch(errors => {
         this.showValidationErrors(errors);
@@ -51,7 +54,7 @@ export class RegisterComponent implements OnInit {
   }
 
   showValidationErrors(errors: any) {
-    let self = this;
+    const self = this;
 
     Object.keys(errors.fieldErrors).forEach(fieldPath => {
       RegisterComponent.formFields.forEach(function (field) {
