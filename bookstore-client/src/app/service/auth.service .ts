@@ -31,7 +31,6 @@ export class AuthService {
         }
       )
       .catch(response => {
-        alert('error cautched in Catch');
         this.clearAuthorization();
         return Promise.reject(response.error);
       });

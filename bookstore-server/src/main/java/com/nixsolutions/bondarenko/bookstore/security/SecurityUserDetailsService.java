@@ -20,10 +20,10 @@ public class SecurityUserDetailsService implements UserDetailsService
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
   {
-    List<User> byUsername = userRepository.findByUsername(username); //TODO get unique users
-    if(byUsername.isEmpty()){
-      throw new UsernameNotFoundException("User '" + username + "' not found");
+    User user = userRepository.findOneByEmail(username);
+    if(user == null){
+      throw new UsernameNotFoundException("User with email '" + username + "' doesn't exist");
     }
-    return new SecurityUserDetails(byUsername.get(0));
+    return new SecurityUserDetails(user);
   }
 }
