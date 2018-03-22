@@ -10,9 +10,13 @@ import {Router} from '@angular/router';
 export class HomeComponent implements OnInit {
   userName: String;
   isAuthorizedUser: boolean;
+  isUser: boolean;
+  isAdmin: boolean;
 
   constructor(private authService: AuthService, private router: Router) {
     this.isAuthorizedUser = this.authService.isAuthorized();
+    this.isUser = this.authService.isUser();
+    this.isAdmin = this.authService.isAdmin();
   }
 
   ngOnInit() {

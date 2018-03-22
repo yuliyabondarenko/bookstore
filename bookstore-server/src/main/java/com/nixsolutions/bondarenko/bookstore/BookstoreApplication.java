@@ -43,7 +43,7 @@ public class BookstoreApplication
 		// -------------USERS--------------
 
 		User userUser = new User();
-		userUser.setRole(roleUser);
+		userUser.getRoles().add(roleUser);
 		userUser.setUsername("user");
 		userUser.setEmail("user@mail.ru");
 		userUser.setPassword("Qwerty123");
@@ -53,7 +53,8 @@ public class BookstoreApplication
 		userRepository.save(userUser);
 
 		User userAdmin = new User();
-		userAdmin.setRole(roleAdmin);
+		userAdmin.getRoles().add(roleUser);
+		userAdmin.getRoles().add(roleAdmin);
 		userAdmin.setUsername("admin");
 		userAdmin.setEmail("admin@mail.ru");
 		userAdmin.setPassword("Qwerty123");

@@ -1,7 +1,7 @@
 package com.nixsolutions.bondarenko.bookstore.security;
 
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import com.nixsolutions.bondarenko.bookstore.entity.User;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,7 +20,9 @@ public class SecurityUserDetails implements UserDetails
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities()
   {
-    return Arrays.asList(new SimpleGrantedAuthority(user.getRole().getName().name()));
+    return user.getRoles().stream()
+        .map(role -> new SimpleGrantedAuthority(role.getName().name()))
+        .collect(Collectors.toList());
   }
 
   @Override

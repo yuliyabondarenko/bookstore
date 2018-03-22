@@ -1,6 +1,7 @@
 package com.nixsolutions.bondarenko.bookstore.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,7 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Pattern;
 
@@ -22,8 +23,8 @@ public class User  implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne(optional = false)
-    private UserRole role; //TODO Can user have several roles?
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<UserRole> roles = new ArrayList<>();
 
     @Pattern(regexp = "^[a-zA-Z](([._-][a-zA-Z0-9])|[a-zA-Z0-9]){2,14}$",
             message = "3-15 characters, beginning with letter. Can include letters, numbers, dashes, and underscores")
@@ -52,14 +53,9 @@ public class User  implements Serializable{
         mappedBy = "user", orphanRemoval = true)
     private List<Order> orders;
 
-    public UserRole getRole()
+    public List<UserRole> getRoles()
     {
-        return role;
-    }
-
-    public void setRole(UserRole role)
-    {
-        this.role = role;
+        return roles;
     }
 
     public String getUsername()

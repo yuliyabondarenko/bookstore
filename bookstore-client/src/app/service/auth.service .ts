@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Config} from '../config';
+import {isNullOrUndefined} from 'util';
 
 @Injectable()
 export class AuthService {
@@ -9,7 +10,7 @@ export class AuthService {
   }
 
   isAuthorized(): boolean {
-    return localStorage.authorization || false;
+    return !isNullOrUndefined(localStorage.authorization);
   }
 
   authenticate(credentials): Promise<any> {
@@ -27,6 +28,7 @@ export class AuthService {
       .then(response => {
           if ( !!response['name'] ) {
             localStorage.authorization = basicAuth;
+            this.initialiseRoles(response['authorities']);
           }
         }
       )
@@ -36,8 +38,11 @@ export class AuthService {
       });
   }
 
-  clearAuthorization() {
-    localStorage.removeItem('authorization');
+  initialiseRoles(authorities) {
+    localStorage.roles = '';
+    authorities.forEach(function (item) {
+      localStorage.roles += item['authority'] + ',';
+    });
   }
 
   logout(): Promise<void> {
@@ -55,8 +60,34 @@ export class AuthService {
         this.clearAuthorization();
       })
       .catch(response => {
-        this.clearAuthorization(); // because something went wrong
+        this.clearAuthorization();
         console.log('Failed logout: ' + response.error.error);
       });
+  }
+
+  clearAuthorization() {
+    localStorage.removeItem('authorization');
+    localStorage.removeItem('roles');
+  }
+
+  isUser(): boolean {
+    return this.hasRole('USER');
+  }
+
+  isAdmin(): boolean {
+    return this.hasRole('ADMIN');
+  }
+
+  hasRole(roleName: string): boolean {
+    if (!this.isAuthorized()) {
+      return false;
+    }
+    let hasRole = false;
+    localStorage.roles.split(',').forEach(function (role) {
+      if ( role === roleName ) {
+        hasRole = true;
+      }
+    });
+    return hasRole;
   }
 }

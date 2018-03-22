@@ -29,7 +29,7 @@ public class RegistrationController
   @RequestMapping(method = RequestMethod.POST)
   public ResponseEntity<User> register(@RequestBody @Valid @UniqueEmail User user)
   {
-    user.setRole(userRoleRepository.findOneByName(Role.USER));
+    user.getRoles().add(userRoleRepository.findOneByName(Role.USER));
     User newUser = userRepository.save(user);
 
     return ResponseEntity.ok(newUser);

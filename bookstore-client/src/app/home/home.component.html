@@ -1,6 +1,15 @@
-<p>
-  home works!
-</p>
+<div *ngIf="isUser">
+  <h4>
+    I am user!
+  </h4>
+</div>
+
+<div *ngIf="isAdmin">
+  <h4>
+    I am admin!
+  </h4>
+</div>
+
 <div *ngIf="isAuthorizedUser">
   <button class="btn btn-primary" (click)="logout()">
     Logout
