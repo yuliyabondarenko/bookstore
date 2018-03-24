@@ -14,6 +14,7 @@ import {BookComponent} from './book/book.component';
 import {BookService} from './service/book.service';
 import {AuthService} from './service/auth.service ';
 import {RegisterService} from './service/register.user.service';
+import { MaterialModule } from './material.module';
 
 
 
@@ -30,6 +31,7 @@ import {RegisterService} from './service/register.user.service';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MaterialModule
   ],
   providers: [
     UserService,
