@@ -10,7 +10,7 @@ export class AuthService {
   }
 
   isAuthorized(): boolean {
-    return !isNullOrUndefined(localStorage.authorization);
+    return !isNullOrUndefined(sessionStorage.authorization);
   }
 
   authenticate(credentials): Promise<any> {
@@ -25,10 +25,9 @@ export class AuthService {
 
     return this.http.get(`${Config.host}/user`, httpOptions)
       .toPromise()
-      .then(response => {
-          if ( !!response['name'] ) {
-            localStorage.authorization = basicAuth;
-            this.initialiseRoles(response['authorities']);
+      .then(principal => {
+          if (!!principal['name']) {
+            this.initSession(basicAuth, principal);
           }
         }
       )
@@ -38,10 +37,16 @@ export class AuthService {
       });
   }
 
-  initialiseRoles(authorities) {
-    localStorage.roles = '';
+  initSession(authorization: String, userPrincipal: Object) {
+    sessionStorage.authorization = authorization;
+    sessionStorage.userName = userPrincipal['name'];
+    this.initRoles(userPrincipal['authorities']);
+  }
+
+  initRoles(authorities) {
+    sessionStorage.roles = '';
     authorities.forEach(function (item) {
-      localStorage.roles += item['authority'] + ',';
+      sessionStorage.roles += item['authority'] + ',';
     });
   }
 
@@ -50,7 +55,7 @@ export class AuthService {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': localStorage.authorization
+        'Authorization': sessionStorage.authorization
       })
     };
 
@@ -66,8 +71,16 @@ export class AuthService {
   }
 
   clearAuthorization() {
-    localStorage.removeItem('authorization');
-    localStorage.removeItem('roles');
+    sessionStorage.removeItem('authorization');
+    sessionStorage.removeItem('roles');
+  }
+
+  getAuthorization(): string {
+    return sessionStorage.authorization;
+  }
+
+  getUserName(): string{
+    return sessionStorage.getItem('userName');
   }
 
   isUser(): boolean {
@@ -83,8 +96,8 @@ export class AuthService {
       return false;
     }
     let hasRole = false;
-    localStorage.roles.split(',').forEach(function (role) {
-      if ( role === roleName ) {
+    sessionStorage.roles.split(',').forEach(function (role) {
+      if (role === roleName) {
         hasRole = true;
       }
     });
