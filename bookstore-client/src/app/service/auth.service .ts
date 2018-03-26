@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Config} from '../config';
-import {isNullOrUndefined} from 'util';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Config } from '../config';
+import { isNullOrUndefined } from 'util';
 
 @Injectable()
 export class AuthService {
@@ -9,8 +9,37 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  isAuthorized(): boolean {
+  get isAuthorized(): boolean {
     return !isNullOrUndefined(sessionStorage.authorization);
+  }
+
+  get authorization(): string {
+    return sessionStorage.authorization;
+  }
+
+  get userName(): string {
+    return sessionStorage.getItem('userName');
+  }
+
+  get isUser(): boolean {
+    return this.hasRole('USER');
+  }
+
+  get isAdmin(): boolean {
+    return this.hasRole('ADMIN');
+  }
+
+  private hasRole(roleName: string): boolean {
+    if ( !this.isAuthorized ) {
+      return false;
+    }
+    let hasRole = false;
+    sessionStorage.roles.split(',').forEach(function (role) {
+      if ( role === roleName ) {
+        hasRole = true;
+      }
+    });
+    return hasRole;
   }
 
   authenticate(credentials): Promise<any> {
@@ -26,7 +55,7 @@ export class AuthService {
     return this.http.get(`${Config.host}/user`, httpOptions)
       .toPromise()
       .then(principal => {
-          if (!!principal['name']) {
+          if ( !!principal['name'] ) {
             this.initSession(basicAuth, principal);
           }
         }
@@ -37,13 +66,13 @@ export class AuthService {
       });
   }
 
-  initSession(authorization: String, userPrincipal: Object) {
+  private initSession(authorization: String, userPrincipal: Object) {
     sessionStorage.authorization = authorization;
     sessionStorage.userName = userPrincipal['name'];
     this.initRoles(userPrincipal['authorities']);
   }
 
-  initRoles(authorities) {
+  private initRoles(authorities) {
     sessionStorage.roles = '';
     authorities.forEach(function (item) {
       sessionStorage.roles += item['authority'] + ',';
@@ -70,37 +99,8 @@ export class AuthService {
       });
   }
 
-  clearAuthorization() {
+  private clearAuthorization() {
     sessionStorage.removeItem('authorization');
     sessionStorage.removeItem('roles');
-  }
-
-  getAuthorization(): string {
-    return sessionStorage.authorization;
-  }
-
-  getUserName(): string{
-    return sessionStorage.getItem('userName');
-  }
-
-  isUser(): boolean {
-    return this.hasRole('USER');
-  }
-
-  isAdmin(): boolean {
-    return this.hasRole('ADMIN');
-  }
-
-  hasRole(roleName: string): boolean {
-    if (!this.isAuthorized()) {
-      return false;
-    }
-    let hasRole = false;
-    sessionStorage.roles.split(',').forEach(function (role) {
-      if (role === roleName) {
-        hasRole = true;
-      }
-    });
-    return hasRole;
   }
 }

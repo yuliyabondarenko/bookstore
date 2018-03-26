@@ -14,7 +14,7 @@ export class BookService {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': this.authService.getAuthorization()
+        'Authorization': this.authService.authorization
       })
     };
 

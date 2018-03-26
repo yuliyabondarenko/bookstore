@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {BookService} from '../service/book.service';
-import {Book} from '../entity/book';
+import { Component, OnInit } from '@angular/core';
+import { BookService } from '../../service/book.service';
+import { Book } from '../../entity/book';
 
 @Component({
-  selector: 'app-book',
-  templateUrl: './book.component.html',
-  styleUrls: ['./book.component.css']
+  selector: 'app-manage-books',
+  templateUrl: './manage-books.component.html',
+  styleUrls: ['./manage-books.component.css']
 })
-export class BookComponent implements OnInit {
+export class ManageBooksComponent implements OnInit {
 
   books: Book[];
 

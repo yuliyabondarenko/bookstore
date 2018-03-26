@@ -1,0 +1,19 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav class="sidenav" mode="side" opened>
+    <mat-list>
+      <mat-list-item>
+        <a routerLink="profile">Profile</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a routerLink="users">Users</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a routerLink="books">Books</a>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="sidenav-content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

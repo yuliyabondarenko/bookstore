@@ -1,6 +1,15 @@
-<mat-card>Bookstore</mat-card>
+<mat-toolbar color="primary" class="app-header">
+  <mat-toolbar-row>
+    <span *ngIf="isAuthorized">Hello, {{userName}}!</span>
+    <span class="text-center">BOOKSTORE</span>
+    <button *ngIf="isAuthorized" mat-button routerLink="home">Home</button>
+    <button *ngIf="isAuthorized" mat-button (click)="logout()">Logout</button>
+    <button *ngIf="!isAuthorized" mat-button routerLink="login">Login</button>
+    <button *ngIf="!isAuthorized" mat-button routerLink="register">Register</button>
+  </mat-toolbar-row>
+</mat-toolbar>
 
-<div style="text-align:center">
+<div class="app-content">
   <router-outlet></router-outlet>
 </div>
 
