@@ -1,16 +1,18 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav class="sidenav" mode="side" opened>
     <mat-list>
-      <mat-list-item>
+      <!--TODO generalize links, active class-->
+      <mat-list-item [class.active]="router.isActive('admin/profile')">
         <a routerLink="profile">Profile</a>
       </mat-list-item>
-      <mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item [class.active]="router.isActive('admin/users')">
         <a routerLink="users">Users</a>
       </mat-list-item>
-      <mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item [class.active]="router.isActive('admin/books')">
         <a routerLink="books">Books</a>
       </mat-list-item>
-      <mat-divider></mat-divider>
     </mat-list>
   </mat-sidenav>
   <mat-sidenav-content class="sidenav-content">
