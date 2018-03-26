@@ -4,6 +4,8 @@ import { UserComponent } from './user.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from "../profile/profile.component";
 import { MaterialModule } from '../material.module';
+import { OrdersComponent } from './orders/orders.component';
+import { BooksComponent } from './books/books.component';
 
 
 const routes: Routes = [
@@ -14,6 +16,14 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+      },
+      {
+        path: 'books',
+        component: BooksComponent,
+      },
+      {
+        path: 'orders',
+        component: OrdersComponent,
       }
     ]
   }
@@ -25,6 +35,11 @@ const routes: Routes = [
     MaterialModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [UserComponent]
+  declarations: [
+    UserComponent,
+    OrdersComponent,
+    BooksComponent
+  ]
 })
-export class UserModule { }
+export class UserModule {
+}
