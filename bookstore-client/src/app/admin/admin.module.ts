@@ -3,19 +3,18 @@ import { CommonModule } from '@angular/common';
 import { AdminComponent } from './admin.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from '../material.module';
-import { ProfileComponent } from '../profile/profile.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { ManageBooksComponent } from './manage-books/manage-books.component';
 
 const routes: Routes = [
   {
-    path: 'admin',
+    path: '',
     component: AdminComponent,
     children: [
-      {
-        path: 'profile',
-        component: ProfileComponent,
-      },
+       {
+         path: 'profile',
+         loadChildren: 'app/user-profile/user-profile.module#UserProfileModule'
+       },
       {
         path: 'users',
         component: ManageUsersComponent,
