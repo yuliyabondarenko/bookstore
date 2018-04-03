@@ -41,6 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         .httpBasic()
       .and()
         .authorizeRequests()
+        .antMatchers("/", "/index.html")
+          .permitAll()
         .antMatchers(HttpMethod.POST, "/register")
           .anonymous()
         .anyRequest().authenticated()
