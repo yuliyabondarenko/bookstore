@@ -12,5 +12,9 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
   }
+  //TODO Generalize
+  isActive(path: string): boolean {
+    return this.router.isActive(`admin/${path}`, true);
+  }
 
 }

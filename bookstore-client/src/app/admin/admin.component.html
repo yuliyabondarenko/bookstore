@@ -2,15 +2,15 @@
   <mat-sidenav class="sidenav" mode="side" opened>
     <mat-list>
       <!--TODO generalize links, active class-->
-      <mat-list-item [class.active]="router.isActive('admin/profile')">
+      <mat-list-item [class.active]="isActive('profile')">
         <a routerLink="profile">Profile</a>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <mat-list-item [class.active]="router.isActive('admin/users')">
+      <mat-list-item [class.active]="isActive('users')">
         <a routerLink="users">Users</a>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <mat-list-item [class.active]="router.isActive('admin/books')">
+      <mat-list-item [class.active]="isActive('books')">
         <a routerLink="books">Books</a>
       </mat-list-item>
     </mat-list>

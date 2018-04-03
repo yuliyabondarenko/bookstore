@@ -13,4 +13,8 @@ export class UserComponent implements OnInit {
   ngOnInit() {
   }
 
+  isActive(path: string): boolean {
+    return this.router.isActive(`user/${path}`, true);
+  }
+
 }

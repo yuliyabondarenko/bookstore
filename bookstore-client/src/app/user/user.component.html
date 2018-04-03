@@ -1,15 +1,15 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav class="sidenav" mode="side" opened>
     <mat-list>
-      <mat-list-item [class.active]="router.isActive('user/profile')">
+      <mat-list-item [class.active]="isActive('profile')">
         <a routerLink="profile">Profile</a>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <mat-list-item [class.active]="router.isActive('user/books')">
+      <mat-list-item [class.active]="isActive('books')">
         <a routerLink="books">Books</a>
       </mat-list-item >
       <mat-divider></mat-divider>
-      <mat-list-item [class.active]="router.isActive('user/orders')">
+      <mat-list-item [class.active]="isActive('orders')">
         <a routerLink="orders">Orders</a>
       </mat-list-item>
     </mat-list>
