@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/');
       })
       .catch((error) => {
-        this.loginFormError = error.message ? error.message : 'Login failed';
+        this.loginFormError = error && error.message ? error.message : 'Login failed';
       });
   }
 
