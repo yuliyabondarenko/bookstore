@@ -5,16 +5,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from '../material.module';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { ManageBooksComponent } from './manage-books/manage-books.component';
+import { AdminGuard } from '../service/admin-guard.service';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
+    canActivate: [AdminGuard],
     children: [
-       {
-         path: 'profile',
-         loadChildren: 'app/user-profile/user-profile.module#UserProfileModule'
-       },
+      {
+        path: 'profile',
+        loadChildren: 'app/user-profile/user-profile.module#UserProfileModule'
+      },
       {
         path: 'users',
         component: ManageUsersComponent,

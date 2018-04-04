@@ -79,7 +79,7 @@ export class AuthService {
     });
   }
 
-  logout(): Promise<void> {
+  logout(): Promise<any> {
     const logoutUrl = `${Config.host}/logout`;
 
     const httpOptions = {
