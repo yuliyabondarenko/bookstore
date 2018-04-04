@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminGuard } from './service/admin-guard.service';
 import { AuthService } from './service/auth.service ';
 import { UserGuard } from './service/user-guard.service';
+import {XhrInterceptor} from "./service/xhr-interceptor.service";
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { UserGuard } from './service/user-guard.service';
   providers: [
     UserService,
     AuthService,
+    XhrInterceptor,
     AdminGuard,
     UserGuard,
     BookService,
