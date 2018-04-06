@@ -29,6 +29,10 @@ public class Book implements Serializable
   @Column(nullable = false)
   private Double price;
 
+  public long getId() {
+    return id;
+  }
+
   public String getName()
   {
     return name;

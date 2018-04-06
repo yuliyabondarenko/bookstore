@@ -1,14 +1,18 @@
 package com.nixsolutions.bondarenko.bookstore;
 
+import com.nixsolutions.bondarenko.bookstore.entity.Book;
+import com.nixsolutions.bondarenko.bookstore.entity.Order;
+import com.nixsolutions.bondarenko.bookstore.entity.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 @Configuration
-public class RestConfig {
-
+public class RestConfig extends RepositoryRestConfigurerAdapter {
   @Bean
   public CorsFilter corsFilter() {
     UrlBasedCorsConfigurationSource configurationSource = new UrlBasedCorsConfigurationSource();
@@ -24,5 +28,10 @@ public class RestConfig {
     configurationSource.registerCorsConfiguration("/**", config);
 
     return new CorsFilter(configurationSource);
+  }
+
+  @Override
+  public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+    config.exposeIdsFor(Book.class, User.class);
   }
 }

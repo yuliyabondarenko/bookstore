@@ -53,6 +53,10 @@ public class User  implements Serializable{
         mappedBy = "user", orphanRemoval = true)
     private List<Order> orders;
 
+    public long getId() {
+        return id;
+    }
+
     public List<UserRole> getRoles()
     {
         return roles;
