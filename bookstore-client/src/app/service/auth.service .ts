@@ -30,12 +30,12 @@ export class AuthService {
   }
 
   private hasRole(roleName: string): boolean {
-    if ( !this.isAuthorized ) {
+    if (!this.isAuthorized) {
       return false;
     }
     let hasRole = false;
     sessionStorage.roles.split(',').forEach(function (role) {
-      if ( role === roleName ) {
+      if (role === roleName) {
         hasRole = true;
       }
     });
@@ -54,9 +54,9 @@ export class AuthService {
 
     return this.http.get(`${Config.host}/user`, httpOptions)
       .toPromise()
-      .then(principal => {
-          if ( !!principal['name'] ) {
-            this.initSession(basicAuth, principal);
+      .then(userData => {
+          if (!!userData['userId']) {
+            this.initSession(basicAuth, userData);
           }
         }
       )
@@ -66,17 +66,11 @@ export class AuthService {
       });
   }
 
-  private initSession(authorization: String, userPrincipal: Object) {
+  private initSession(authorization: String, userData: Object) {
     sessionStorage.authorization = authorization;
-    sessionStorage.userName = userPrincipal['name'];
-    this.initRoles(userPrincipal['authorities']);
-  }
-
-  private initRoles(authorities) {
-    sessionStorage.roles = '';
-    authorities.forEach(function (item) {
-      sessionStorage.roles += item['authority'] + ',';
-    });
+    sessionStorage.userId = userData['userId'];
+    sessionStorage.userName = userData['userName'];
+    sessionStorage.roles = userData['roles'];
   }
 
   logout(): Promise<any> {

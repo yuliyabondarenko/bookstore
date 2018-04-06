@@ -25,6 +25,10 @@ public class SecurityUserDetails implements UserDetails
         .collect(Collectors.toList());
   }
 
+  public User getUser() {
+    return user;
+  }
+
   @Override
   public String getPassword()
   {
@@ -34,7 +38,7 @@ public class SecurityUserDetails implements UserDetails
   @Override
   public String getUsername()
   {
-    return this.user.getUsername();
+    return this.user.getEmail();
   }
 
   @Override
