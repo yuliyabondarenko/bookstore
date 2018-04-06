@@ -81,7 +81,7 @@ public class Order implements Serializable
   public Double getPrice()
   {
     return getOrderBookPrices().stream()
-        .mapToDouble(OrderBookPrice::getBookPrice)
+        .mapToDouble(OrderBookPrice::getPrice)
         .sum();
   }
 }

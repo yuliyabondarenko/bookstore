@@ -13,11 +13,11 @@ public interface OrderView {
 
   Date getDate();
 
-  List<OrderBookPriceCountView> getOrderBookPrices();
+  List<BookPriceCountView> getOrderBookPrices();
 
   default Double getTotalAmount() {
     OptionalDouble total = this.getOrderBookPrices().stream()
-        .mapToDouble(OrderBookPriceCountView::getBookPrice)
+        .mapToDouble(BookPriceCountView::getPrice)
         .reduce((a, b) -> a + b);
 
     return total.isPresent() ? total.getAsDouble() : 0.0;

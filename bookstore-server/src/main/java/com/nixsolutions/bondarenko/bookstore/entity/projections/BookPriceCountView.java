@@ -4,10 +4,10 @@ import com.nixsolutions.bondarenko.bookstore.entity.OrderBookPrice;
 import org.springframework.data.rest.core.config.Projection;
 
 @Projection(name = "view", types = OrderBookPrice.class)
-public interface OrderBookPriceCountView {
+public interface BookPriceCountView {
   BookBasic getBook();
 
-  Double getBookPrice();
+  Double getPrice();
 
   Integer getCount();
 }

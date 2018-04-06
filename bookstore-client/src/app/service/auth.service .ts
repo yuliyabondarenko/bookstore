@@ -17,6 +17,9 @@ export class AuthService {
     return sessionStorage.authorization;
   }
 
+  get userId(): string {
+    return sessionStorage.getItem('userId');
+  }
   get userName(): string {
     return sessionStorage.getItem('userName');
   }
