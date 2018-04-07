@@ -16,8 +16,9 @@
       <mat-cell *matCellDef="let item"> {{item.count}}</mat-cell>
     </ng-container>
 
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <div *ngIf="showHeader">
+      <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
+    </div>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 </div>

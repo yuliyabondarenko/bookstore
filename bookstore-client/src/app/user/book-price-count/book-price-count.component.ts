@@ -10,6 +10,8 @@ export class BookPriceCountComponent implements OnInit {
   @Input() bookPriceCountInfo: BookPriceCount [];
   displayedColumns = ['bookName', 'price', 'count'];
 
+  @Input() showHeader: boolean = true;
+
   constructor() { }
 
   ngOnInit() {

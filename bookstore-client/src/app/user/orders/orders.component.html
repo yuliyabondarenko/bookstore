@@ -7,9 +7,9 @@
     </ng-container>
 
     <ng-container matColumnDef="books">
-      <mat-header-cell *matHeaderCellDef> Books</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Books <br> (name, price, count) </mat-header-cell>
       <mat-cell *matCellDef="let order">
-        <app-book-price-count [bookPriceCountInfo]="order.orderBookPrices"></app-book-price-count>
+        <app-book-price-count [showHeader]="false"  [bookPriceCountInfo]="order.orderBookPrices"></app-book-price-count>
       </mat-cell>
     </ng-container>
 
