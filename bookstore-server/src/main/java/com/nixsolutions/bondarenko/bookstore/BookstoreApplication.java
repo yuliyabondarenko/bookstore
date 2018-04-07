@@ -2,13 +2,16 @@ package com.nixsolutions.bondarenko.bookstore;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import javax.annotation.PostConstruct;
 
+import com.nixsolutions.bondarenko.bookstore.entity.ShoppingCartItem;
 import com.nixsolutions.bondarenko.bookstore.entity.Order;
 import com.nixsolutions.bondarenko.bookstore.entity.OrderBookPrice;
 import com.nixsolutions.bondarenko.bookstore.entity.User;
 import com.nixsolutions.bondarenko.bookstore.entity.UserRole;
 import com.nixsolutions.bondarenko.bookstore.entity.enums.Role;
+import com.nixsolutions.bondarenko.bookstore.repository.ShoppingCartRepository;
 import com.nixsolutions.bondarenko.bookstore.repository.OrderRepository;
 import com.nixsolutions.bondarenko.bookstore.repository.UserRepository;
 import com.nixsolutions.bondarenko.bookstore.repository.UserRoleRepository;
@@ -30,6 +33,8 @@ public class BookstoreApplication
 	private BookRepository bookRepository;
 	@Autowired
 	private OrderRepository orderRepository;
+	@Autowired
+	private ShoppingCartRepository cartRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
@@ -112,5 +117,22 @@ public class BookstoreApplication
 
 		orderRepository.save(order2);
 
-	}
+
+    //SHOPPING CART
+
+    ShoppingCartItem cart1 = new ShoppingCartItem(userUser, book1, 11);
+    cartRepository.save(cart1);
+    ShoppingCartItem cart2 = new ShoppingCartItem(userUser, book2, 12);
+    cartRepository.save(cart2);
+    ShoppingCartItem cart3 = new ShoppingCartItem(userUser, book3, 3);
+    cartRepository.save(cart3);
+
+    ShoppingCartItem cart4 = new ShoppingCartItem(userAdmin, book1, 5);
+    cartRepository.save(cart4);
+    ShoppingCartItem cart5 = new ShoppingCartItem(userAdmin, book3, 4);
+    cartRepository.save(cart5);
+
+    List<ShoppingCartItem> userCarts = cartRepository.findByUser(userUser);
+    List<ShoppingCartItem> adminCarts = cartRepository.findByUser(userAdmin);
+  }
 }
