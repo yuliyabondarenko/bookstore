@@ -20,7 +20,7 @@ public class OrderBookPrice implements Serializable
   private Book book;
 
   @Column(nullable = false)
-  private Double bookPrice;
+  private Double price;
 
   @Column(nullable = false)
   private int count;
@@ -29,11 +29,11 @@ public class OrderBookPrice implements Serializable
   {
   }
 
-  public OrderBookPrice(Order order, Book book, Double bookPrice, int count)
+  public OrderBookPrice(Order order, Book book, Double price, int count)
   {
     this.order = order;
     this.book = book;
-    this.bookPrice = bookPrice;
+    this.price = price;
     this.count = count;
   }
 
@@ -57,14 +57,12 @@ public class OrderBookPrice implements Serializable
     this.book = book;
   }
 
-  public Double getBookPrice()
-  {
-    return bookPrice;
+  public Double getPrice() {
+    return price;
   }
 
-  public void setBookPrice(Double bookPrice)
-  {
-    this.bookPrice = bookPrice;
+  public void setPrice(Double price) {
+    this.price = price;
   }
 
   public int getCount()

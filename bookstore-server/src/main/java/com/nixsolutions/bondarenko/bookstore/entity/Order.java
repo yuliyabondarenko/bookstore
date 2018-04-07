@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Formula;
+
 @Entity
 @Table(name = "user_order")
 public class Order implements Serializable
@@ -31,6 +33,9 @@ public class Order implements Serializable
 
   @ManyToOne(optional = false)
   private User user;
+
+  @Formula("select sum(obp.price) from order_book_price obp where obp.order_id = id")
+  Double totalAmount;
 
   public Order()
   {
@@ -78,10 +83,8 @@ public class Order implements Serializable
     this.orderBookPrices = orderBookPrices;
   }
 
-  public Double getPrice()
+  public Double getTotalAmount()
   {
-    return getOrderBookPrices().stream()
-        .mapToDouble(OrderBookPrice::getBookPrice)
-        .sum();
+    return this.totalAmount;
   }
 }

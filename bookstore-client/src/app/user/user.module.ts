@@ -6,6 +6,7 @@ import { MaterialModule } from '../material.module';
 import { OrdersComponent } from './orders/orders.component';
 import { BooksComponent } from './books/books.component';
 import { UserGuard } from '../service/user-guard.service';
+import { BookPriceCountComponent } from './book-price-count/book-price-count.component';
 
 
 const routes: Routes = [
@@ -39,7 +40,8 @@ const routes: Routes = [
   declarations: [
     UserComponent,
     OrdersComponent,
-    BooksComponent
+    BooksComponent,
+    BookPriceCountComponent
   ]
 })
 export class UserModule {

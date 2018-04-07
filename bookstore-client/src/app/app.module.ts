@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminGuard } from './service/admin-guard.service';
 import { AuthService } from './service/auth.service ';
 import { UserGuard } from './service/user-guard.service';
+import { OrderService } from './service/order.service';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { UserGuard } from './service/user-guard.service';
     AdminGuard,
     UserGuard,
     BookService,
+    OrderService,
     RegisterService
   ],
   bootstrap: [AppComponent]
