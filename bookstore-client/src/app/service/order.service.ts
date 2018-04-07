@@ -13,8 +13,8 @@ export class OrderService {
     this.baseUrl = `${Config.host}/orders/search/findByUserId?userId=${this.userId}`;
   }
 
-  getOrders(page: number, size: number): Promise<any> {
-    const ordersUrl = `${this.baseUrl}&sort=totalAmount,asc&page=${page}&size=${size}&projection=view`;
+  getOrders(page: number, size: number, sortParam: string): Promise<any> {
+    const ordersUrl = `${this.baseUrl}&sort=${sortParam}&page=${page}&size=${size}&projection=view`;
 
     const httpOptions = {
       headers: new HttpHeaders({
