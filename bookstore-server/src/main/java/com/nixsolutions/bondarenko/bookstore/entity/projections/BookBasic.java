@@ -8,4 +8,6 @@ public interface BookBasic {
   Long getId();
 
   String getName();
+
+  String getPrice();
 }

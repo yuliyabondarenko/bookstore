@@ -16,101 +16,107 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Pattern;
 
 @Entity
-public class User  implements Serializable{
-    private static final long serialVersionUID = -8521008567463876822L;
+public class User implements Serializable {
+  private static final long serialVersionUID = -8521008567463876822L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private long id;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<UserRole> roles = new ArrayList<>();
+  @ManyToMany(fetch = FetchType.EAGER)
+  private List<UserRole> roles = new ArrayList<>();
 
-    @Pattern(regexp = "^[a-zA-Z](([._-][a-zA-Z0-9])|[a-zA-Z0-9]){2,14}$",
-            message = "3-15 characters, beginning with letter. Can include letters, numbers, dashes, and underscores")
-    @Column(unique = true, nullable = false)
-    private String username;
+  @OneToMany(orphanRemoval = true, mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+  private List<ShoppingCartItem> shoppingCartItems = new ArrayList<>();
 
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$",
-            message = "Minimum 6 characters, at least one uppercase letter, one lowercase letter and one number")
-    @Column(nullable = false)
-    private String password;
+  @Pattern(regexp = "^[a-zA-Z](([._-][a-zA-Z0-9])|[a-zA-Z0-9]){2,14}$",
+      message = "3-15 characters, beginning with letter. Can include letters, numbers, dashes, and underscores")
+  @Column(unique = true, nullable = false)
+  private String username;
 
-    @Pattern(regexp = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}$",
-            message = "Not a well-formed email address")
-    @Column(unique = true, nullable = false)
-    private String email;
+  @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$",
+      message = "Minimum 6 characters, at least one uppercase letter, one lowercase letter and one number")
+  @Column(nullable = false)
+  private String password;
 
-    //TODO Add Date validation
-    //TODO ? Change to string ?
-    @Column(nullable = false)
-    private String birthday;
+  @Pattern(regexp = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}$",
+      message = "Not a well-formed email address")
+  @Column(unique = true, nullable = false)
+  private String email;
 
-    @Column(nullable = false)
-    private String gender;
+  //TODO Add Date validation
+  //TODO ? Change to string ?
+  @Column(nullable = false)
+  private String birthday;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-        mappedBy = "user", orphanRemoval = true)
-    private List<Order> orders;
+  @Column(nullable = false)
+  private String gender;
 
-    public long getId() {
-        return id;
-    }
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+      mappedBy = "user", orphanRemoval = true)
+  private List<Order> orders;
 
-    public List<UserRole> getRoles()
-    {
-        return roles;
-    }
+  public long getId() {
+    return id;
+  }
 
-    public String getUsername()
-    {
-        return username;
-    }
+  public List<UserRole> getRoles() {
+    return roles;
+  }
 
-    public void setUsername(String username)
-    {
-        this.username = username;
-    }
+  public String getUsername() {
+    return username;
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    public String getEmail()
-    {
-        return email;
-    }
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public String getBirthday() {
-        return birthday;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
+  public String getBirthday() {
+    return birthday;
+  }
 
-    public String getGender() {
-        return gender;
-    }
+  public void setBirthday(String birthday) {
+    this.birthday = birthday;
+  }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+  public String getGender() {
+    return gender;
+  }
 
-    public List<Order> getOrders() {
-        return orders;
-    }
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
+  public List<Order> getOrders() {
+    return orders;
+  }
+
+  public void setOrders(List<Order> orders) {
+    this.orders = orders;
+  }
+
+  public List<ShoppingCartItem> getShoppingCartItems() {
+    return shoppingCartItems;
+  }
+
+  public void setShoppingCartItems(List<ShoppingCartItem> shoppingCartItems) {
+    this.shoppingCartItems = shoppingCartItems;
+  }
 }

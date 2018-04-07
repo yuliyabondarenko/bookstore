@@ -1,6 +1,5 @@
 package com.nixsolutions.bondarenko.bookstore.entity;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,32 +8,27 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class OrderBookPrice implements Serializable {
-  private static final long serialVersionUID = -6202609770901139946L;
+public class ShoppingCartItem {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
-  @ManyToOne
-  private Order order;
+  @ManyToOne(optional = false)
+  private User user;
 
-  @ManyToOne
+  @ManyToOne(optional = false)
   private Book book;
-
-  @Column(nullable = false)
-  private Double price;
 
   @Column(nullable = false)
   private int count;
 
-  public OrderBookPrice() {
+  public ShoppingCartItem() {
   }
 
-  public OrderBookPrice(Order order, Book book, Double price, int count) {
-    this.order = order;
+  public ShoppingCartItem(User user, Book book, int count) {
+    this.user = user;
     this.book = book;
-    this.price = price;
     this.count = count;
   }
 
@@ -42,12 +36,12 @@ public class OrderBookPrice implements Serializable {
     return id;
   }
 
-  public Order getOrder() {
-    return order;
+  public User getUser() {
+    return user;
   }
 
-  public void setOrder(Order order) {
-    this.order = order;
+  public void setUser(User user) {
+    this.user = user;
   }
 
   public Book getBook() {
@@ -56,14 +50,6 @@ public class OrderBookPrice implements Serializable {
 
   public void setBook(Book book) {
     this.book = book;
-  }
-
-  public Double getPrice() {
-    return price;
-  }
-
-  public void setPrice(Double price) {
-    this.price = price;
   }
 
   public int getCount() {
