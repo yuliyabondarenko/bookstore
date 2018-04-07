@@ -2,17 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Config } from '../config';
 import { AuthService } from './auth.service ';
-import { Order } from '../entity/order';
 
 @Injectable()
 export class OrderService {
-  ordersUrl: string;
+  baseUrl = `${Config.host}/orders`;
+  userId: string;
 
   constructor(private http: HttpClient, private authService: AuthService) {
-    this.ordersUrl = `${Config.host}/orders/search/findByUserId?projection=view&userId=${this.authService.userId}`;
+    this.userId = this.authService.userId;
   }
 
-  getOrders(): Promise<any> {
+  getOrders(page: number, size: number): Promise<any> {
+    const ordersUrl = `${this.baseUrl}/search/findByUserId?userId=${this.userId}
+                        &sort=totalAmount,asc
+                        &page=${page}&size=${size}
+                        &projection=view`;
+
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': this.authService.authorization
@@ -20,11 +25,11 @@ export class OrderService {
     };
 
     return this.http
-      .get(this.ordersUrl, httpOptions)
+      .get(ordersUrl, httpOptions)
       .toPromise()
       .then(response => {
           debugger;
-          return response['_embedded'].orders as Order [];
+          return response;
         }
       );
   }
