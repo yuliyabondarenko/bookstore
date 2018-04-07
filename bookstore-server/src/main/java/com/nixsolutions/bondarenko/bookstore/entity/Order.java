@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Formula;
@@ -46,6 +48,14 @@ public class Order implements Serializable
     this.date = date;
     this.user = user;
     this.orderBookPrices = orderBookPrice;
+  }
+
+  @PrePersist
+  @PreUpdate
+  public void updateBookPriceAssociation(){
+    for(OrderBookPrice item : this.orderBookPrices){
+      item.setOrder(this);
+    }
   }
 
   public long getId()
