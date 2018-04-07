@@ -5,7 +5,6 @@ import org.springframework.data.rest.core.config.Projection;
 
 import java.util.Date;
 import java.util.List;
-import java.util.OptionalDouble;
 
 @Projection(name = "view", types = Order.class)
 public interface OrderView {
@@ -15,11 +14,5 @@ public interface OrderView {
 
   List<BookPriceCountView> getOrderBookPrices();
 
-  default Double getTotalAmount() {
-    OptionalDouble total = this.getOrderBookPrices().stream()
-        .mapToDouble(BookPriceCountView::getPrice)
-        .reduce((a, b) -> a + b);
-
-    return total.isPresent() ? total.getAsDouble() : 0.0;
-  }
+  Double getTotalAmount();
 }
