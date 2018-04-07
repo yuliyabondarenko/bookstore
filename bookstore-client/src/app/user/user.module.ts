@@ -7,6 +7,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { BooksComponent } from './books/books.component';
 import { UserGuard } from '../service/user-guard.service';
 import { BookPriceCountComponent } from './book-price-count/book-price-count.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'orders',
         component: OrdersComponent,
+      },
+      {
+        path: 'shopcart',
+        component: ShoppingCartComponent,
       }
     ]
   }
@@ -41,7 +46,8 @@ const routes: Routes = [
     UserComponent,
     OrdersComponent,
     BooksComponent,
-    BookPriceCountComponent
+    BookPriceCountComponent,
+    ShoppingCartComponent
   ]
 })
 export class UserModule {

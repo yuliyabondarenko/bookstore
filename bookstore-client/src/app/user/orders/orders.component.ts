@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Order } from '../../entity/order';
 import { OrderService } from '../../service/order.service';
-import { MatSort, MatTableDataSource, Sort } from '@angular/material';
+import { MatSort, MatTableDataSource, Sort, SortDirection } from '@angular/material';
 import { Page } from '../../../page';
 import { environment } from '../../../environments/environment';
 
@@ -24,7 +24,7 @@ export class OrdersComponent implements OnInit {
   ngOnInit() {
     debugger;
     this.sort.active = environment.ordersSort.active;
-    this.sort.direction = environment.ordersSort.direction;
+    this.sort.direction = environment.ordersSort.direction as SortDirection;
 
     this.getPage(this.currentPage, this.sort);
   }
