@@ -23,9 +23,7 @@
       <mat-cell *matCellDef="let order"> {{order.date | date: 'dd.MM.yyyy hh:mm2'}} </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns">
-      <app-book-price-count></app-book-price-count>
-    </mat-header-row>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 

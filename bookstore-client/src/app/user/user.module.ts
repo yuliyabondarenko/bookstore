@@ -8,6 +8,7 @@ import { BooksComponent } from './books/books.component';
 import { UserGuard } from '../service/user-guard.service';
 import { BookPriceCountComponent } from './book-price-count/book-price-count.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ShoppingCartService } from '../service/shopping.cart.service';
 
 
 const routes: Routes = [
@@ -48,7 +49,8 @@ const routes: Routes = [
     BooksComponent,
     BookPriceCountComponent,
     ShoppingCartComponent
-  ]
+  ],
+  providers: [ShoppingCartService]
 })
 export class UserModule {
 }

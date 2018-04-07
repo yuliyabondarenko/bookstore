@@ -1,3 +1,32 @@
-<p>
-  shopping-cart works!
-</p>
+<mat-card class="shopcart-container mat-elevation-z2">
+
+  <mat-table #table [dataSource]="shoppingCartItems">
+
+    <ng-container matColumnDef="bookName">
+      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+      <mat-cell *matCellDef="let item">{{item.book.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef> Price</mat-header-cell>
+      <mat-cell *matCellDef="let item"> $ {{item.book.price}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="count">
+      <mat-header-cell *matHeaderCellDef> Count</mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{item.count}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+  <mat-toolbar-row>
+    <button id="clearCart" mat-button class="mat-elevation-z2" color="primary"
+            (click)="clearCart()">Clear cart</button>
+    <button id="submitOrder" mat-button class="mat-elevation-z2" color="primary"
+            (click)="performOrder()">Submit order</button>
+  </mat-toolbar-row>
+
+</mat-card>

@@ -132,7 +132,7 @@ public class BookstoreApplication
     ShoppingCartItem cart5 = new ShoppingCartItem(userAdmin, book3, 4);
     cartRepository.save(cart5);
 
-    List<ShoppingCartItem> userCarts = cartRepository.findByUser(userUser);
-    List<ShoppingCartItem> adminCarts = cartRepository.findByUser(userAdmin);
+    List<ShoppingCartItem> userCarts = cartRepository.findByUserId(userUser.getId());
+    List<ShoppingCartItem> adminCarts = cartRepository.findByUserId(userAdmin.getId());
   }
 }
