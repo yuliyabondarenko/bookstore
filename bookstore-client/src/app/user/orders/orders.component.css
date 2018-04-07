@@ -1,4 +1,4 @@
-.orders-container{
+.orders-container {
   margin: 20px auto;
   width: 80%
 }
@@ -27,8 +27,8 @@
 .mat-header-cell {
   font-weight: bold;
 }
+
 .mat-header-row, .mat-row {
   min-height: 30px;
   padding: 0 5px;
 }
-

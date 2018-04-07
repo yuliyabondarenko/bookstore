@@ -22,10 +22,6 @@
    border-bottom-style: none;
 }
 
-.mat-header-row {
-  border-bottom: 1px solid lightgrey;
-}
-
 .mat-header-row, .mat-row {
   min-height: 30px;
   padding: 0 5px;

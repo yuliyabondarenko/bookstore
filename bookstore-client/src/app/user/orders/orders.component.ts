@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Order } from '../../entity/order';
 import { OrderService } from '../../service/order.service';
-import { Config } from '../../config';
+import { MatPaginator, MatTableDataSource} from '@angular/material';
+import { Page } from '../../../page';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-orders',
@@ -9,10 +11,8 @@ import { Config } from '../../config';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-  orders: Order [];
-
-  itemsPerPage = Config.ordersPerPage;
-  page = 1;
+  orders: MatTableDataSource<Order>;
+  currentPage = environment.ordersPage;
   totalOrderCount: number;
   displayedColumns = ['index', 'books', 'total', 'date'];
 
@@ -20,16 +20,16 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getOrders(this.page);
+    this.getPage(this.currentPage);
   }
 
-  getOrders(page: number) {
-    page--; // decrement page number as it begins with 0 in spring-data-rest response
-
-    this.orderService.getOrders(page, this.itemsPerPage)
+  getPage(page: Page) {
+    this.orderService.getOrders(page.pageIndex, page.pageSize)
       .then(response => {
-        this.orders = response['_embedded'].orders as Order [];
+        const orders = response['_embedded'].orders as Order [];
+        this.orders = new MatTableDataSource<Order>(orders);
         this.totalOrderCount = response.page.totalElements;
+        this.currentPage = page;
       });
   }
 }

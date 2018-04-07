@@ -5,18 +5,16 @@ import { AuthService } from './auth.service ';
 
 @Injectable()
 export class OrderService {
-  baseUrl = `${Config.host}/orders`;
+  baseUrl: string;
   userId: string;
 
   constructor(private http: HttpClient, private authService: AuthService) {
     this.userId = this.authService.userId;
+    this.baseUrl = `${Config.host}/orders/search/findByUserId?userId=${this.userId}`;
   }
 
   getOrders(page: number, size: number): Promise<any> {
-    const ordersUrl = `${this.baseUrl}/search/findByUserId?userId=${this.userId}
-                        &sort=totalAmount,asc
-                        &page=${page}&size=${size}
-                        &projection=view`;
+    const ordersUrl = `${this.baseUrl}&sort=totalAmount,asc&page=${page}&size=${size}&projection=view`;
 
     const httpOptions = {
       headers: new HttpHeaders({
