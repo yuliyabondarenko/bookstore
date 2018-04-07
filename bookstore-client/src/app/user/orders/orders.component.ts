@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSort, MatTableDataSource } from '@angular/material';
 import { Order } from '../../entity/order';
 import { OrderService } from '../../service/order.service';
 import { Config } from '../../config';
@@ -14,6 +15,7 @@ export class OrdersComponent implements OnInit {
   itemsPerPage = Config.ordersPerPage;
   page = 1;
   totalOrderCount: number;
+  displayedColumns = ['books', 'total', 'date'];
 
   constructor(private orderService: OrderService) {
   }
