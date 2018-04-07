@@ -17,6 +17,7 @@ import { AdminGuard } from './service/admin-guard.service';
 import { AuthService } from './service/auth.service ';
 import { UserGuard } from './service/user-guard.service';
 import { OrderService } from './service/order.service';
+import {XhrInterceptor} from "./service/xhr-interceptor.service";
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { OrderService } from './service/order.service';
   providers: [
     UserService,
     AuthService,
+    XhrInterceptor,
     AdminGuard,
     UserGuard,
     BookService,
