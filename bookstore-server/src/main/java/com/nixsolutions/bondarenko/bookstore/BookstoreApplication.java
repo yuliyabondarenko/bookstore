@@ -84,8 +84,8 @@ public class BookstoreApplication
 		bookRepository.save(book3);
 
 		// -------------ORDERS--------------
-		Date date1 = new GregorianCalendar(2017, 3, 11).getTime();
-		Date date2 = new GregorianCalendar(2017, 3, 12).getTime();
+		Date date1 = new GregorianCalendar(2017, 3, 11, 17, 9, 8).getTime();
+		Date date2 = new GregorianCalendar(2017, 3, 12, 23, 56, 34).getTime();
 
 		Order order1 = new Order();
 		order1.setUser(userUser);

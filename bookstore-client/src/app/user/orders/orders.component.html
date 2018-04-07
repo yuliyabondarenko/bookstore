@@ -1,53 +1,31 @@
-<div class="example-container mat-elevation-z8">
+<div class="orders-container mat-elevation-z8">
   <mat-table #table [dataSource]="orders">
+
+    <ng-container matColumnDef="index">
+      <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+      <mat-cell *matCellDef="let rIndex = index"> {{rIndex + 1}}</mat-cell>
+    </ng-container>
 
     <ng-container matColumnDef="books">
       <mat-header-cell *matHeaderCellDef> Books</mat-header-cell>
-      <mat-cell *matCellDef="let order">stub</mat-cell>
+      <mat-cell *matCellDef="let order">
+        <app-book-price-count [bookPriceCountInfo]="order.orderBookPrices"></app-book-price-count>
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="total">
       <mat-header-cell *matHeaderCellDef> Total amount</mat-header-cell>
-      <mat-cell *matCellDef="let order"> {{order.totalAmount}}</mat-cell>
+      <mat-cell *matCellDef="let order"> $ {{order.totalAmount}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="date">
       <mat-header-cell *matHeaderCellDef> Date</mat-header-cell>
-      <mat-cell *matCellDef="let order"> {{order.date}}</mat-cell>
+      <mat-cell *matCellDef="let order"> {{order.date | date: 'dd.MM.yyyy hh:mm2'}} </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="displayedColumns">
+      <app-book-price-count></app-book-price-count>
+    </mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 </div>
-
-
-
-<!--<table>-->
-  <!--<tr>-->
-    <!--<th>OrderBookPrices-->
-      <!--<table>-->
-        <!--<thead>-->
-        <!--<th>Book name</th>-->
-        <!--<th>Price</th>-->
-        <!--<th>Count</th>-->
-        <!--</thead>-->
-      <!--</table>-->
-    <!--</th>-->
-    <!--<th>Total</th>-->
-    <!--<th>Date</th>-->
-  <!--</tr>-->
-  <!--<tr *ngFor="let order of orders">-->
-    <!--<td>-->
-      <!--<table *ngFor="let orderBookPrice of order.orderBookPrices">-->
-        <!--<tr>-->
-          <!--<td>{{orderBookPrice.book.name}}</td>-->
-          <!--<td>{{orderBookPrice.price}}</td>-->
-          <!--<td>{{orderBookPrice.count}}</td>-->
-        <!--</tr>-->
-      <!--</table>-->
-    <!--</td>-->
-    <!--<td>{{ order.totalAmount }}</td>-->
-    <!--<td>{{ order.date }}</td>-->
-  <!--</tr>-->
-<!--</table>-->
