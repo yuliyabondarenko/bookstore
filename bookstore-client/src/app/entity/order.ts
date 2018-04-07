@@ -2,6 +2,7 @@ import { BookPriceCount } from './book-price-count';
 
 export class Order {
   constructor(public id: number = null,
+              public user: any = null,
               public date: Date = null,
               public orderBookPrices: BookPriceCount [] = null,
               public totalAmount: number = null,
