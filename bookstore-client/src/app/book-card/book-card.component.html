@@ -1,0 +1,13 @@
+<mat-card class="book-card mutable-field">
+  <mat-card-header>
+    <mat-card-title>{{book.name}}</mat-card-title>
+  </mat-card-header>
+  <img src="{{book.photo}}" alt="Photo of book">
+  <mat-card-actions>
+
+    <mat-chip-list>
+      <mat-chip style="text-align: right" color="accent"  *ngIf="!book.visible" selected="true">Absent</mat-chip>
+    </mat-chip-list>
+    <button title="Add to cart" mat-raised-button class="add-btn" *ngIf="book.visible" color="primary">ADD</button>
+  </mat-card-actions>
+</mat-card>

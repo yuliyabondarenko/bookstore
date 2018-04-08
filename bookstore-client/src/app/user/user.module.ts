@@ -9,6 +9,7 @@ import { UserGuard } from '../service/user-guard.service';
 import { BookPriceCountComponent } from './book-price-count/book-price-count.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingCartService } from '../service/shopping.cart.service';
+import { BookCardComponent } from '../book-card/book-card.component';
 
 
 const routes: Routes = [
@@ -48,7 +49,8 @@ const routes: Routes = [
     OrdersComponent,
     BooksComponent,
     BookPriceCountComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    BookCardComponent
   ],
   providers: [ShoppingCartService]
 })
