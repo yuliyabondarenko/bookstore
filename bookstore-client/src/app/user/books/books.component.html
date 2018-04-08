@@ -1,3 +1,5 @@
-<p>
-  books works!
-</p>
+<mat-grid-list cols="4" rowHeight="1:1">
+  <mat-grid-tile *ngFor="let book of books">
+    <app-book-card [book]="book"></app-book-card>
+  </mat-grid-tile>
+</mat-grid-list>

@@ -1,0 +1,18 @@
+.book-card {
+  text-align: center;
+  margin: 10px;
+}
+.mat-card-title {
+  text-align: center;
+}
+
+.mat-card-actions {
+  text-align: right;
+}
+
+img {
+  margin-bottom: 0;
+  height: 80px;
+}
+
+
