@@ -69,7 +69,7 @@ export class AuthService {
       });
   }
 
-  private initSession(authorization: String, userData: Object) {
+  private initSession(authorization: String, userData: any) {
     sessionStorage.authorization = authorization;
     sessionStorage.userId = userData['userId'];
     sessionStorage.userName = userData['userName'];
