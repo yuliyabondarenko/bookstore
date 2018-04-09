@@ -15,7 +15,7 @@
 
     <ng-container matColumnDef="totalAmount">
       <mat-header-cell *matHeaderCellDef mat-sort-header> TOTAL AMOUNT </mat-header-cell>
-      <mat-cell *matCellDef="let order"> $ {{order.totalAmount}}</mat-cell>
+      <mat-cell *matCellDef="let order"> $ {{ order.totalAmount.toFixed(2)}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="date">

@@ -13,7 +13,7 @@
 
     <ng-container matColumnDef="price">
       <mat-header-cell *matHeaderCellDef mat-sort-header> PRICE </mat-header-cell>
-      <mat-cell *matCellDef="let book"> $ {{book.price}}</mat-cell>
+      <mat-cell *matCellDef="let book"> $ {{book.price.toFixed(2)}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="absent">

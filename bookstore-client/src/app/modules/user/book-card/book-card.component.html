@@ -3,7 +3,7 @@
     <mat-card-title>{{book.name}}</mat-card-title>
   </mat-card-header>
   <mat-chip-list style="float: right;">
-    <mat-chip color="accent"  selected="true"> $ {{book.price}} </mat-chip>
+    <mat-chip color="accent"  selected="true"> $ {{book.price.toFixed(2)}} </mat-chip>
   </mat-chip-list>
   <img src="{{book.photo}}" alt="Photo of book">
   <mat-card-actions>
