@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Config } from '../config';
-import { ShoppingCartItem } from '../entity/shopping-cart-item';
-import { ShoppingCartItemDTO } from '../entity/shopping-cart-item-dto';
-import { SessionService } from './session.service';
+import { Config } from '../../config';
+import { ShoppingCartItem } from '../../entity/shopping-cart-item';
+import { ShoppingCartItemDTO } from '../../entity/shopping-cart-item-dto';
+import { SessionService } from '../session.service';
 
 @Injectable()
 export class ShoppingCartService {

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Book } from '../../entity/book';
-import { BookService } from '../../service/book.service';
+import { BookService } from '../../service/api/book.service';
 import { environment } from '../../../environments/environment';
 import { Page } from '../../../page';
 import { MatSort, Sort, SortDirection } from '@angular/material';

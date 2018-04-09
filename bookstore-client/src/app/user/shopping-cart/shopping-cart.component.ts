@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookPriceCount } from '../../entity/book-price-count';
-import { OrderService } from '../../service/order.service';
+import { OrderService } from '../../service/api/order.service';
 import { Order } from '../../entity/order';
 import { Router } from '@angular/router';
 import { Config } from '../../config';

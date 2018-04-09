@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Config} from '../config';
-import { SessionService } from './session.service';
+import {Config} from '../../config';
+import { SessionService } from '../session.service';
 
 @Injectable()
 export class BookService {

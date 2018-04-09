@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {PasswordConfirmValidator} from './password.match.validator';
 import {User} from '../entity/user';
-import {RegisterService} from '../service/register.user.service';
+import {RegisterService} from '../service/api/register.user.service';
 import {Router} from '@angular/router';
 
 @Component({
