@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Book } from '../entity/book';
-import { LocalShoppingCartService } from '../service/local-shopping-cart.service';
+import { LocalShoppingCartService } from '../../../service/local-shopping-cart.service';
+import { Book } from '../../../entity/book';
 
 @Component({
   selector: 'app-book-card',

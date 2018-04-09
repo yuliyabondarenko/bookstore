@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Order } from '../../entity/order';
-import { OrderService } from '../../service/api/order.service';
+import { Order } from '../../../entity/order';
+import { OrderService } from '../../../service/api/order.service';
 import { MatSort, MatTableDataSource, Sort, SortDirection } from '@angular/material';
-import { Page } from '../../../page';
-import { environment } from '../../../environments/environment';
+import { Page } from '../../../../page';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-orders',

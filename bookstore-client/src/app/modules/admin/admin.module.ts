@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminComponent } from './admin.component';
 import { RouterModule, Routes } from '@angular/router';
-import { MaterialModule } from '../material.module';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { ManageBooksComponent } from './manage-books/manage-books.component';
-import { AdminGuard } from '../service/admin-guard.service';
+import { AdminGuard } from '../../service/admin-guard.service';
+import { MaterialModule } from '../../material.module';
 
 const routes: Routes = [
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
     children: [
       {
         path: 'profile',
-        loadChildren: 'app/user-profile/user-profile.module#UserProfileModule'
+        loadChildren: 'app/modules/user-profile/user-profile.module#UserProfileModule'
       },
       {
         path: 'users',

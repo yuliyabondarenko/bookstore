@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalShoppingCartService } from '../service/local-shopping-cart.service';
+import { LocalShoppingCartService } from '../../service/local-shopping-cart.service';
 
 @Component({
   selector: 'app-user',
