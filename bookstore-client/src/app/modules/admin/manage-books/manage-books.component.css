@@ -1,3 +1,9 @@
+.container {
+  margin: 20px auto;
+  width: 80%;
+  padding: 10px 20px;
+}
+
 .mat-column-id {
   flex: 0 0 5%;
 }
@@ -7,17 +13,11 @@
 }
 
 .mat-column-price {
-  text-align: center;
   flex: 0 0 20%;
 }
 
 .mat-column-date {
   flex: 0 0 5%;
-}
-
-
-.mat-cell {
-  text-align: center;
 }
 
 .mat-header-cell {

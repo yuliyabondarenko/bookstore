@@ -11,9 +11,6 @@
   flex: 0 0 20%;
 }
 
-.mat-cell, .mat-header-cell {
-  text-align: center;
-}
 .mat-header-cell {
   font-weight: bold;
 }

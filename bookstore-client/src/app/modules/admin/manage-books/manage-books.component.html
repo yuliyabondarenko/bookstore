@@ -1,6 +1,4 @@
-<button mat-raised-button (click)="openCreateBookDialog()">Create book</button>
-
-<div class="books-container mat-elevation-z8">
+<mat-card class="container">
   <mat-table #table [dataSource]="books" matSort (matSortChange)="sortData($event)">
 
     <ng-container matColumnDef="id">
@@ -10,7 +8,7 @@
 
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header> NAME </mat-header-cell>
-      <mat-cell *matCellDef="let book"> $ {{book.name}}</mat-cell>
+      <mat-cell *matCellDef="let book"> {{book.name}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="price">
@@ -35,4 +33,6 @@
                  [showFirstLastButtons]="true"
                  (page)="getPage($event, sort)" >
   </mat-paginator>
-</div>
+
+  <button mat-raised-button color="primary" (click)="openCreateBookDialog()">Create book</button>
+</mat-card>

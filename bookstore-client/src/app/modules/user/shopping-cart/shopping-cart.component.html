@@ -1,4 +1,4 @@
-<mat-card class="shopcart-container mat-elevation-z2">
+<mat-card class="container">
 
   <mat-table #table [dataSource]="shoppingCartItems">
 
@@ -28,9 +28,9 @@
 
 
   <mat-toolbar-row>
-    <button id="clearCart" mat-raised-button class="mat-elevation-z2" color="primary"
+    <button id="clearCart" mat-raised-button color="primary"
             (click)="clearCart()">Clear cart</button>
-    <button id="submitOrder" mat-raised-button class="mat-elevation-z2" color="primary"
+    <button id="submitOrder" mat-raised-button color="primary"
             (click)="performOrder()">Submit order</button>
   </mat-toolbar-row>
 
