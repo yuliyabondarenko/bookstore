@@ -13,5 +13,15 @@ export const environment = {
   ordersSort: {
     active: 'date',
     direction: 'desc'
+  },
+
+  userBooksPage: {
+    pageIndex: 0,
+    pageSize: 12
+  },
+
+  userBooksSort: {
+    active: 'visible',
+    direction: 'desc'
   }
 };
