@@ -4,20 +4,22 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { RegisterComponent } from './register/register.component';
-import { UserService } from './service/user.service';
+import { RegisterComponent } from './components/register/register.component';
+import { UserService } from './service/api/user.service';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { BookService } from './service/book.service';
-import { RegisterService } from './service/register.user.service';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { BookService } from './service/api/book.service';
+import { RegisterService } from './service/api/register.user.service';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminGuard } from './service/admin-guard.service';
-import { AuthService } from './service/auth.service ';
 import { UserGuard } from './service/user-guard.service';
-import { OrderService } from './service/order.service';
+import { OrderService } from './service/api/order.service';
 import {XhrInterceptor} from "./service/xhr-interceptor.service";
+import { LoginService } from './service/api/login.service';
+import { SessionService } from './service/session.service';
+import { EditProfileComponent } from './modules/user-profile/edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -35,8 +37,9 @@ import {XhrInterceptor} from "./service/xhr-interceptor.service";
     MaterialModule,
   ],
   providers: [
+    LoginService,
+    SessionService,
     UserService,
-    AuthService,
     XhrInterceptor,
     AdminGuard,
     UserGuard,

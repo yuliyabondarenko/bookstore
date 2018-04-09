@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './service/auth.service ';
 import { Router } from '@angular/router';
+import { LoginService } from './service/api/login.service';
+import { SessionService } from './service/session.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,9 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private loginService: LoginService,
+              private sessionService: SessionService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -19,23 +22,23 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout()
+    this.loginService.logout()
       .then(() => this.router.navigateByUrl('login'));
   }
 
   get isAuthorized(): boolean {
-    return this.authService.isAuthorized;
+    return this.sessionService.isAuthorized;
   }
 
   get isUser(): boolean {
-    return this.authService.isUser;
+    return this.sessionService.isUser;
   }
 
   get isAdmin(): boolean {
-    return this.authService.isAdmin;
+    return this.sessionService.isAdmin;
   }
 
   get userName(): String {
-    return this.authService.userName;
+    return this.sessionService.userName;
   }
 }
