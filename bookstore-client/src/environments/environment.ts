@@ -23,5 +23,15 @@ export const environment = {
   userBooksSort: {
     active: 'visible',
     direction: 'desc'
+  },
+
+  adminBooksPage: {
+    pageIndex: 0,
+    pageSize: 10
+  },
+
+  adminBooksSort: {
+    active: 'id',
+    direction: 'desc'
   }
 };

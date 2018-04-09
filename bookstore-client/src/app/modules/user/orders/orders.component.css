@@ -20,7 +20,7 @@
   flex: 0 0 20%;
 }
 
-.mat-cell, .mat-header-cell {
+.mat-cell, {
   text-align: center;
 }
 

@@ -20,7 +20,7 @@
            name="photo" #name=ngModel>
   </mat-form-field>
 
-  <mat-checkbox [(ngModel)]="book.visible" name="visible">Available</mat-checkbox>
+  <mat-checkbox [(ngModel)]="!book.visible" name="visible">Absent</mat-checkbox>
 
   <button mat-raised-button [mat-dialog-close]="book" [disabled]="form.invalid">Submit</button>
   <button mat-button mat-dialog-close>Cansel</button>

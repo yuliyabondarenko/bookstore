@@ -1,0 +1,25 @@
+.mat-column-id {
+  flex: 0 0 5%;
+}
+
+.mat-column-name {
+  flex: 0 0 70%;
+}
+
+.mat-column-price {
+  text-align: center;
+  flex: 0 0 20%;
+}
+
+.mat-column-date {
+  flex: 0 0 5%;
+}
+
+
+.mat-cell {
+  text-align: center;
+}
+
+.mat-header-cell {
+  font-weight: bold;
+}

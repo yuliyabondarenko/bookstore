@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BookService } from '../../../service/api/book.service';
 import { Book } from '../../../entity/book';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatSort, MatTableDataSource, Sort, SortDirection } from '@angular/material';
 import { BookFormDialogComponent } from './book.form/book.form';
+import { environment } from '../../../../environments/environment';
+import { Page } from '../../../../page';
 
 @Component({
   selector: 'app-manage-books',
@@ -10,13 +12,24 @@ import { BookFormDialogComponent } from './book.form/book.form';
   styleUrls: ['./manage-books.component.css']
 })
 export class ManageBooksComponent implements OnInit {
-  books: Book[];
+  books: Array<Book>;
+  dataSource: MatTableDataSource<Book>;
+  currentPage = environment.adminBooksPage;
+  totalElements: number;
+  displayedColumns = ['id', 'name', 'price', 'visible'];
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private bookService: BookService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.getBooks();
+    this.sort.active = environment.adminBooksSort.active;
+    this.sort.direction = environment.adminBooksSort.direction as SortDirection;
+    this.getPage(this.currentPage, this.sort);
+  }
+
+  sortData(sort: Sort) {
+    this.getPage(this.currentPage, sort);
   }
 
   openCreateBookDialog(): void {
@@ -29,16 +42,21 @@ export class ManageBooksComponent implements OnInit {
         if (!book) return;
         this.bookService.create(book)
           .then(() => {
-            this.getBooks();
+            this.getPage(this.currentPage, this.sort);
           });
       });
   }
 
-  getBooks(): void {
+  getPage(page: Page, sort: Sort): void {
     //FIXME
-    this.bookService.getBooks(0, 20, null)
+    const sortParam = `${sort.active},${sort.direction}`;
+    this.bookService.getBooks(page.pageIndex, page.pageSize, sortParam)
       .then(response => {
         this.books = response._embedded.books as Book[];
+        this.dataSource = new MatTableDataSource<Book>(this.books);
+        this.totalElements = response.page.totalElements;
+        this.currentPage = page;
+        this.dataSource.sort = this.sort;
       })
       .catch(error => {
           alert("Can't get books: " + error.message);
