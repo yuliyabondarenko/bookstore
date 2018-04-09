@@ -22,7 +22,6 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger;
     this.sort.active = environment.ordersSort.active;
     this.sort.direction = environment.ordersSort.direction as SortDirection;
 
@@ -33,7 +32,6 @@ export class OrdersComponent implements OnInit {
     const sortParam = `${sort.active},${sort.direction}`;
     this.orderService.getOrders(page.pageIndex, page.pageSize, sortParam)
       .then(response => {
-        debugger;
         const orders = response['_embedded'].orders as Order [];
         this.orders = new MatTableDataSource<Order>(orders);
         this.totalOrderCount = response.page.totalElements;
@@ -44,7 +42,6 @@ export class OrdersComponent implements OnInit {
   }
 
   sortOrders(sort: Sort) {
-    debugger;
     this.getPage(this.currentPage, sort);
   }
 }

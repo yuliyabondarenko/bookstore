@@ -6,8 +6,12 @@
   <mat-card-actions>
 
     <mat-chip-list>
-      <mat-chip style="text-align: right" color="accent"  *ngIf="!book.visible" selected="true">Absent</mat-chip>
+      <mat-chip color="accent"  *ngIf="!book.visible" selected="true">Absent</mat-chip>
     </mat-chip-list>
-    <button title="Add to cart" mat-raised-button class="add-btn" *ngIf="book.visible" color="primary">ADD</button>
+
+    <button *ngIf="book.visible && !isInCart" mat-raised-button color="primary"
+            (click)="addToCart()" title="Add to cart">ADD</button>
+    <button *ngIf="isInCart" disabled mat-raised-button>IN CART</button>
+
   </mat-card-actions>
 </mat-card>
