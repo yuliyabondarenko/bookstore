@@ -1,9 +1,9 @@
 INSERT INTO book (name, price, photo)
 VALUES ('Юлий Алкин "Цена познания"', 12.3, 'http://fb2-epub.ru/Fantstic/Alkin/Tsiena_poznaniia-Iurii_Alkin.jpg');
-INSERT INTO book (name, price, visible, photo)
-VALUES ('Оноре де Бальзак "Тридцатилетняя женщина"', 10.2, false, 'http://irecommend.ru/sites/default/files/product-images/75276/ZtWWyVa21Kvl4bYJFfvg.jpg');
-INSERT INTO book (name, price, photo)
-VALUES ('Трейси Брайан "Оставьте брезгливость, съешьте лягушку!"', 17.4, 'https://audioknigi.club/uploads/topics/preview/00/00/65/47/9f924e7dec.jpg');
+INSERT INTO book (name, price, absent, photo)
+VALUES ('Оноре де Бальзак "Тридцатилетняя женщина"', 10.2, true, 'http://irecommend.ru/sites/default/files/product-images/75276/ZtWWyVa21Kvl4bYJFfvg.jpg');
+INSERT INTO book (name, price, absent, photo)
+VALUES ('Трейси Брайан "Оставьте брезгливость, съешьте лягушку!"', true, 17.4, 'https://audioknigi.club/uploads/topics/preview/00/00/65/47/9f924e7dec.jpg');
 INSERT INTO book (name, price, photo)
 VALUES ('Рей Бредбери - "451 градус по Фаренгейту"', 53.34, 'http://loveread.ec/img/photo_books/2039.jpg');
 INSERT INTO book (name, price, photo)

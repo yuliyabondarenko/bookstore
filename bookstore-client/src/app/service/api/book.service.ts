@@ -48,4 +48,22 @@ export class BookService {
       })
       .catch(response => alert('Error while create book'));
   }
+
+
+  update(book: Book): Promise<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.sessionService.authorization
+      })
+    };
+
+    return this.http
+      .put(`${this.baseBooksUrl}/${book.id}`, JSON.stringify(book), httpOptions)
+      .toPromise()
+      .then(response => {
+        return response as Book
+      })
+      .catch(response => alert('Error while update book'));
+  }
 }

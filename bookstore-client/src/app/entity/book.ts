@@ -3,7 +3,7 @@ export class Book {
               public name: string = null,
               public price: number = null,
               public photo: string = null,
-              public visible: boolean = true,
+              public absent: boolean = false,
               public _links: any = null) {
   }
 }

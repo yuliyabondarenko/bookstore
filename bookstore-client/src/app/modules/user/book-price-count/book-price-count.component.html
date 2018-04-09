@@ -1,22 +1,24 @@
-<mat-table #table [dataSource]="bookPriceCountInfo">
+<div class="container">
+  <mat-table #table [dataSource]="bookPriceCountInfo">
 
-  <ng-container matColumnDef="bookName">
-    <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
-    <mat-cell *matCellDef="let item">{{item.book.name}}</mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="bookName">
+      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+      <mat-cell *matCellDef="let item">{{item.book.name}}</mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="price">
-    <mat-header-cell *matHeaderCellDef> Price</mat-header-cell>
-    <mat-cell *matCellDef="let item"> $ {{item.price}}</mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef> Price</mat-header-cell>
+      <mat-cell *matCellDef="let item"> $ {{item.price}}</mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="count">
-    <mat-header-cell *matHeaderCellDef> Count</mat-header-cell>
-    <mat-cell *matCellDef="let item"> {{item.count}}</mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="count">
+      <mat-header-cell *matHeaderCellDef> Count</mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{item.count}}</mat-cell>
+    </ng-container>
 
-  <div *ngIf="showHeader">
-    <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
-  </div>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
+    <div *ngIf="showHeader">
+      <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
+    </div>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

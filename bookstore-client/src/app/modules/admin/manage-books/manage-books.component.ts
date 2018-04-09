@@ -16,7 +16,7 @@ export class ManageBooksComponent implements OnInit {
   dataSource: MatTableDataSource<Book>;
   currentPage = environment.adminBooksPage;
   totalElements: number;
-  displayedColumns = ['id', 'name', 'price', 'visible'];
+  displayedColumns = ['id', 'name', 'price', 'absent', 'actions'];
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private bookService: BookService, public dialog: MatDialog) {
@@ -41,6 +41,21 @@ export class ManageBooksComponent implements OnInit {
       .then(book => {
         if (!book) return;
         this.bookService.create(book)
+          .then(() => {
+            this.getPage(this.currentPage, this.sort);
+          });
+      });
+  }
+
+  openEditBookDialog(book: Book): void {
+    const dialogConfig = {width: '500px', data: {book: Object.assign({}, book)}} as MatDialogConfig;
+    const dialogRef = this.dialog.open(BookFormDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed()
+      .toPromise()
+      .then(book => {
+        if (!book) return;
+        this.bookService.update(book)
           .then(() => {
             this.getPage(this.currentPage, this.sort);
           });

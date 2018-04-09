@@ -21,8 +21,8 @@ export const environment = {
   },
 
   userBooksSort: {
-    active: 'visible',
-    direction: 'desc'
+    active: 'absent',
+    direction: 'asc'
   },
 
   adminBooksPage: {
