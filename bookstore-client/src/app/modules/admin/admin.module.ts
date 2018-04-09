@@ -6,6 +6,9 @@ import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { ManageBooksComponent } from './manage-books/manage-books.component';
 import { AdminGuard } from '../../service/admin-guard.service';
 import { MaterialModule } from '../../material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BookFormDialogComponent } from './manage-books/book.form/book.form';
+
 
 const routes: Routes = [
   {
@@ -33,13 +36,16 @@ const routes: Routes = [
   imports: [
     CommonModule,
     MaterialModule,
+    FormsModule,
     RouterModule.forChild(routes)
   ],
   declarations: [
     AdminComponent,
     ManageUsersComponent,
-    ManageBooksComponent
-  ]
+    ManageBooksComponent,
+    BookFormDialogComponent
+  ],
+  entryComponents: [BookFormDialogComponent]
 })
 export class AdminModule {
 }

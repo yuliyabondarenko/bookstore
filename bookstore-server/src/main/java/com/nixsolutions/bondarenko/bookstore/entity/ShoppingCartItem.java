@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(uniqueConstraints=@UniqueConstraint(columnNames={"user_id", "book_id"}))
@@ -24,6 +25,7 @@ public class ShoppingCartItem {
   private Book book;
 
   @Column(nullable = false)
+  @Min(1)
   private int count;
 
   public ShoppingCartItem() {

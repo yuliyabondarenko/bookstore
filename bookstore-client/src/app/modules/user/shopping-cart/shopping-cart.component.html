@@ -15,6 +15,8 @@
     <ng-container matColumnDef="count">
       <mat-header-cell *matHeaderCellDef> Count</mat-header-cell>
       <mat-cell *matCellDef="let item"> {{item.count}}
+        <!--
+    <input type="number" matInput [(ngModel)]='book.price' placeholder="price">-->
         <button mat-raised-button (click)="upCount(item)" class="count-btn">Up</button>
         <button mat-raised-button (click)="downCount(item)" class="count-btn">Down</button>
       </mat-cell>
