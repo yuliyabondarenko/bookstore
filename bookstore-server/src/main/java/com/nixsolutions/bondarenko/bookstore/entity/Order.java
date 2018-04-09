@@ -37,7 +37,7 @@ public class Order implements Serializable
   private User user;
 
   @Formula("select sum(obp.price) from order_book_price obp where obp.order_id = id")
-  Double totalAmount;
+  private Double totalAmount;
 
   public Order()
   {

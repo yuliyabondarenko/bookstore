@@ -7,6 +7,7 @@ import { Config } from '../../../config';
 import { ShoppingCartItem } from '../../../entity/shopping-cart-item';
 import { LocalShoppingCartService } from '../../../service/local-shopping-cart.service';
 import { SessionService } from '../../../service/session.service';
+import { ShoppingCartService } from '../../../service/api/shopping.cart.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -18,6 +19,7 @@ export class ShoppingCartComponent implements OnInit {
   displayedColumns = ['bookName', 'price', 'count'];
 
   constructor(private localShoppingCartService: LocalShoppingCartService,
+              private shoppingCartService: ShoppingCartService,
               private ordersService: OrderService,
               private sessionService: SessionService,
               private router: Router) {
@@ -28,17 +30,20 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   refreshItems() {
-    this.localShoppingCartService.retrieveShoppingCartItems()
+    this.localShoppingCartService.fetchShoppingCartItems()
       .then(items => {
         this.shoppingCartItems = items;
       });
   }
 
-  performOrder() {
+  submitOrder() {
     let order = this.buildOrder();
 
     this.ordersService.createOrder(order, () => {
       this.router.navigateByUrl('user/orders');
+      this.shoppingCartService.cleanUserCart(this.sessionService.userId).then(() => {
+        this.localShoppingCartService.fetchShoppingCartItems();
+      });
     });
   }
 
@@ -65,7 +70,13 @@ export class ShoppingCartComponent implements OnInit {
 
 
   clearCart() {
-    alert("Oh! I can't clear yet");
+    this.shoppingCartService.cleanUserCart(this.sessionService.userId).then(() => {
+      this.shoppingCartItems = [];
+    });
+  }
+
+  get isEmpty() {
+    return !this.shoppingCartItems || this.shoppingCartItems.length == 0;
   }
 
   upCount(item: ShoppingCartItem) {

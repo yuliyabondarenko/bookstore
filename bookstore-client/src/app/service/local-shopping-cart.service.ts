@@ -17,7 +17,7 @@ export class LocalShoppingCartService {
     this.userLink = `${Config.host}/users/${this.userId}`;
   }
 
-  retrieveShoppingCartItems(): Promise<ShoppingCartItem []> {
+  fetchShoppingCartItems(): Promise<ShoppingCartItem []> {
     return this.shoppingCartService.getShopCartItems()
       .then(response => {
         const cartItems = response['_embedded'].shopcart as ShoppingCartItem [];
@@ -37,14 +37,14 @@ export class LocalShoppingCartService {
   addBookToCart(book: Book) {
     const itemDto = new ShoppingCartItemDTO(null, this.userLink, book._links.self.href, 1);
     return this.shoppingCartService.createItem(itemDto)
-      .then(() => this.retrieveShoppingCartItems()
+      .then(() => this.fetchShoppingCartItems()
     );
   }
 
   updateCount(item: ShoppingCartItem, targetCount: number = null) {
       const itemDto = new ShoppingCartItemDTO(item.id, this.userLink, item.book._links.self.href, targetCount);
       return this.shoppingCartService.updateItem(itemDto).then(
-        () => this.retrieveShoppingCartItems()
+        () => this.fetchShoppingCartItems()
       );
   }
 

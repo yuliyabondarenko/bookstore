@@ -7,7 +7,7 @@ import { SessionService } from '../session.service';
 
 @Injectable()
 export class ShoppingCartService {
-  cartsUrl = `${Config.host}/shopcart`;
+  baseShopCartUrl = `${Config.host}/shopcart`;
   userId: number;
 
   constructor(private http: HttpClient,
@@ -17,7 +17,7 @@ export class ShoppingCartService {
 
   getShopCartItems(): Promise<any> {
 
-    const getUserCartUrl = `${this.cartsUrl}/search/findByUserId?userId=${this.userId}&projection=view`;
+    const getUserCartUrl = `${this.baseShopCartUrl}/search/findByUserId?userId=${this.userId}&projection=view`;
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -36,11 +36,27 @@ export class ShoppingCartService {
 
   deleteItem(id: number): Promise<any> {
     return this.http
-      .delete(`${this.cartsUrl}/${id}`)
+      .delete(`${this.baseShopCartUrl}/${id}`)
       .toPromise()
       .catch(response => {
         alert(`Error while delete shopping-cart: ${id}`);
       });
+  }
+
+  cleanUserCart(userId: number){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.sessionService.authorization
+      })
+    };
+
+    return this.http
+      .get(`${this.baseShopCartUrl}/clean?userId=${userId}`, httpOptions)
+      .toPromise()
+      .then(response => {
+          return response;
+        }
+      );
   }
 
   createItem(shoppingCartItem: ShoppingCartItemDTO): Promise<any> {
@@ -52,7 +68,7 @@ export class ShoppingCartService {
     };
 
     return this.http
-      .post(`${this.cartsUrl}?projection=view`, JSON.stringify(shoppingCartItem), httpOptions)
+      .post(`${this.baseShopCartUrl}?projection=view`, JSON.stringify(shoppingCartItem), httpOptions)
       .toPromise()
       .then(response => response as ShoppingCartItem)
       .catch(response => {
@@ -68,7 +84,7 @@ export class ShoppingCartService {
       })
     };
 
-    const itemUrl = `${this.cartsUrl}/${shoppingCartItem.id}?projection=view`;
+    const itemUrl = `${this.baseShopCartUrl}/${shoppingCartItem.id}?projection=view`;
     return this.http
       .put(itemUrl, JSON.stringify(shoppingCartItem), httpOptions)
       .toPromise()

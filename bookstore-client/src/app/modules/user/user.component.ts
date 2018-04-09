@@ -13,7 +13,7 @@ export class UserComponent implements OnInit {
               private localShoppingCartService: LocalShoppingCartService) { }
 
   ngOnInit() {
-    this.localShoppingCartService.retrieveShoppingCartItems();
+    this.localShoppingCartService.fetchShoppingCartItems();
   }
 
   isActive(path: string): boolean {
