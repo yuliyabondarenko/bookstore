@@ -16,7 +16,7 @@ import { ShoppingCartService } from '../../../service/api/shopping.cart.service'
 })
 export class ShoppingCartComponent implements OnInit {
   shoppingCartItems: ShoppingCartItem [];
-  displayedColumns = ['bookName', 'price', 'count'];
+  displayedColumns = ['bookName', 'price', 'count', 'actions'];
 
   constructor(private localShoppingCartService: LocalShoppingCartService,
               private shoppingCartService: ShoppingCartService,
@@ -84,11 +84,13 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   downCount(item: ShoppingCartItem) {
-    if (item.count == 1) {
-      this.localShoppingCartService.deleteItem(item.id)
-        .then(() => this.refreshItems());
-    } else {
+    if (item.count > 1) {
       this.localShoppingCartService.updateCount(item, --item.count);
     }
+  }
+
+  removeItem(item: ShoppingCartItem) {
+    this.localShoppingCartService.deleteItem(item.id)
+      .then(() => this.refreshItems());
   }
 }

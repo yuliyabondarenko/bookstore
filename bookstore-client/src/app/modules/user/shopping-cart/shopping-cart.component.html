@@ -3,22 +3,32 @@
   <mat-table #table [dataSource]="shoppingCartItems">
 
     <ng-container matColumnDef="bookName">
-      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> NAME</mat-header-cell>
       <mat-cell *matCellDef="let item">{{item.book.name}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="price">
-      <mat-header-cell *matHeaderCellDef> Price</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> PRICE</mat-header-cell>
       <mat-cell *matCellDef="let item"> $ {{item.book.price}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="count">
-      <mat-header-cell *matHeaderCellDef> Count</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> COUNT</mat-header-cell>
       <mat-cell *matCellDef="let item"> {{item.count}}
         <!--
     <input type="number" matInput [(ngModel)]='book.price' placeholder="price">-->
-        <button mat-raised-button (click)="upCount(item)" class="count-btn">Up</button>
-        <button mat-raised-button (click)="downCount(item)" class="count-btn">Down</button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> ACTIONS</mat-header-cell>
+      <mat-cell *matCellDef="let item">
+        <!--<input type="number" matInput [(ngModel)]='book.price' placeholder="price">-->
+        <button mat-raised-button class="count-btn" (click)="upCount(item)">Up</button>
+        <button mat-raised-button class="count-btn"
+                [disabled]="item.count == 1" (click)="downCount(item)">Down</button>
+        <button id="removeItem" mat-raised-button color="accent"
+                (click)="removeItem(item)">Remove</button>
       </mat-cell>
     </ng-container>
 
@@ -29,9 +39,9 @@
 
   <mat-toolbar-row>
     <button id="clearCart" mat-raised-button color="primary"
-           [disabled]="isEmpty" (click)="clearCart()">Clear cart</button>
+            [disabled]="isEmpty" (click)="clearCart()">Clear cart</button>
     <button id="submitOrder" mat-raised-button color="primary"
-           [disabled]="isEmpty" (click)="submitOrder()">Submit order</button>
+            [disabled]="isEmpty" (click)="submitOrder()">Submit order</button>
   </mat-toolbar-row>
 
 </mat-card>
