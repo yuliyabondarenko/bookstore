@@ -17,8 +17,8 @@ export class AuthService {
     return sessionStorage.authorization;
   }
 
-  get userId(): string {
-    return sessionStorage.getItem('userId');
+  get userId(): number {
+    return parseInt(sessionStorage.getItem('userId'));
   }
   get userName(): string {
     return sessionStorage.getItem('userName');
@@ -98,6 +98,9 @@ export class AuthService {
 
   private clearAuthorization() {
     sessionStorage.removeItem('authorization');
+    sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('userName');
     sessionStorage.removeItem('roles');
+    sessionStorage.removeItem('shoppingCart');
   }
 }

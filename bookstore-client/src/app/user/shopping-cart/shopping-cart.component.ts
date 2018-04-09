@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { BookPriceCount } from '../../entity/book-price-count';
-import { ShoppingCartService } from '../../service/shopping.cart.service';
 import { OrderService } from '../../service/order.service';
 import { Order } from '../../entity/order';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service ';
 import { Config } from '../../config';
+import { ShoppingCartItem } from '../../entity/shopping-cart-item';
+import { LocalShoppingCartService } from '../../local-shopping-cart.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -13,24 +14,24 @@ import { Config } from '../../config';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
-  shoppingCartItems: BookPriceCount [];
+  shoppingCartItems: ShoppingCartItem [];
   displayedColumns = ['bookName', 'price', 'count'];
 
-  constructor(private shoppingCartService: ShoppingCartService,
+  constructor(private localShoppingCartService: LocalShoppingCartService,
               private ordersService: OrderService,
               private authService: AuthService,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.getShopCartItems();
+    this.refreshItems();
   }
 
-  getShopCartItems() {
-    this.shoppingCartService.getShopCartItems().then(response => {
-      debugger;
-      this.shoppingCartItems = response['_embedded'].shopcart as BookPriceCount [];
-    })
+  refreshItems() {
+    this.localShoppingCartService.retrieveShoppingCartItems()
+      .then(items => {
+        this.shoppingCartItems = items;
+      });
   }
 
   performOrder() {
@@ -41,6 +42,7 @@ export class ShoppingCartComponent implements OnInit {
     });
   }
 
+  //TODO move this logic somewhere
   buildOrder() {
     let orderBookPriceItems = new Array<BookPriceCount>();
     this.shoppingCartItems.forEach(
@@ -66,4 +68,16 @@ export class ShoppingCartComponent implements OnInit {
     alert("Oh! I can't clear yet");
   }
 
+  upCount(item: ShoppingCartItem) {
+    this.localShoppingCartService.updateCount(item, ++item.count);
+  }
+
+  downCount(item: ShoppingCartItem) {
+    if (item.count == 1) {
+      this.localShoppingCartService.deleteItem(item.id)
+        .then(() => this.refreshItems());
+    } else {
+      this.localShoppingCartService.updateCount(item, --item.count);
+    }
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocalShoppingCartService } from '../local-shopping-cart.service';
 
 @Component({
   selector: 'app-user',
@@ -8,9 +9,11 @@ import { Router } from '@angular/router';
 })
 export class UserComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private localShoppingCartService: LocalShoppingCartService) { }
 
   ngOnInit() {
+    this.localShoppingCartService.retrieveShoppingCartItems();
   }
 
   isActive(path: string): boolean {

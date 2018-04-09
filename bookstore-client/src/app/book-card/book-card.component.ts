@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Book } from '../entity/book';
+import { LocalShoppingCartService } from '../local-shopping-cart.service';
 
 @Component({
   selector: 'app-book-card',
@@ -9,10 +10,17 @@ import { Book } from '../entity/book';
 export class BookCardComponent implements OnInit {
   @Input() book: Book;
 
-  constructor() { }
+  constructor(private localShoppingCartService: LocalShoppingCartService) {
+  }
 
   ngOnInit() {
   }
 
+  addToCart() {
+    this.localShoppingCartService.addBookToCart(this.book);
+  }
 
+  get isInCart() {
+    return this.localShoppingCartService.isBookInCart(this.book);
+  }
 }

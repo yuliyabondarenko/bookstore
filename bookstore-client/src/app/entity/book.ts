@@ -1,5 +1,5 @@
 export class Book {
-  constructor(public id: string = null,
+  constructor(public id: number = null,
               public name: string = null,
               public price: string = null,
               public photo: string = null,

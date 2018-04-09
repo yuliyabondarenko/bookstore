@@ -8,7 +8,7 @@ import { Order } from '../entity/order';
 export class OrderService {
   baseOrdersUrl = `${Config.host}/orders`;
   userOrdersUrl: string;
-  userId: string;
+  userId: number;
 
   constructor(private http: HttpClient, private authService: AuthService) {
     this.userId = this.authService.userId;
@@ -28,7 +28,6 @@ export class OrderService {
       .get(ordersUrl, httpOptions)
       .toPromise()
       .then(response => {
-          debugger;
           return response;
         }
       );

@@ -32,3 +32,8 @@
   position: absolute;
   right: 30px;
 }
+
+.count-btn {
+  margin: 5px;
+  min-width: 50px;
+}
