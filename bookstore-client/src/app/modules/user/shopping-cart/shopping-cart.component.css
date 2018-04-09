@@ -1,4 +1,4 @@
-.shopcart-container {
+.container {
   margin: 20px auto;
   width: 80%;
   padding: 10px 20px;
@@ -17,7 +17,7 @@
   flex: 0 0 20%;
 }
 
-.mat-cell, .mat-header-cell {
+.mat-cell {
   text-align: center;
 }
 

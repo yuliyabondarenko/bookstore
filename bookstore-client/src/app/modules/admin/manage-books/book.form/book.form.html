@@ -1,0 +1,30 @@
+<form #form="ngForm">
+  <mat-form-field class="full-width mutable-field">
+  <textarea [(ngModel)]='book.name' matInput placeholder="Name"
+            matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"
+            [errorStateMatcher]="matcher" required name="name" #name=ngModel></textarea>
+    <mat-error *ngIf="name.errors?.required">
+      Name is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field  class="full-width mutable-field">
+    <input matInput type="number" [(ngModel)]="book.price" placeholder="Price"
+           [errorStateMatcher]="matcher" required name="price" #price=ngModel>
+    <mat-error *ngIf="price.errors?.required">
+      Price is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field  class="full-width mutable-field">
+    <input matInput type="text" [(ngModel)]='book.photo' placeholder="Photo"
+           name="photo" #name=ngModel>
+  </mat-form-field>
+
+  <mat-checkbox [(ngModel)]="book.absent" name="absent">Absent</mat-checkbox>
+
+  <mat-toolbar-row>
+    <button mat-button mat-dialog-close>Cansel</button>
+    <button mat-raised-button [mat-dialog-close]="book" color="primary" [disabled]="form.invalid">Submit</button>
+  </mat-toolbar-row>
+</form>

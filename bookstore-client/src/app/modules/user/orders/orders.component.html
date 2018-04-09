@@ -1,4 +1,4 @@
-<div class="orders-container mat-elevation-z8">
+<mat-card class="container">
   <mat-table #table [dataSource]="orders" matSort (matSortChange)="sortOrders($event)">
 
     <ng-container matColumnDef="id">
@@ -33,4 +33,4 @@
                  [showFirstLastButtons]="true"
                  (page)="getPage($event, sort)" >
   </mat-paginator>
-</div>
+</mat-card>

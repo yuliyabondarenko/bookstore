@@ -1,6 +1,5 @@
-.orders-container {
+.container {
   margin: 20px auto;
-  width: 80%
 }
 
 .mat-column-id {
@@ -18,10 +17,6 @@
 
 .mat-column-date {
   flex: 0 0 20%;
-}
-
-.mat-cell, .mat-header-cell {
-  text-align: center;
 }
 
 .mat-header-cell {

@@ -1,10 +1,45 @@
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Price</th>
-  </tr>
-  <tr *ngFor="let book of books">
-    <td>{{ book.name }}</td>
-    <td>{{ book.price }}</td>
-  </tr>
-</table>
+<mat-card class="container">
+  <mat-table #table [dataSource]="books" matSort (matSortChange)="sortData($event)">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header> ID </mat-header-cell>
+      <mat-cell *matCellDef="let book"> {{book.id}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> NAME </mat-header-cell>
+      <mat-cell *matCellDef="let book"> {{book.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> PRICE </mat-header-cell>
+      <mat-cell *matCellDef="let book"> $ {{book.price}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="absent">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ABSENT </mat-header-cell>
+      <mat-cell *matCellDef="let book">
+        <mat-checkbox *ngIf="book.absent" disabled="true" [(ngModel)]="book.absent" name="absent"></mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+      <mat-cell *matCellDef="let book">
+        <button mat-button (click)="openEditBookDialog(book)">Edit</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [length]="totalElements"
+                 [pageSize]="currentPage.pageSize"
+                 [pageSizeOptions]="[2, 5, 10, 20]"
+                 [showFirstLastButtons]="true"
+                 (page)="getPage($event, sort)" >
+  </mat-paginator>
+
+  <button mat-raised-button color="primary" (click)="openCreateBookDialog()">Create book</button>
+</mat-card>

@@ -15,7 +15,7 @@ export class BooksComponent implements OnInit {
   currentPage = environment.userBooksPage;
   totalBookCount: number;
 
-  displayedColumns = ['name', 'price', 'visible'];
+  displayedColumns = ['name', 'price', 'absent'];
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private bookService: BookService) {

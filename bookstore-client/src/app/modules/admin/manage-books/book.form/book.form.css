@@ -1,0 +1,11 @@
+.full-width {
+  width: 100%;
+}
+
+.mutable-field {
+  height: 7.5vh;
+}
+
+.mat-form-field {
+  margin: 5px 0;
+}

@@ -5,8 +5,8 @@
   <ng-container matColumnDef="price">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Price</mat-header-cell>
   </ng-container>
-  <ng-container matColumnDef="visible">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Presence</mat-header-cell>
+  <ng-container matColumnDef="absent">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Absent</mat-header-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

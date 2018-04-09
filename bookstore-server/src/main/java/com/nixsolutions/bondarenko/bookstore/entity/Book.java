@@ -23,8 +23,8 @@ public class Book implements Serializable
   @Column(nullable = true)
   private String photo;
 
-  @Column(columnDefinition = "boolean default true", nullable = false)
-  private boolean visible;
+  @Column(columnDefinition = "boolean default false", nullable = false)
+  private boolean absent;
 
   @Column(nullable = false)
   private Double price;
@@ -53,14 +53,14 @@ public class Book implements Serializable
     this.photo = photo;
   }
 
-  public boolean isVisible()
+  public boolean isAbsent()
   {
-    return visible;
+    return absent;
   }
 
-  public void setVisible(boolean visible)
+  public void setAbsent(boolean absent)
   {
-    this.visible = visible;
+    this.absent = absent;
   }
 
   public Double getPrice()

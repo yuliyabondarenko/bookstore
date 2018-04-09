@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -16,10 +16,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminGuard } from './service/admin-guard.service';
 import { UserGuard } from './service/user-guard.service';
 import { OrderService } from './service/api/order.service';
-import {XhrInterceptor} from "./service/xhr-interceptor.service";
+import { XhrInterceptor } from "./service/xhr-interceptor.service";
 import { LoginService } from './service/api/login.service';
 import { SessionService } from './service/session.service';
-import { EditProfileComponent } from './modules/user-profile/edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -35,6 +34,7 @@ import { EditProfileComponent } from './modules/user-profile/edit-profile/edit-p
     ReactiveFormsModule,
     HttpClientModule,
     MaterialModule,
+    FormsModule
   ],
   providers: [
     LoginService,

@@ -9,10 +9,10 @@
   <mat-card-actions>
 
     <mat-chip-list>
-      <mat-chip *ngIf="!book.visible">Absent</mat-chip>
+      <mat-chip *ngIf="book.absent">Absent</mat-chip>
     </mat-chip-list>
 
-    <button *ngIf="book.visible && !isInCart" mat-raised-button color="primary"
+    <button *ngIf="!book.absent && !isInCart" mat-raised-button color="primary"
             (click)="addToCart()" title="Add to cart">ADD</button>
     <button *ngIf="isInCart" disabled mat-raised-button>IN CART</button>
 

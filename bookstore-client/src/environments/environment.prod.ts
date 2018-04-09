@@ -17,7 +17,17 @@ export const environment = {
   },
 
   userBooksSort: {
-    active: 'visible',
+    active: 'absent',
+    direction: 'asc'
+  },
+
+  adminBooksPage: {
+    pageIndex: 0,
+    pageSize: 10
+  },
+
+  adminBooksSort: {
+    active: 'id',
     direction: 'desc'
   }
 };
