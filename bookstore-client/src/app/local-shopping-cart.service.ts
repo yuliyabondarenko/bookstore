@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { ShoppingCartItem } from './entity/shopping-cart-item';
 import { ShoppingCartService } from './service/shopping.cart.service';
 import { Book } from './entity/book';
-import { AuthService } from './service/auth.service ';
 import { Config } from './config';
 import { ShoppingCartItemDTO } from './entity/shopping-cart-item-dto';
+import { SessionService } from './service/session.service';
 
 @Injectable()
 export class LocalShoppingCartService {
@@ -12,8 +12,8 @@ export class LocalShoppingCartService {
   userLink :string;
 
   constructor(private shoppingCartService: ShoppingCartService,
-              private authService: AuthService) {
-    this.userId = this.authService.userId; //TODO escape  from this
+              private sessionService: SessionService) {
+    this.userId = this.sessionService.userId; //TODO escape  from this
     this.userLink = `${Config.host}/users/${this.userId}`;
   }
 

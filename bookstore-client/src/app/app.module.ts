@@ -14,10 +14,11 @@ import { RegisterService } from './service/register.user.service';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminGuard } from './service/admin-guard.service';
-import { AuthService } from './service/auth.service ';
 import { UserGuard } from './service/user-guard.service';
 import { OrderService } from './service/order.service';
 import {XhrInterceptor} from "./service/xhr-interceptor.service";
+import { LoginService } from './service/api/login.service';
+import { SessionService } from './service/session.service';
 
 
 @NgModule({
@@ -35,8 +36,9 @@ import {XhrInterceptor} from "./service/xhr-interceptor.service";
     MaterialModule,
   ],
   providers: [
+    LoginService,
+    SessionService,
     UserService,
-    AuthService,
     XhrInterceptor,
     AdminGuard,
     UserGuard,

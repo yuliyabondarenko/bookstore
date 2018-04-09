@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Config } from '../config';
-import { AuthService } from './auth.service ';
 import { ShoppingCartItem } from '../entity/shopping-cart-item';
 import { ShoppingCartItemDTO } from '../entity/shopping-cart-item-dto';
+import { SessionService } from './session.service';
 
 @Injectable()
 export class ShoppingCartService {
   cartsUrl = `${Config.host}/shopcart`;
   userId: number;
 
-  constructor(private http: HttpClient, private authService: AuthService) {
-    this.userId = this.authService.userId;
+  constructor(private http: HttpClient,
+              private sessionService: SessionService) {
+    this.userId = this.sessionService.userId;
   }
 
   getShopCartItems(): Promise<any> {
@@ -20,7 +21,7 @@ export class ShoppingCartService {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': this.authService.authorization
+        'Authorization': this.sessionService.authorization
       })
     };
 
@@ -46,7 +47,7 @@ export class ShoppingCartService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': this.authService.authorization
+        'Authorization': this.sessionService.authorization
       })
     };
 
@@ -63,7 +64,7 @@ export class ShoppingCartService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': this.authService.authorization
+        'Authorization': this.sessionService.authorization
       })
     };
 

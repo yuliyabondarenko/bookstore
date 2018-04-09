@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Config } from '../config';
-import { AuthService } from './auth.service ';
 import { Order } from '../entity/order';
+import { SessionService } from './session.service';
 
 @Injectable()
 export class OrderService {
@@ -10,8 +10,8 @@ export class OrderService {
   userOrdersUrl: string;
   userId: number;
 
-  constructor(private http: HttpClient, private authService: AuthService) {
-    this.userId = this.authService.userId;
+  constructor(private http: HttpClient, private sessionService: SessionService) {
+    this.userId = this.sessionService.userId;
     this.userOrdersUrl = `${this.baseOrdersUrl}/search/findByUserId?userId=${this.userId}`;
   }
 
@@ -20,7 +20,7 @@ export class OrderService {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': this.authService.authorization
+        'Authorization': this.sessionService.authorization
       })
     };
 
@@ -37,7 +37,7 @@ export class OrderService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': this.authService.authorization
+        'Authorization': this.sessionService.authorization
       })
     };
 

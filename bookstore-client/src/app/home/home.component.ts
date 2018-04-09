@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../service/auth.service ';
 import { Router } from '@angular/router';
+import { SessionService } from '../service/session.service';
 
 @Component({
   selector: 'app-home',
@@ -8,13 +8,14 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private sessionService: SessionService,
+              private router: Router) {
   }
 
   ngOnInit() {
-    if ( this.authService.isAdmin ) {
+    if (this.sessionService.isAdmin) {
       this.router.navigateByUrl('admin');
-    } else if ( this.authService.isUser ) {
+    } else if (this.sessionService.isUser) {
       this.router.navigateByUrl('user');
     }
   }

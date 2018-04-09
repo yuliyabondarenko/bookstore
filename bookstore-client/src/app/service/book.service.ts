@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Config} from '../config';
-import {AuthService} from './auth.service ';
+import { SessionService } from './session.service';
 
 @Injectable()
 export class BookService {
   baseBooksUrl = `${Config.host}/books`;
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient,
+              private sessionService: SessionService,) {
   }
 
   getBooks(page: number, size: number, sortParam: string): Promise<any> {
@@ -15,7 +16,7 @@ export class BookService {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': this.authService.authorization
+        'Authorization': this.sessionService.authorization
       })
     };
 

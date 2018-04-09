@@ -3,10 +3,10 @@ import { BookPriceCount } from '../../entity/book-price-count';
 import { OrderService } from '../../service/order.service';
 import { Order } from '../../entity/order';
 import { Router } from '@angular/router';
-import { AuthService } from '../../service/auth.service ';
 import { Config } from '../../config';
 import { ShoppingCartItem } from '../../entity/shopping-cart-item';
 import { LocalShoppingCartService } from '../../local-shopping-cart.service';
+import { SessionService } from '../../service/session.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -19,7 +19,7 @@ export class ShoppingCartComponent implements OnInit {
 
   constructor(private localShoppingCartService: LocalShoppingCartService,
               private ordersService: OrderService,
-              private authService: AuthService,
+              private sessionService: SessionService,
               private router: Router) {
   }
 
@@ -57,7 +57,7 @@ export class ShoppingCartComponent implements OnInit {
     );
     return new Order(
       null,
-      `${Config.host}/users/${this.authService.userId}`,
+      `${Config.host}/users/${this.sessionService.userId}`,
       new Date(Date.now()),
       orderBookPriceItems
     )
