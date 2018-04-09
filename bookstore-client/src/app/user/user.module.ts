@@ -10,7 +10,7 @@ import { BookPriceCountComponent } from './book-price-count/book-price-count.com
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingCartService } from '../service/shopping.cart.service';
 import { BookCardComponent } from '../book-card/book-card.component';
-import { LocalShoppingCartService } from '../local-shopping-cart.service';
+import { LocalShoppingCartService } from '../service/local-shopping-cart.service';
 
 
 const routes: Routes = [

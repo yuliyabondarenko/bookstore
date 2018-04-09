@@ -5,7 +5,7 @@ import { Order } from '../../entity/order';
 import { Router } from '@angular/router';
 import { Config } from '../../config';
 import { ShoppingCartItem } from '../../entity/shopping-cart-item';
-import { LocalShoppingCartService } from '../../local-shopping-cart.service';
+import { LocalShoppingCartService } from '../../service/local-shopping-cart.service';
 import { SessionService } from '../../service/session.service';
 
 @Component({
