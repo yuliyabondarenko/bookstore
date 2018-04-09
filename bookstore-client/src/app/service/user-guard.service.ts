@@ -10,6 +10,6 @@ export class UserGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    return this.sessionService.isUser;
+    return this.sessionService.isUser && !this.sessionService.isAdmin;
   }
 }
