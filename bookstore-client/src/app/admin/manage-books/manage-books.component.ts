@@ -19,15 +19,15 @@ export class ManageBooksComponent implements OnInit {
   }
 
   getBooks(): void {
-
-    this.bookService.getBooks()
-      .then(response => {
-        this.books = response._embedded.books as Book[];
-
-      })
-      .catch(error => {
-          alert("Can't get books: " + error.message);
-        }
-      );
+    //FIXME
+    // this.bookService.getBooks()
+    //   .then(response => {
+    //     this.books = response._embedded.books as Book[];
+    //
+    //   })
+    //   .catch(error => {
+    //       alert("Can't get books: " + error.message);
+    //     }
+    //   );
   }
 }

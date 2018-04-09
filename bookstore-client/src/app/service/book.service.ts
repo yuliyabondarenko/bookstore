@@ -5,12 +5,13 @@ import {AuthService} from './auth.service ';
 
 @Injectable()
 export class BookService {
-  bookUrl = `${Config.host}/books`;
+  baseBooksUrl = `${Config.host}/books`;
 
   constructor(private http: HttpClient, private authService: AuthService) {
   }
 
-  getBooks(): Promise<any> {
+  getBooks(page: number, size: number, sortParam: string): Promise<any> {
+    const booksUrl = `${this.baseBooksUrl}?sort=${sortParam}&page=${page}&size=${size}`;
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -19,11 +20,13 @@ export class BookService {
     };
 
     return this.http
-      .get(this.bookUrl, httpOptions)
+      .get(booksUrl, httpOptions)
       .toPromise()
       .then(response => {
           return response;
         }
-      );
+      ).catch(error => {
+        alert("Error while get books!");
+      });
   }
 }

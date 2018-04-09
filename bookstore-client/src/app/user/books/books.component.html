@@ -3,3 +3,11 @@
     <app-book-card [book]="book"></app-book-card>
   </mat-grid-tile>
 </mat-grid-list>
+
+
+<mat-paginator [length]="totalBookCount"
+               [pageSize]="currentPage.pageSize"
+               [pageSizeOptions]="[4, 8, 12, 16, 24, 32]"
+               [showFirstLastButtons]="true"
+               (page)="getPage($event, sort)" >
+</mat-paginator>
