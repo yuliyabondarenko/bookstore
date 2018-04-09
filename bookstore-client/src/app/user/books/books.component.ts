@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Book } from '../../entity/book';
 import { BookService } from '../../service/book.service';
 import { environment } from '../../../environments/environment';
 import { Page } from '../../../page';
+import { MatSort, Sort, SortDirection } from '@angular/material';
 
 @Component({
   selector: 'app-books',
@@ -13,16 +14,21 @@ export class BooksComponent implements OnInit {
   books: Array<Book>;
   currentPage = environment.userBooksPage;
   totalBookCount: number;
-  sort = environment.userBooksSort;
+
+  displayedColumns = ['name', 'price', 'visible'];
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private bookService: BookService) {
   }
 
   ngOnInit() {
-    this.getPage(this.currentPage, environment.userBooksSort);
+    this.sort.active = environment.userBooksSort.active;
+    this.sort.direction = environment.userBooksSort.direction as SortDirection;
+
+    this.getPage(this.currentPage, this.sort);
   }
 
-  getPage(page: Page, sort: any) {
+  getPage(page: Page, sort: Sort) {
     const sortParam = `${sort.active},${sort.direction}`;
     this.bookService.getBooks(page.pageIndex, page.pageSize, sortParam)
       .then(response => {
@@ -36,7 +42,7 @@ export class BooksComponent implements OnInit {
       );
   }
 
-  sortBooks(sort: any) {
+  sortBooks(sort: Sort) {
     this.getPage(this.currentPage, sort);
   }
 }
