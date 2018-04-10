@@ -50,21 +50,22 @@ export class RegisterComponent implements OnInit {
         this.router.navigateByUrl('login');
       })
       .catch(error => {
-        if (error.validationErrors) {
-          this.showValidationErrors(error.validationErrors);
+        if (error.fieldErrors) {
+          this.showValidationErrors(error.fieldErrors);
         } else {
-          this.globalError = error && error.message ? error.message : 'Registration failed. Unexpected error';
+          const errorMsg =  error && error.message ? error.message : '';
+          this.globalError = `Registration failed. ${errorMsg}`;
         }
       });
   }
 
-  showValidationErrors(errors: any) {
+  showValidationErrors(fieldErrors: any) {
     const self = this;
 
-    Object.keys(errors.fieldErrors).forEach(fieldPath => {
+    Object.keys(fieldErrors).forEach(fieldPath => {
       RegisterComponent.formFields.forEach(function (field) {
         if (fieldPath.endsWith(field)) {
-          self.setFieldError(field, errors.fieldErrors[fieldPath])
+          self.setFieldError(field, fieldErrors[fieldPath])
         }
       });
     });

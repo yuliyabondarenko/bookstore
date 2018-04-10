@@ -11,24 +11,24 @@ export class BookService {
   constructor(private http: HttpClient) {
   }
 
-  create(book: Book): Promise<any> {
+  create(book: Book): Promise<Book> {
     return this.http
       .post(this.baseBooksUrl, JSON.stringify(book), HttpOptions.authorizedJsonBody)
       .toPromise()
       .then(response => {
         return response as Book
       })
-      .catch(response => alert('Error while create book'));
+      .catch(error => Promise.reject(error));
   }
 
 
-  update(book: Book): Promise<any> {
+  update(book: Book): Promise<Book> {
     return this.http
-      .put(`${this.baseBooksUrl}/${book.id}`, JSON.stringify(book), HttpOptions.authorizedJsonBody)
+      .put(book._links.self.href, JSON.stringify(book), HttpOptions.authorizedJsonBody)
       .toPromise()
       .then(response => {
         return response as Book
       })
-      .catch(response => alert('Error while update book'));
+      .catch(error => Promise.reject(error));
   }
 }

@@ -17,6 +17,7 @@ import { LinkHelper } from '../../../service/link.helper';
 export class ShoppingCartComponent implements OnInit {
   shoppingCartItems: ShoppingCartItem [];
   displayedColumns = ['bookName', 'price', 'count', 'actions'];
+  globalError: string;
 
   constructor(private localShoppingCartService: LocalShoppingCartService,
               private shoppingCartService: ShoppingCartService,
@@ -43,7 +44,11 @@ export class ShoppingCartComponent implements OnInit {
       this.shoppingCartService.cleanUserCart(SessionService.userId).then(() => {
         this.localShoppingCartService.fetchShoppingCartItems();
       });
-    });
+    })
+      .catch(error => {
+        const errorMsg = error && error.message ? error.message : '';
+        this.globalError = `Submit order failed. ${errorMsg}`;
+      });
   }
 
   //TODO move this logic somewhere
@@ -72,8 +77,11 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   hasAbsentBook() {
-    return this.localShoppingCartService.storedShoppingCartItems
+    debugger;
+    let shoppingCartItems2 = this.localShoppingCartService.storedShoppingCartItems;
+    let b = shoppingCartItems2
       .some(item => item.book.absent);
+    return b;
   }
 
   get disableClear(): boolean {

@@ -31,7 +31,7 @@ export class SessionService {
   }
 
   static get itemsInCart(): boolean {
-    return JSON.parse(sessionStorage.shoppingCart).length;
+    return sessionStorage.shoppingCart ? JSON.parse(sessionStorage.shoppingCart).length : 0;
   }
 
   private static hasRole(roleName: string): boolean {

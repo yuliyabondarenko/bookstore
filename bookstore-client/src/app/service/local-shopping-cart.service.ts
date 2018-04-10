@@ -15,13 +15,9 @@ export class LocalShoppingCartService {
   fetchShoppingCartItems(): Promise<ShoppingCartItem []> {
     return this.shoppingCartService.getShopCartItems(SessionService.userId)
       .then(response => {
-        const cartItems = response['_embedded'].shopcart as ShoppingCartItem [];
+        const cartItems = response;
         sessionStorage.shoppingCart = JSON.stringify(cartItems);
         return cartItems;
-      })
-      .catch(error => {
-        console.log(`Fetch Shopping Cart failed. Error: ${error.message}`);
-        return [];
       });
   }
 

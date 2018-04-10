@@ -6,16 +6,18 @@ import { HttpOptions } from './http-heares-helper';
 
 @Injectable()
 export class RegisterService {
-  baseUrl = `${environment.apiUrl}/register`;
+  registerUrl = `${environment.apiUrl}/register`;
 
   constructor(private http: HttpClient) {
   }
 
-  registerUser(user: User): Promise<any> {
+  registerUser(user: User): Promise<User> {
     return this.http
-      .post(this.baseUrl, JSON.stringify(user), HttpOptions.anonymouthJsonBody)
+      .post(this.registerUrl, JSON.stringify(user), HttpOptions.anonymouthJsonBody)
       .toPromise()
       .then(response => response as User)
-      .catch(error => Promise.reject(error));
+      .catch(response => {
+        return Promise.reject(response.error);
+      });
   }
 }

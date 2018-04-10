@@ -38,7 +38,8 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/');
       })
       .catch((error) => {
-        this.loginFormError = error && error.message ? error.message : `Login failed. Unknown Error`;
+        const errorMsg =  error && error.message ? error.message : '';
+        this.loginFormError = `Login failed. ${errorMsg}`;
       });
   }
 

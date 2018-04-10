@@ -12,35 +12,41 @@ export class ShoppingCartService {
   constructor(private http: HttpClient) {
   }
 
-  getShopCartItems(userId): Promise<any> {
+  getShopCartItems(userId): Promise<ShoppingCartItem []> {
     const getUserCartUrl = `${this.baseShopCartUrl}/search/findByUserId?userId=${userId}&projection=view`;
 
     return this.http
       .get(getUserCartUrl, HttpOptions.authorizedEmptyBody)
       .toPromise()
       .then(response => {
-          return response;
+          return response['_embedded'].shopcart as ShoppingCartItem [];
         }
-      );
+      )
+      .catch(() => {
+        console.log(`Get of shopping-cart-items failed`);
+        return [];
+      });
   }
 
   deleteItem(id: number): Promise<any> {
     return this.http
       .delete(`${this.baseShopCartUrl}/${id}`)
       .toPromise()
-      .catch(response => {
+      .catch(() => {
         alert(`Error while delete shopping-cart: ${id}`);
       });
   }
 
-  cleanUserCart(userId: number){
+  cleanUserCart(userId: number) {
     return this.http
       .get(`${this.baseShopCartUrl}/clean?userId=${userId}`, HttpOptions.authorizedEmptyBody)
       .toPromise()
       .then(response => {
           return response;
         }
-      );
+      ).catch(response => {
+        console.log(`Clean shopping-cart failed`);
+      });
   }
 
   createItem(shoppingCartItem: ShoppingCartItemDTO): Promise<any> {
@@ -49,7 +55,7 @@ export class ShoppingCartService {
       .toPromise()
       .then(response => response as ShoppingCartItem)
       .catch(response => {
-        alert('Error while save shopping-cart');
+        console.log(`Create shopping-cart-item failed`);
       });
   }
 
@@ -60,8 +66,8 @@ export class ShoppingCartService {
       .put(itemUrl, JSON.stringify(shoppingCartItem), HttpOptions.authorizedJsonBody)
       .toPromise()
       .then(response => response as ShoppingCartItem)
-      .catch(response => {
-        alert('Error while update shopping-cart');
+      .catch(() => {
+        console.log(`Update shopping-cart-item failed`);
       });
   }
 }

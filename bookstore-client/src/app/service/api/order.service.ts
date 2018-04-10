@@ -20,8 +20,6 @@ export class OrderService {
           successCalback();
         }
       })
-      .catch(response => {
-        alert('Error while order creation!');
-      });
+      .catch(error => Promise.reject(error));
   }
 }
