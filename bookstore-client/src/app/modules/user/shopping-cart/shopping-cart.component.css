@@ -5,7 +5,7 @@
 }
 
 .mat-column-bookName {
-  flex: 0 0 45%;
+  flex: 0 0 40%;
 }
 
 .mat-column-price {
@@ -17,7 +17,7 @@
   flex: 0 0 10%;
 }
 .mat-column-actions {
-  flex: 0 0 25%;
+  flex: 0 0 30%;
 }
 
 #performOrder{
@@ -35,4 +35,9 @@
 .count-btn {
   margin: 5px;
   min-width: 50px;
+}
+
+.warning {
+  font-style: italic;
+  color: orangered;
 }

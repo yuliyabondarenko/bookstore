@@ -4,7 +4,10 @@
 
     <ng-container matColumnDef="bookName">
       <mat-header-cell *matHeaderCellDef> NAME</mat-header-cell>
-      <mat-cell *matCellDef="let item">{{item.book.name}}</mat-cell>
+      <mat-cell *matCellDef="let item">
+        {{item.book.name}}
+        <p *ngIf="item.book.absent" class="warning">Absent</p>
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="price">
@@ -24,9 +27,13 @@
       <mat-header-cell *matHeaderCellDef> ACTIONS</mat-header-cell>
       <mat-cell *matCellDef="let item">
         <!--<input type="number" matInput [(ngModel)]='book.price' placeholder="price">-->
-        <button mat-raised-button class="count-btn" (click)="upCount(item)">Up</button>
-        <button mat-raised-button class="count-btn"
-                [disabled]="item.count == 1" (click)="downCount(item)">Down</button>
+
+        <div *ngIf="!item.book.absent">
+          <button mat-raised-button class="count-btn" (click)="upCount(item)">Up</button>
+          <button mat-raised-button class="count-btn"
+                  [disabled]="item.count == 1" (click)="downCount(item)">Down</button>
+        </div>
+
         <button id="removeItem" mat-raised-button color="accent"
                 (click)="removeItem(item)">Remove</button>
       </mat-cell>
@@ -36,12 +43,16 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
+  <mat-toolbar-row *ngIf="hasAbsentBook()" >
+    <p class="warning">Unable to submit order. Shopping cart contains absent books</p>
+  </mat-toolbar-row>
 
   <mat-toolbar-row>
+
     <button id="clearCart" mat-raised-button color="primary"
-            [disabled]="isEmpty" (click)="clearCart()">Clear cart</button>
+            [disabled]="disableClear" (click)="clearCart()">Clear cart</button>
     <button id="submitOrder" mat-raised-button color="primary"
-            [disabled]="isEmpty" (click)="submitOrder()">Submit order</button>
+            [disabled]="disableSubmit" (click)="submitOrder()">Submit order</button>
   </mat-toolbar-row>
 
 </mat-card>
