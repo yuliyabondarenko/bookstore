@@ -20,7 +20,7 @@ export class LocalShoppingCartService {
         return cartItems;
       })
       .catch(error => {
-        alert('Error while fetch Shopping Cart!');
+        console.log(`Fetch Shopping Cart failed. Error: ${error.message}`);
         return [];
       });
   }

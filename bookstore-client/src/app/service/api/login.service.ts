@@ -42,9 +42,9 @@ export class LoginService {
       .then(response => {
         SessionService.clearAuthorization();
       })
-      .catch(response => {
+      .catch(error => {
         SessionService.clearAuthorization();
-        console.log('Failed logout: ' + response.error.error);
+        console.log('Logout failed');
       });
   }
 

@@ -72,7 +72,6 @@ export class ManageBooksComponent implements OnInit {
 
     this.collectionPageService.getCollectionPage(page.pageIndex, page.pageSize, sortParam)
       .then(collectionPage => {
-        debugger;
         this.books = collectionPage.collection;
         this.totalElements = collectionPage.totalElements;
         this.dataSource = new MatTableDataSource<Book>(this.books);

@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Order } from '../../../entity/order';
-import { OrderService } from '../../../service/api/order.service';
 import { MatSort, MatTableDataSource, Sort, SortDirection } from '@angular/material';
 import { Page } from '../../../../page';
 import { environment } from '../../../../environments/environment';
 import { SessionService } from '../../../service/session.service';
+import { OrdersPageService } from '../../../service/api/page.service/orders.page.service';
 
 @Component({
   selector: 'app-orders',
@@ -12,14 +12,15 @@ import { SessionService } from '../../../service/session.service';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-  orders: MatTableDataSource<Order>;
+  orders: Array<Order>;
+  dataSource: MatTableDataSource<Order>;
   currentPage = environment.ordersPage;
-  totalOrderCount: number;
+  totalElements: number;
   displayedColumns = ['id', 'books', 'totalAmount', 'date'];
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private orderService: OrderService) {
+  constructor(private ordersPageService: OrdersPageService) {
   }
 
   ngOnInit() {
@@ -31,14 +32,14 @@ export class OrdersComponent implements OnInit {
 
   getPage(page: Page, sort: Sort) {
     const sortParam = `${sort.active},${sort.direction}`;
-    this.orderService.getOrders(SessionService.userId, page.pageIndex, page.pageSize, sortParam)
-      .then(response => {
-        const orders = response['_embedded'].orders as Order [];
-        this.orders = new MatTableDataSource<Order>(orders);
-        this.totalOrderCount = response.page.totalElements;
-        this.currentPage = page;
 
-        this.orders.sort = this.sort;
+    this.ordersPageService.getOrderPageByUser(SessionService.userId, page.pageIndex, page.pageSize, sortParam)
+      .then(collectionPage => {
+        this.orders = collectionPage.collection;
+        this.totalElements = collectionPage.totalElements;
+        this.dataSource = new MatTableDataSource<Order>(this.orders);
+        this.currentPage = page;
+        this.dataSource.sort = this.sort;
       });
   }
 
