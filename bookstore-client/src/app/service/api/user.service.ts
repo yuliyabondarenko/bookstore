@@ -19,7 +19,7 @@ export class UserService {
 
   deleteUser(user: User): Promise<any> {
     return this.http
-      .delete(user._links.user.href)
+      .delete(user._links.self.href)
       .toPromise()
       .catch(response => this.handleError(response.error));
   }

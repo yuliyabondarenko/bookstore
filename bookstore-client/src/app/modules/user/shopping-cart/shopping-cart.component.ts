@@ -95,7 +95,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   removeItem(item: ShoppingCartItem) {
-    this.localShoppingCartService.deleteItem(item.id)
+    this.localShoppingCartService.deleteItem(item)
       .then(() => this.refreshItems());
   }
 }
