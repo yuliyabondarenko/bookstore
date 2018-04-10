@@ -1,31 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Order } from '../../entity/order';
 import { SessionService } from '../session.service';
 import { environment } from '../../../environments/environment';
+import { HttpOptions } from './http-heares-helper';
 
 @Injectable()
 export class OrderService {
   baseOrdersUrl = `${environment.apiUrl}/orders`;
-  userOrdersUrl: string;
-  userId: number;
 
-  constructor(private http: HttpClient, private sessionService: SessionService) {
-    this.userId = this.sessionService.userId;
-    this.userOrdersUrl = `${this.baseOrdersUrl}/search/findByUserId?userId=${this.userId}`;
+  constructor(private http: HttpClient) {
   }
 
-  getOrders(page: number, size: number, sortParam: string): Promise<any> {
-    const ordersUrl = `${this.userOrdersUrl}&sort=${sortParam}&page=${page}&size=${size}&projection=view`;
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': this.sessionService.authorization
-      })
-    };
+  getOrders(userId: number, page: number, size: number, sortParam: string): Promise<any> {
+    const userOrdersUrl = `${this.baseOrdersUrl}/search/findByUserId?userId=${userId}`;
+    const ordersUrl = `${userOrdersUrl}&sort=${sortParam}&page=${page}&size=${size}&projection=view`;
 
     return this.http
-      .get(ordersUrl, httpOptions)
+      .get(ordersUrl, HttpOptions.authorizedEmptyBody)
       .toPromise()
       .then(response => {
           return response;
@@ -34,15 +26,8 @@ export class OrderService {
   }
 
   createOrder(order: Order, successCalback: any): Promise<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.sessionService.authorization
-      })
-    };
-
     return this.http
-      .post(this.baseOrdersUrl, JSON.stringify(order), httpOptions)
+      .post(this.baseOrdersUrl, JSON.stringify(order), HttpOptions.authorizedJsonBody)
       .toPromise()
       .then(response => {
         if (successCalback) {

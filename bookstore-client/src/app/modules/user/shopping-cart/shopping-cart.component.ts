@@ -7,6 +7,7 @@ import { ShoppingCartItem } from '../../../entity/shopping-cart-item';
 import { LocalShoppingCartService } from '../../../service/local-shopping-cart.service';
 import { SessionService } from '../../../service/session.service';
 import { ShoppingCartService } from '../../../service/api/shopping.cart.service';
+import { LinkHelper } from '../../../service/link.helper';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -20,7 +21,6 @@ export class ShoppingCartComponent implements OnInit {
   constructor(private localShoppingCartService: LocalShoppingCartService,
               private shoppingCartService: ShoppingCartService,
               private ordersService: OrderService,
-              private sessionService: SessionService,
               private router: Router) {
   }
 
@@ -40,7 +40,7 @@ export class ShoppingCartComponent implements OnInit {
 
     this.ordersService.createOrder(order, () => {
       this.router.navigateByUrl('user/orders');
-      this.shoppingCartService.cleanUserCart(this.sessionService.userId).then(() => {
+      this.shoppingCartService.cleanUserCart(SessionService.userId).then(() => {
         this.localShoppingCartService.fetchShoppingCartItems();
       });
     });
@@ -56,12 +56,12 @@ export class ShoppingCartComponent implements OnInit {
         }
       }
     );
-    let userLink = this.sessionService.userLink;
+    let userLink = LinkHelper.getUserLink(SessionService.userId);
     return new Order(null, userLink, new Date(Date.now()), orderBookPriceItems)
   }
 
   clearCart() {
-    this.shoppingCartService.cleanUserCart(this.sessionService.userId)
+    this.shoppingCartService.cleanUserCart(SessionService.userId)
       .then(() => {
         this.refreshItems();
       });

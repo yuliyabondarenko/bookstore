@@ -1,32 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ShoppingCartItem } from '../../entity/shopping-cart-item';
 import { ShoppingCartItemDTO } from '../../entity/shopping-cart-item-dto';
-import { SessionService } from '../session.service';
 import { environment } from '../../../environments/environment';
+import { HttpOptions } from './http-heares-helper';
 
 @Injectable()
 export class ShoppingCartService {
   baseShopCartUrl = `${environment.apiUrl}/shopcart`;
-  userId: number;
 
-  constructor(private http: HttpClient,
-              private sessionService: SessionService) {
-    this.userId = this.sessionService.userId;
+  constructor(private http: HttpClient) {
   }
 
-  getShopCartItems(): Promise<any> {
-
-    const getUserCartUrl = `${this.baseShopCartUrl}/search/findByUserId?userId=${this.userId}&projection=view`;
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': this.sessionService.authorization
-      })
-    };
+  getShopCartItems(userId): Promise<any> {
+    const getUserCartUrl = `${this.baseShopCartUrl}/search/findByUserId?userId=${userId}&projection=view`;
 
     return this.http
-      .get(getUserCartUrl, httpOptions)
+      .get(getUserCartUrl, HttpOptions.authorizedEmptyBody)
       .toPromise()
       .then(response => {
           return response;
@@ -44,14 +34,8 @@ export class ShoppingCartService {
   }
 
   cleanUserCart(userId: number){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': this.sessionService.authorization
-      })
-    };
-
     return this.http
-      .get(`${this.baseShopCartUrl}/clean?userId=${userId}`, httpOptions)
+      .get(`${this.baseShopCartUrl}/clean?userId=${userId}`, HttpOptions.authorizedEmptyBody)
       .toPromise()
       .then(response => {
           return response;
@@ -60,15 +44,8 @@ export class ShoppingCartService {
   }
 
   createItem(shoppingCartItem: ShoppingCartItemDTO): Promise<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.sessionService.authorization
-      })
-    };
-
     return this.http
-      .post(`${this.baseShopCartUrl}?projection=view`, JSON.stringify(shoppingCartItem), httpOptions)
+      .post(`${this.baseShopCartUrl}?projection=view`, JSON.stringify(shoppingCartItem), HttpOptions.authorizedJsonBody)
       .toPromise()
       .then(response => response as ShoppingCartItem)
       .catch(response => {
@@ -77,16 +54,10 @@ export class ShoppingCartService {
   }
 
   updateItem(shoppingCartItem: ShoppingCartItemDTO): Promise<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.sessionService.authorization
-      })
-    };
-
     const itemUrl = `${this.baseShopCartUrl}/${shoppingCartItem.id}?projection=view`;
+
     return this.http
-      .put(itemUrl, JSON.stringify(shoppingCartItem), httpOptions)
+      .put(itemUrl, JSON.stringify(shoppingCartItem), HttpOptions.authorizedJsonBody)
       .toPromise()
       .then(response => response as ShoppingCartItem)
       .catch(response => {

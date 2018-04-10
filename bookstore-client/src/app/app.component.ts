@@ -11,7 +11,6 @@ import { SessionService } from './service/session.service';
 export class AppComponent implements OnInit {
 
   constructor(private loginService: LoginService,
-              private sessionService: SessionService,
               private router: Router) {
   }
 
@@ -27,18 +26,18 @@ export class AppComponent implements OnInit {
   }
 
   get isAuthorized(): boolean {
-    return this.sessionService.isAuthorized;
+    return SessionService.isAuthorized;
   }
 
   get isUser(): boolean {
-    return this.sessionService.isUser;
+    return SessionService.isUser;
   }
 
   get isAdmin(): boolean {
-    return this.sessionService.isAdmin;
+    return SessionService.isAdmin;
   }
 
   get userName(): String {
-    return this.sessionService.userName;
+    return SessionService.userName;
   }
 }

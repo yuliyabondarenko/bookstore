@@ -8,14 +8,13 @@ import { SessionService } from '../../service/session.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private sessionService: SessionService,
-              private router: Router) {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
-    if (this.sessionService.isAdmin) {
+    if (SessionService.isAdmin) {
       this.router.navigateByUrl('admin');
-    } else if (this.sessionService.isUser) {
+    } else if (SessionService.isUser) {
       this.router.navigateByUrl('user');
     }
   }

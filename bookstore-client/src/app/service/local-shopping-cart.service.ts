@@ -4,18 +4,16 @@ import { ShoppingCartService } from './api/shopping.cart.service';
 import { Book } from '../entity/book';
 import { ShoppingCartItemDTO } from '../entity/shopping-cart-item-dto';
 import { SessionService } from './session.service';
+import { LinkHelper } from './link.helper';
 
 @Injectable()
 export class LocalShoppingCartService {
-  userLink :string;
 
-  constructor(private shoppingCartService: ShoppingCartService,
-              private sessionService: SessionService) {
-    this.userLink = sessionService.userLink;
+  constructor(private shoppingCartService: ShoppingCartService) {
   }
 
   fetchShoppingCartItems(): Promise<ShoppingCartItem []> {
-    return this.shoppingCartService.getShopCartItems()
+    return this.shoppingCartService.getShopCartItems(SessionService.userId)
       .then(response => {
         const cartItems = response['_embedded'].shopcart as ShoppingCartItem [];
         sessionStorage.shoppingCart = JSON.stringify(cartItems);
@@ -27,22 +25,24 @@ export class LocalShoppingCartService {
       });
   }
 
-  deleteItem(itemId: number) : Promise<any>{
+  deleteItem(itemId: number): Promise<any> {
     return this.shoppingCartService.deleteItem(itemId);
   }
 
   addBookToCart(book: Book) {
-    const itemDto = new ShoppingCartItemDTO(null, this.userLink, book._links.self.href, 1);
+    const userLink = LinkHelper.getUserLink(SessionService.userId);
+    const itemDto = new ShoppingCartItemDTO(null, userLink, book._links.self.href, 1);
     return this.shoppingCartService.createItem(itemDto)
       .then(() => this.fetchShoppingCartItems()
-    );
+      );
   }
 
   updateCount(item: ShoppingCartItem, targetCount: number = null) {
-      const itemDto = new ShoppingCartItemDTO(item.id, this.userLink, item.book._links.self.href, targetCount);
-      return this.shoppingCartService.updateItem(itemDto).then(
-        () => this.fetchShoppingCartItems()
-      );
+    const userLink = LinkHelper.getUserLink(SessionService.userId);
+    const itemDto = new ShoppingCartItemDTO(item.id, userLink, item.book._links.self.href, targetCount);
+    return this.shoppingCartService.updateItem(itemDto).then(
+      () => this.fetchShoppingCartItems()
+    );
   }
 
   isBookInCart(book: Book) {
