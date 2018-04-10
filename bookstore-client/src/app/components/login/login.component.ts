@@ -10,7 +10,7 @@ import { LoginService } from '../../service/api/login.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  loginFormError: String;
+  loginFormError: string;
 
   credentials = {username: '', password: ''};
 
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/');
       })
       .catch((error) => {
-        this.loginFormError = error && error.message ? error.message : 'Login failed';
+        this.loginFormError = error && error.message ? error.message : `Login failed. Unknown Error`;
       });
   }
 

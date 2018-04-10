@@ -28,9 +28,9 @@ export class LoginService {
           }
         }
       )
-      .catch(response => {
+      .catch(error => {
         SessionService.clearAuthorization();
-        return Promise.reject(response.error);
+        return Promise.reject(error);
       });
   }
 

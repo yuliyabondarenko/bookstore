@@ -16,13 +16,6 @@ export class RegisterService {
       .post(this.baseUrl, JSON.stringify(user), HttpOptions.anonymouthJsonBody)
       .toPromise()
       .then(response => response as User)
-      .catch(response => this.handleError(response.error));
-  }
-
-  private handleError(error) {
-    if (error.validationErrors) {
-      return Promise.reject(error.validationErrors);
-    }
-    return Promise.reject(error);
+      .catch(error => Promise.reject(error));
   }
 }

@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {PasswordConfirmValidator} from './password.match.validator';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { PasswordConfirmValidator } from './password.match.validator';
+import { Router } from '@angular/router';
 import { RegisterService } from '../../service/api/register.user.service';
 import { User } from '../../entity/user';
 
@@ -20,6 +20,7 @@ export class RegisterComponent implements OnInit {
   ];
 
   registerForm: FormGroup;
+  globalError: string;
 
   constructor(private formBuilder: FormBuilder,
               private registerService: RegisterService,
@@ -48,8 +49,12 @@ export class RegisterComponent implements OnInit {
         alert('Registration successful! Please login');
         this.router.navigateByUrl('login');
       })
-      .catch(errors => {
-        this.showValidationErrors(errors);
+      .catch(error => {
+        if (error.validationErrors) {
+          this.showValidationErrors(error.validationErrors);
+        } else {
+          this.globalError = error && error.message ? error.message : 'Registration failed. Unexpected error';
+        }
       });
   }
 
