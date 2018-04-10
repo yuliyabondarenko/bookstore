@@ -46,7 +46,10 @@ export class LocalShoppingCartService {
   }
 
   isBookInCart(book: Book) {
-    let items = JSON.parse(sessionStorage.shoppingCart) as ShoppingCartItem [];
-    return items.some(item => item.book.id === book.id);
+    return this.storedShoppingCartItems.some(item => item.book.id === book.id);
+  }
+
+  get storedShoppingCartItems(): ShoppingCartItem [] {
+    return JSON.parse(sessionStorage.shoppingCart) as ShoppingCartItem [];
   }
 }

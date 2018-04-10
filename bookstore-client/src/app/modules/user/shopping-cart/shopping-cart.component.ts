@@ -48,34 +48,40 @@ export class ShoppingCartComponent implements OnInit {
 
   //TODO move this logic somewhere
   buildOrder() {
-    let orderBookPriceItems = new Array<BookPriceCount>();
+    let orderBookPriceItems = [];
     this.shoppingCartItems.forEach(
       item => {
-        let bookPriceCount = new BookPriceCount(
-          item.book._links.self.href,
-          item.book.price,
-          item.count,
-        );
-        orderBookPriceItems.push(bookPriceCount);
+        if (!item.book.absent) {
+          orderBookPriceItems.push(BookPriceCount.of(item));
+        }
       }
     );
-    return new Order(
-      null,
-      this.sessionService.userLink,
-      new Date(Date.now()),
-      orderBookPriceItems
-    )
+    let userLink = this.sessionService.userLink;
+    return new Order(null, userLink, new Date(Date.now()), orderBookPriceItems)
   }
-
 
   clearCart() {
-    this.shoppingCartService.cleanUserCart(this.sessionService.userId).then(() => {
-      this.shoppingCartItems = [];
-    });
+    this.shoppingCartService.cleanUserCart(this.sessionService.userId)
+      .then(() => {
+        this.refreshItems();
+      });
   }
 
-  get isEmpty() {
-    return !this.shoppingCartItems || this.shoppingCartItems.length == 0;
+  get disableSubmit(): boolean {
+    return this.hasAbsentBook() || this.isCartEmpty();
+  }
+
+  hasAbsentBook() {
+    return this.localShoppingCartService.storedShoppingCartItems
+      .some(item => item.book.absent);
+  }
+
+  get disableClear(): boolean {
+    return this.isCartEmpty();
+  }
+
+  private isCartEmpty() {
+    return this.localShoppingCartService.storedShoppingCartItems.length == 0;
   }
 
   upCount(item: ShoppingCartItem) {
