@@ -1,13 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {User} from '../../entity/user';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { User } from '../../entity/user';
 import { environment } from '../../../environments/environment';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-};
+import { HttpOptions } from './http-heares-helper';
 
 @Injectable()
 export class UserService {
@@ -40,17 +35,9 @@ export class UserService {
       .catch(response => this.handleError(response.error));
   }
 
-  createUser(user: User): Promise<any> {
-    return this.http
-      .post(this.baseUrl, JSON.stringify(user), httpOptions)
-      .toPromise()
-      .then(response => response as User)
-      .catch(response => this.handleError(response.error));
-  }
-
   updateUser(userUrl: string, user: User): Promise<any> {
     return this.http
-      .put(userUrl, JSON.stringify(user), httpOptions)
+      .put(userUrl, JSON.stringify(user), HttpOptions.authorizedJsonBody)
       .toPromise()
       .then(response => response as User)
       .catch(response => this.handleError(response.error));

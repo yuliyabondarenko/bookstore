@@ -1,13 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {User} from '../../entity/user';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { User } from '../../entity/user';
 import { environment } from '../../../environments/environment';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-};
+import { HttpOptions } from './http-heares-helper';
 
 @Injectable()
 export class RegisterService {
@@ -18,7 +13,7 @@ export class RegisterService {
 
   registerUser(user: User): Promise<any> {
     return this.http
-      .post(this.baseUrl, JSON.stringify(user), httpOptions)
+      .post(this.baseUrl, JSON.stringify(user), HttpOptions.anonymouthJsonBody)
       .toPromise()
       .then(response => response as User)
       .catch(response => this.handleError(response.error));

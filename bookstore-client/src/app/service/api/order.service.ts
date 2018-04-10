@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Order } from '../../entity/order';
 import { SessionService } from '../session.service';
 import { environment } from '../../../environments/environment';
+import { HttpOptions } from './http-heares-helper';
 
 @Injectable()
 export class OrderService {
@@ -18,14 +19,8 @@ export class OrderService {
   getOrders(page: number, size: number, sortParam: string): Promise<any> {
     const ordersUrl = `${this.userOrdersUrl}&sort=${sortParam}&page=${page}&size=${size}&projection=view`;
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': SessionService.authorization
-      })
-    };
-
     return this.http
-      .get(ordersUrl, httpOptions)
+      .get(ordersUrl, HttpOptions.authorizedEmptyBody)
       .toPromise()
       .then(response => {
           return response;
@@ -34,15 +29,8 @@ export class OrderService {
   }
 
   createOrder(order: Order, successCalback: any): Promise<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': SessionService.authorization
-      })
-    };
-
     return this.http
-      .post(this.baseOrdersUrl, JSON.stringify(order), httpOptions)
+      .post(this.baseOrdersUrl, JSON.stringify(order), HttpOptions.authorizedJsonBody)
       .toPromise()
       .then(response => {
         if (successCalback) {

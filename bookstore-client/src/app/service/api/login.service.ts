@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SessionService } from '../session.service';
 import { environment } from '../../../environments/environment';
+import { HttpOptions } from './http-heares-helper';
 
 @Injectable()
 export class LoginService {
@@ -36,13 +37,7 @@ export class LoginService {
   logout(): Promise<any> {
     const logoutUrl = `${environment.apiUrl}/logout`;
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': sessionStorage.authorization
-      })
-    };
-
-    return this.http.get(logoutUrl, httpOptions)
+    return this.http.get(logoutUrl, HttpOptions.authorizedEmptyBody)
       .toPromise()
       .then(response => {
         SessionService.clearAuthorization();

@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { SessionService } from '../session.service';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Book } from '../../entity/book';
 import { environment } from '../../../environments/environment';
+import { HttpOptions } from './http-heares-helper';
 
 @Injectable()
 export class BookService {
@@ -14,14 +14,8 @@ export class BookService {
   getBooks(page: number, size: number, sortParam: string): Promise<any> {
     const booksUrl = `${this.baseBooksUrl}?sort=${sortParam}&page=${page}&size=${size}`;
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': SessionService.authorization
-      })
-    };
-
     return this.http
-      .get(booksUrl, httpOptions)
+      .get(booksUrl, HttpOptions.authorizedEmptyBody)
       .toPromise()
       .then(response => {
           return response;
@@ -32,15 +26,8 @@ export class BookService {
   }
 
   create(book: Book): Promise<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': SessionService.authorization
-      })
-    };
-
     return this.http
-      .post(this.baseBooksUrl, JSON.stringify(book), httpOptions)
+      .post(this.baseBooksUrl, JSON.stringify(book), HttpOptions.authorizedJsonBody)
       .toPromise()
       .then(response => {
         return response as Book
@@ -50,15 +37,8 @@ export class BookService {
 
 
   update(book: Book): Promise<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': SessionService.authorization
-      })
-    };
-
     return this.http
-      .put(`${this.baseBooksUrl}/${book.id}`, JSON.stringify(book), httpOptions)
+      .put(`${this.baseBooksUrl}/${book.id}`, JSON.stringify(book), HttpOptions.authorizedJsonBody)
       .toPromise()
       .then(response => {
         return response as Book
