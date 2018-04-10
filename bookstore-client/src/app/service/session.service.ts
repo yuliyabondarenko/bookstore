@@ -1,5 +1,5 @@
 import { isNullOrUndefined } from 'util';
-import { LinkHelper } from './link.helper';
+import { ShoppingCartItem } from '../entity/shopping-cart-item';
 
 export class SessionService {
 
@@ -28,6 +28,10 @@ export class SessionService {
 
   static get isAdmin(): boolean {
     return this.hasRole('ADMIN');
+  }
+
+  static get itemsInCart(): boolean {
+    return JSON.parse(sessionStorage.shoppingCart).length;
   }
 
   private static hasRole(roleName: string): boolean {

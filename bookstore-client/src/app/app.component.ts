@@ -40,4 +40,8 @@ export class AppComponent implements OnInit {
   get userName(): String {
     return SessionService.userName;
   }
+
+  get shoppingCartItemsCount() {
+    return SessionService.itemsInCart ;
+  }
 }
