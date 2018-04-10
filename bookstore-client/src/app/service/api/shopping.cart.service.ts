@@ -2,21 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ShoppingCartItem } from '../../entity/shopping-cart-item';
 import { ShoppingCartItemDTO } from '../../entity/shopping-cart-item-dto';
-import { SessionService } from '../session.service';
 import { environment } from '../../../environments/environment';
 import { HttpOptions } from './http-heares-helper';
 
 @Injectable()
 export class ShoppingCartService {
   baseShopCartUrl = `${environment.apiUrl}/shopcart`;
-  userId: number;
 
   constructor(private http: HttpClient) {
-    this.userId = SessionService.userId;
   }
 
-  getShopCartItems(): Promise<any> {
-    const getUserCartUrl = `${this.baseShopCartUrl}/search/findByUserId?userId=${this.userId}&projection=view`;
+  getShopCartItems(userId): Promise<any> {
+    const getUserCartUrl = `${this.baseShopCartUrl}/search/findByUserId?userId=${userId}&projection=view`;
 
     return this.http
       .get(getUserCartUrl, HttpOptions.authorizedEmptyBody)

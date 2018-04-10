@@ -7,14 +7,12 @@ import { SessionService } from './session.service';
 
 @Injectable()
 export class LocalShoppingCartService {
-  userLink :string;
 
   constructor(private shoppingCartService: ShoppingCartService) {
-    this.userLink = SessionService.userLink;
   }
 
   fetchShoppingCartItems(): Promise<ShoppingCartItem []> {
-    return this.shoppingCartService.getShopCartItems()
+    return this.shoppingCartService.getShopCartItems(SessionService.userId)
       .then(response => {
         const cartItems = response['_embedded'].shopcart as ShoppingCartItem [];
         sessionStorage.shoppingCart = JSON.stringify(cartItems);
@@ -31,14 +29,14 @@ export class LocalShoppingCartService {
   }
 
   addBookToCart(book: Book) {
-    const itemDto = new ShoppingCartItemDTO(null, this.userLink, book._links.self.href, 1);
+    const itemDto = new ShoppingCartItemDTO(null, SessionService.userLink, book._links.self.href, 1);
     return this.shoppingCartService.createItem(itemDto)
       .then(() => this.fetchShoppingCartItems()
     );
   }
 
   updateCount(item: ShoppingCartItem, targetCount: number = null) {
-      const itemDto = new ShoppingCartItemDTO(item.id, this.userLink, item.book._links.self.href, targetCount);
+      const itemDto = new ShoppingCartItemDTO(item.id, SessionService.userLink, item.book._links.self.href, targetCount);
       return this.shoppingCartService.updateItem(itemDto).then(
         () => this.fetchShoppingCartItems()
       );

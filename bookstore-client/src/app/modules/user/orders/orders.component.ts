@@ -4,6 +4,7 @@ import { OrderService } from '../../../service/api/order.service';
 import { MatSort, MatTableDataSource, Sort, SortDirection } from '@angular/material';
 import { Page } from '../../../../page';
 import { environment } from '../../../../environments/environment';
+import { SessionService } from '../../../service/session.service';
 
 @Component({
   selector: 'app-orders',
@@ -30,7 +31,7 @@ export class OrdersComponent implements OnInit {
 
   getPage(page: Page, sort: Sort) {
     const sortParam = `${sort.active},${sort.direction}`;
-    this.orderService.getOrders(page.pageIndex, page.pageSize, sortParam)
+    this.orderService.getOrders(SessionService.userId, page.pageIndex, page.pageSize, sortParam)
       .then(response => {
         const orders = response['_embedded'].orders as Order [];
         this.orders = new MatTableDataSource<Order>(orders);

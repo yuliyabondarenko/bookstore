@@ -8,16 +8,13 @@ import { HttpOptions } from './http-heares-helper';
 @Injectable()
 export class OrderService {
   baseOrdersUrl = `${environment.apiUrl}/orders`;
-  userOrdersUrl: string;
-  userId: number;
 
   constructor(private http: HttpClient) {
-    this.userId = SessionService.userId;
-    this.userOrdersUrl = `${this.baseOrdersUrl}/search/findByUserId?userId=${this.userId}`;
   }
 
-  getOrders(page: number, size: number, sortParam: string): Promise<any> {
-    const ordersUrl = `${this.userOrdersUrl}&sort=${sortParam}&page=${page}&size=${size}&projection=view`;
+  getOrders(userId: number, page: number, size: number, sortParam: string): Promise<any> {
+    const userOrdersUrl = `${this.baseOrdersUrl}/search/findByUserId?userId=${userId}`;
+    const ordersUrl = `${userOrdersUrl}&sort=${sortParam}&page=${page}&size=${size}&projection=view`;
 
     return this.http
       .get(ordersUrl, HttpOptions.authorizedEmptyBody)
