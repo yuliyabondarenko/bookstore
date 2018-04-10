@@ -10,9 +10,8 @@ export class ShoppingCartService {
   baseShopCartUrl = `${environment.apiUrl}/shopcart`;
   userId: number;
 
-  constructor(private http: HttpClient,
-              private sessionService: SessionService) {
-    this.userId = this.sessionService.userId;
+  constructor(private http: HttpClient) {
+    this.userId = SessionService.userId;
   }
 
   getShopCartItems(): Promise<any> {
@@ -21,7 +20,7 @@ export class ShoppingCartService {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': this.sessionService.authorization
+        'Authorization': SessionService.authorization
       })
     };
 
@@ -46,7 +45,7 @@ export class ShoppingCartService {
   cleanUserCart(userId: number){
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': this.sessionService.authorization
+        'Authorization': SessionService.authorization
       })
     };
 
@@ -63,7 +62,7 @@ export class ShoppingCartService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': this.sessionService.authorization
+        'Authorization': SessionService.authorization
       })
     };
 
@@ -80,7 +79,7 @@ export class ShoppingCartService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': this.sessionService.authorization
+        'Authorization': SessionService.authorization
       })
     };
 

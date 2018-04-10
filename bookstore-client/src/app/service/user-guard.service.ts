@@ -6,10 +6,10 @@ import { SessionService } from './session.service';
 export class UserGuard implements CanActivate {
 
 
-  constructor(private sessionService: SessionService,) {
+  constructor() {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    return this.sessionService.isUser && !this.sessionService.isAdmin;
+    return SessionService.isUser && !SessionService.isAdmin;
   }
 }

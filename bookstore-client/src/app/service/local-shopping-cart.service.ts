@@ -9,9 +9,8 @@ import { SessionService } from './session.service';
 export class LocalShoppingCartService {
   userLink :string;
 
-  constructor(private shoppingCartService: ShoppingCartService,
-              private sessionService: SessionService) {
-    this.userLink = sessionService.userLink;
+  constructor(private shoppingCartService: ShoppingCartService) {
+    this.userLink = SessionService.userLink;
   }
 
   fetchShoppingCartItems(): Promise<ShoppingCartItem []> {

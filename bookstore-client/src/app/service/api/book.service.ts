@@ -8,8 +8,7 @@ import { environment } from '../../../environments/environment';
 export class BookService {
   baseBooksUrl = `${environment.apiUrl}/books`;
 
-  constructor(private http: HttpClient,
-              private sessionService: SessionService,) {
+  constructor(private http: HttpClient) {
   }
 
   getBooks(page: number, size: number, sortParam: string): Promise<any> {
@@ -17,7 +16,7 @@ export class BookService {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': this.sessionService.authorization
+        'Authorization': SessionService.authorization
       })
     };
 
@@ -36,7 +35,7 @@ export class BookService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': this.sessionService.authorization
+        'Authorization': SessionService.authorization
       })
     };
 
@@ -54,7 +53,7 @@ export class BookService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': this.sessionService.authorization
+        'Authorization': SessionService.authorization
       })
     };
 

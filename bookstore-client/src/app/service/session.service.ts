@@ -1,43 +1,42 @@
-import { Injectable } from '@angular/core';
 import { isNullOrUndefined } from 'util';
 import { LinkHelper } from './link.helper';
 
-@Injectable()
 export class SessionService {
 
-  constructor() { }
+  constructor() {
+  }
 
-  get isAuthorized(): boolean {
+  static get isAuthorized(): boolean {
     return !isNullOrUndefined(sessionStorage.authorization);
   }
 
-  get authorization(): string {
+  static get authorization(): string {
     return sessionStorage.authorization;
   }
 
-  get userLink(): string {
+  static get userLink(): string {
     const userId = parseInt(sessionStorage.getItem('userId'));
     return LinkHelper.getUserLink(userId);
   }
 
-  get userId(): number {
+  static get userId(): number {
     return parseInt(sessionStorage.getItem('userId'));
   }
 
-  get userName(): string {
+  static get userName(): string {
     return sessionStorage.getItem('userName');
   }
 
-  get isUser(): boolean {
+  static get isUser(): boolean {
     return this.hasRole('USER');
   }
 
-  get isAdmin(): boolean {
+  static get isAdmin(): boolean {
     return this.hasRole('ADMIN');
   }
 
-  private hasRole(roleName: string): boolean {
-    if (!this.isAuthorized) {
+  private static hasRole(roleName: string): boolean {
+    if (!SessionService.isAuthorized) {
       return false;
     }
     let hasRole = false;

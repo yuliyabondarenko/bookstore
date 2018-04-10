@@ -10,8 +10,8 @@ export class OrderService {
   userOrdersUrl: string;
   userId: number;
 
-  constructor(private http: HttpClient, private sessionService: SessionService) {
-    this.userId = this.sessionService.userId;
+  constructor(private http: HttpClient) {
+    this.userId = SessionService.userId;
     this.userOrdersUrl = `${this.baseOrdersUrl}/search/findByUserId?userId=${this.userId}`;
   }
 
@@ -20,7 +20,7 @@ export class OrderService {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': this.sessionService.authorization
+        'Authorization': SessionService.authorization
       })
     };
 
@@ -37,7 +37,7 @@ export class OrderService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': this.sessionService.authorization
+        'Authorization': SessionService.authorization
       })
     };
 

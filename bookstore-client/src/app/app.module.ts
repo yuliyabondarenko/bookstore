@@ -18,8 +18,6 @@ import { UserGuard } from './service/user-guard.service';
 import { OrderService } from './service/api/order.service';
 import { XhrInterceptor } from "./service/xhr-interceptor.service";
 import { LoginService } from './service/api/login.service';
-import { SessionService } from './service/session.service';
-import { LinkHelper } from './service/link.helper';
 
 
 @NgModule({
@@ -38,9 +36,7 @@ import { LinkHelper } from './service/link.helper';
     FormsModule
   ],
   providers: [
-    LinkHelper,
     LoginService,
-    SessionService,
     UserService,
     XhrInterceptor,
     AdminGuard,
