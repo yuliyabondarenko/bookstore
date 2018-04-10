@@ -14,11 +14,6 @@ export class SessionService {
     return sessionStorage.authorization;
   }
 
-  static get userLink(): string {
-    const userId = parseInt(sessionStorage.getItem('userId'));
-    return LinkHelper.getUserLink(userId);
-  }
-
   static get userId(): number {
     return parseInt(sessionStorage.getItem('userId'));
   }

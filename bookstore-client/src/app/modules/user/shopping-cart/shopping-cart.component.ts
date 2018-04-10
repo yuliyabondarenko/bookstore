@@ -7,6 +7,7 @@ import { ShoppingCartItem } from '../../../entity/shopping-cart-item';
 import { LocalShoppingCartService } from '../../../service/local-shopping-cart.service';
 import { SessionService } from '../../../service/session.service';
 import { ShoppingCartService } from '../../../service/api/shopping.cart.service';
+import { LinkHelper } from '../../../service/link.helper';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -55,7 +56,7 @@ export class ShoppingCartComponent implements OnInit {
         }
       }
     );
-    let userLink = SessionService.userLink;
+    let userLink = LinkHelper.getUserLink(SessionService.userId);
     return new Order(null, userLink, new Date(Date.now()), orderBookPriceItems)
   }
 
