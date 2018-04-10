@@ -62,7 +62,7 @@ export class ShoppingCartComponent implements OnInit {
     );
     return new Order(
       null,
-      `${Config.host}/users/${this.sessionService.userId}`,
+      this.sessionService.userLink,
       new Date(Date.now()),
       orderBookPriceItems
     )

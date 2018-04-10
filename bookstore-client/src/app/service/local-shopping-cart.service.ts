@@ -8,13 +8,11 @@ import { SessionService } from './session.service';
 
 @Injectable()
 export class LocalShoppingCartService {
-  userId: number;
   userLink :string;
 
   constructor(private shoppingCartService: ShoppingCartService,
               private sessionService: SessionService) {
-    this.userId = this.sessionService.userId; //TODO escape  from this
-    this.userLink = `${Config.host}/users/${this.userId}`;
+    this.userLink = sessionService.userLink;
   }
 
   fetchShoppingCartItems(): Promise<ShoppingCartItem []> {
