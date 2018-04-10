@@ -28,12 +28,12 @@ export class ShoppingCartService {
       });
   }
 
-  deleteItem(id: number): Promise<any> {
+  deleteItem(item: ShoppingCartItem): Promise<any> {
     return this.http
-      .delete(`${this.baseShopCartUrl}/${id}`)
+      .delete(item._links.self.href)
       .toPromise()
-      .catch(() => {
-        alert(`Error while delete shopping-cart: ${id}`);
+      .catch(response => {
+        console.log(`Delete shopping-cart failed`);
       });
   }
 

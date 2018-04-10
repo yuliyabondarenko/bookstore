@@ -21,8 +21,8 @@ export class LocalShoppingCartService {
       });
   }
 
-  deleteItem(itemId: number): Promise<any> {
-    return this.shoppingCartService.deleteItem(itemId);
+  deleteItem(item: ShoppingCartItem): Promise<any> {
+    return this.shoppingCartService.deleteItem(item);
   }
 
   addBookToCart(book: Book) {
