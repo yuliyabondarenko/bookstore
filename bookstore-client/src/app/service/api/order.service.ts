@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Config } from '../../config';
 import { Order } from '../../entity/order';
 import { SessionService } from '../session.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class OrderService {
-  baseOrdersUrl = `${Config.host}/orders`;
+  baseOrdersUrl = `${environment.apiUrl}/orders`;
   userOrdersUrl: string;
   userId: number;
 

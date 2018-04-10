@@ -3,7 +3,6 @@ import { BookPriceCount } from '../../../entity/book-price-count';
 import { OrderService } from '../../../service/api/order.service';
 import { Order } from '../../../entity/order';
 import { Router } from '@angular/router';
-import { Config } from '../../../config';
 import { ShoppingCartItem } from '../../../entity/shopping-cart-item';
 import { LocalShoppingCartService } from '../../../service/local-shopping-cart.service';
 import { SessionService } from '../../../service/session.service';

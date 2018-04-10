@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Config } from '../../config';
 import { ShoppingCartItem } from '../../entity/shopping-cart-item';
 import { ShoppingCartItemDTO } from '../../entity/shopping-cart-item-dto';
 import { SessionService } from '../session.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class ShoppingCartService {
-  baseShopCartUrl = `${Config.host}/shopcart`;
+  baseShopCartUrl = `${environment.apiUrl}/shopcart`;
   userId: number;
 
   constructor(private http: HttpClient,

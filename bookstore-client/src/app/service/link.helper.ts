@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { isNullOrUndefined } from 'util';
-import { Config } from '../config';
-import { SessionService } from './session.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class LinkHelper {
@@ -9,6 +7,6 @@ export class LinkHelper {
   constructor() { }
 
   static getUserLink(userId: number): string {
-    return `${Config.host}/users/${userId}`;
+    return `${environment.apiUrl}/users/${userId}`;
   }
 }

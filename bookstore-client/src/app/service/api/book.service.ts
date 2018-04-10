@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Config} from '../../config';
 import { SessionService } from '../session.service';
 import { Book } from '../../entity/book';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class BookService {
-  baseBooksUrl = `${Config.host}/books`;
+  baseBooksUrl = `${environment.apiUrl}/books`;
 
   constructor(private http: HttpClient,
               private sessionService: SessionService,) {

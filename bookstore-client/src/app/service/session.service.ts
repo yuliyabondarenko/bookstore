@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { isNullOrUndefined } from 'util';
-import { Config } from '../config';
 import { LinkHelper } from './link.helper';
 
 @Injectable()
