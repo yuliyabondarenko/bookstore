@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../../entity/user';
-import {Config} from '../../config';
+import { environment } from '../../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -11,7 +11,7 @@ const httpOptions = {
 
 @Injectable()
 export class RegisterService {
-  baseUrl = `${Config.host}/register`;
+  baseUrl = `${environment.apiUrl}/register`;
 
   constructor(private http: HttpClient) {
   }

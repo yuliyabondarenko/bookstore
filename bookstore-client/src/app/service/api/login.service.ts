@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Config } from '../../config';
 import { SessionService } from '../session.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class LoginService {
@@ -19,7 +19,7 @@ export class LoginService {
       })
     };
 
-    return this.http.get(`${Config.host}/user`, httpOptions)
+    return this.http.get(`${environment.apiUrl}/user`, httpOptions)
       .toPromise()
       .then(userData => {
           if (!!userData['userId']) {
@@ -34,7 +34,7 @@ export class LoginService {
   }
 
   logout(): Promise<any> {
-    const logoutUrl = `${Config.host}/logout`;
+    const logoutUrl = `${environment.apiUrl}/logout`;
 
     const httpOptions = {
       headers: new HttpHeaders({

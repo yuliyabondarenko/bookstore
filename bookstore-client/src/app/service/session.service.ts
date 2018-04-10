@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { isNullOrUndefined } from 'util';
+import { LinkHelper } from './link.helper';
 
 @Injectable()
 export class SessionService {
@@ -12,6 +13,11 @@ export class SessionService {
 
   get authorization(): string {
     return sessionStorage.authorization;
+  }
+
+  get userLink(): string {
+    const userId = parseInt(sessionStorage.getItem('userId'));
+    return LinkHelper.getUserLink(userId);
   }
 
   get userId(): number {
