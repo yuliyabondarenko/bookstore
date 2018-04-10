@@ -5,6 +5,8 @@ import { MatDialog, MatDialogConfig, MatSort, MatTableDataSource, Sort, SortDire
 import { BookFormDialogComponent } from './book.form/book.form';
 import { environment } from '../../../../environments/environment';
 import { Page } from '../../../../page';
+import { CollectionPageService } from '../../../service/api/page.service/collection.page.service';
+import { BooksPageService } from '../../../service/api/page.service/books.page.service';
 
 @Component({
   selector: 'app-manage-books',
@@ -19,7 +21,9 @@ export class ManageBooksComponent implements OnInit {
   displayedColumns = ['id', 'name', 'price', 'absent', 'actions'];
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private bookService: BookService, public dialog: MatDialog) {
+  constructor(private bookService: BookService,
+              public dialog: MatDialog,
+              private collectionPageService: BooksPageService) {
   }
 
   ngOnInit(): void {
@@ -62,20 +66,18 @@ export class ManageBooksComponent implements OnInit {
       });
   }
 
-  getPage(page: Page, sort: Sort): void {
-    //FIXME
+
+  getPage(page: Page, sort: Sort) {
     const sortParam = `${sort.active},${sort.direction}`;
-    this.bookService.getBooks(page.pageIndex, page.pageSize, sortParam)
-      .then(response => {
-        this.books = response._embedded.books as Book[];
+
+    this.collectionPageService.getCollectionPage(page.pageIndex, page.pageSize, sortParam)
+      .then(collectionPage => {
+        debugger;
+        this.books = collectionPage.collection;
+        this.totalElements = collectionPage.totalElements;
         this.dataSource = new MatTableDataSource<Book>(this.books);
-        this.totalElements = response.page.totalElements;
         this.currentPage = page;
         this.dataSource.sort = this.sort;
-      })
-      .catch(error => {
-          alert("Can't get books: " + error.message);
-        }
-      );
+      });
   }
 }

@@ -11,20 +11,6 @@ export class BookService {
   constructor(private http: HttpClient) {
   }
 
-  getBooks(page: number, size: number, sortParam: string): Promise<any> {
-    const booksUrl = `${this.baseBooksUrl}?sort=${sortParam}&page=${page}&size=${size}`;
-
-    return this.http
-      .get(booksUrl, HttpOptions.authorizedEmptyBody)
-      .toPromise()
-      .then(response => {
-          return response;
-        }
-      ).catch(error => {
-        alert("Error while get books!");
-      });
-  }
-
   create(book: Book): Promise<any> {
     return this.http
       .post(this.baseBooksUrl, JSON.stringify(book), HttpOptions.authorizedJsonBody)

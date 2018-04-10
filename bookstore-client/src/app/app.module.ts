@@ -18,6 +18,8 @@ import { UserGuard } from './service/user-guard.service';
 import { OrderService } from './service/api/order.service';
 import { XhrInterceptor } from "./service/xhr-interceptor.service";
 import { LoginService } from './service/api/login.service';
+import { CollectionPageService } from './service/api/page.service/collection.page.service';
+import { BooksPageService } from './service/api/page.service/books.page.service';
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import { LoginService } from './service/api/login.service';
     FormsModule
   ],
   providers: [
+    BooksPageService,
     LoginService,
     UserService,
     XhrInterceptor,

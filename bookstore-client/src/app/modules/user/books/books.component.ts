@@ -4,6 +4,8 @@ import { BookService } from '../../../service/api/book.service';
 import { environment } from '../../../../environments/environment';
 import { Page } from '../../../../page';
 import { MatSort, Sort, SortDirection } from '@angular/material';
+import { CollectionPageService } from '../../../service/api/page.service/collection.page.service';
+import { BooksPageService } from '../../../service/api/page.service/books.page.service';
 
 @Component({
   selector: 'app-books',
@@ -13,12 +15,13 @@ import { MatSort, Sort, SortDirection } from '@angular/material';
 export class BooksComponent implements OnInit {
   books: Array<Book>;
   currentPage = environment.userBooksPage;
-  totalBookCount: number;
+  totalElements: number;
 
   displayedColumns = ['name', 'price', 'absent'];
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private bookService: BookService) {
+  constructor(private bookService: BookService,
+              private collectionPageService: BooksPageService) {
   }
 
   ngOnInit() {
@@ -30,16 +33,14 @@ export class BooksComponent implements OnInit {
 
   getPage(page: Page, sort: Sort) {
     const sortParam = `${sort.active},${sort.direction}`;
-    this.bookService.getBooks(page.pageIndex, page.pageSize, sortParam)
-      .then(response => {
-        this.books = response._embedded.books as Book[];
-        this.totalBookCount = response.page.totalElements;
+
+    this.collectionPageService.getCollectionPage(page.pageIndex, page.pageSize, sortParam)
+      .then(collectionPage => {
+        debugger;
+        this.books = collectionPage.collection;
+        this.totalElements = collectionPage.totalElements;
         this.currentPage = page;
-      })
-      .catch(error => {
-          alert("Can't get books: " + error.message);
-        }
-      );
+      });
   }
 
   sortBooks(sort: Sort) {
