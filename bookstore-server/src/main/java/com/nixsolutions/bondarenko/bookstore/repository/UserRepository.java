@@ -1,7 +1,5 @@
 package com.nixsolutions.bondarenko.bookstore.repository;
 
-import java.util.List;
-
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -13,5 +11,4 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long>
 {
     boolean existsByEmail(@Param("email") String username);
     User findOneByEmail(@Param("email") String username);
-    List<User> findByUsername(@Param("username") String username);
 }

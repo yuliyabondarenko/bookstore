@@ -16,7 +16,7 @@ import { BooksPageService } from '../../../service/api/page.service/books.page.s
 export class ManageBooksComponent implements OnInit {
   books: Array<Book>;
   dataSource: MatTableDataSource<Book>;
-  currentPage = environment.adminBooksPage;
+  currentPage = environment.manageBooksPage;
   totalElements: number;
   displayedColumns = ['id', 'name', 'price', 'absent', 'actions'];
   @ViewChild(MatSort) sort: MatSort;
@@ -27,8 +27,8 @@ export class ManageBooksComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.sort.active = environment.adminBooksSort.active;
-    this.sort.direction = environment.adminBooksSort.direction as SortDirection;
+    this.sort.active = environment.manageBooksSort.active;
+    this.sort.direction = environment.manageBooksSort.direction as SortDirection;
     this.getPage(this.currentPage, this.sort);
   }
 

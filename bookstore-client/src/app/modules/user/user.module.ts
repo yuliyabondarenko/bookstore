@@ -11,6 +11,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingCartService } from '../../service/api/shopping.cart.service';
 import { BookCardComponent } from './book-card/book-card.component';
 import { LocalShoppingCartService } from '../../service/local-shopping-cart.service';
+import { OrdersPageService } from '../../service/api/page.service/orders.page.service';
 
 
 const routes: Routes = [
@@ -54,6 +55,7 @@ const routes: Routes = [
     BookCardComponent
   ],
   providers: [
+    OrdersPageService,
     ShoppingCartService,
     LocalShoppingCartService
   ]

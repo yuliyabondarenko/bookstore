@@ -1,0 +1,32 @@
+.container {
+  margin: 20px auto;
+  padding: 10px 20px;
+}
+
+.mat-header-cell {
+  font-weight: bold;
+}
+
+.mat-column-id {
+  flex: 0 0 10%;
+}
+
+.mat-column-name {
+  flex: 0 0 20%;
+}
+
+.mat-column-email {
+  flex: 0 0 20%;
+}
+
+.mat-column-gender {
+  flex: 0 0 10%;
+}
+
+.mat-column-bithday {
+  flex: 0 0 20%;
+}
+
+.mat-column-actions {
+  flex: 0 0 20%;
+}

@@ -39,7 +39,6 @@ import { OrdersPageService } from './service/api/page.service/orders.page.servic
   ],
   providers: [
     BooksPageService,
-    OrdersPageService,
     LoginService,
     UserService,
     XhrInterceptor,

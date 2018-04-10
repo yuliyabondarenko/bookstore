@@ -30,7 +30,7 @@ public class Order implements Serializable
 
   private Date date;
 
-  @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "order")
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
   private List<OrderBookPrice> orderBookPrices = new ArrayList<>();
 
   @ManyToOne(optional = false)

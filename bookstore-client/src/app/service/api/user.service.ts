@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../entity/user';
-import { environment } from '../../../environments/environment';
 import { HttpOptions } from './http-heares-helper';
 
 @Injectable()
 export class UserService {
-  baseUrl = `${environment.apiUrl}/users`;
 
   constructor(private http: HttpClient) {
   }
@@ -16,15 +14,6 @@ export class UserService {
       .get(userUrl)
       .toPromise()
       .then(response => response as User)
-      .catch(response => this.handleError(response.error));
-  }
-
-  getUsers(page: number, size: number): Promise<any> {
-    const usersUrl = `${this.baseUrl}?page=${page}&size=${size}`;
-    return this.http
-      .get(usersUrl)
-      .toPromise()
-      .then(response => response)
       .catch(response => this.handleError(response.error));
   }
 

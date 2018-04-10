@@ -6,8 +6,9 @@ import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { ManageBooksComponent } from './manage-books/manage-books.component';
 import { AdminGuard } from '../../service/admin-guard.service';
 import { MaterialModule } from '../../material.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BookFormDialogComponent } from './manage-books/book.form/book.form';
+import { UsersPageService } from '../../service/api/page.service/users.page.service';
 
 
 const routes: Routes = [
@@ -44,6 +45,9 @@ const routes: Routes = [
     ManageUsersComponent,
     ManageBooksComponent,
     BookFormDialogComponent
+  ],
+  providers: [
+    UsersPageService
   ],
   entryComponents: [BookFormDialogComponent]
 })

@@ -27,12 +27,22 @@ export const environment = {
     direction: 'asc'
   },
 
-  adminBooksPage: {
+  manageBooksPage: {
     pageIndex: 0,
     pageSize: 10
   },
 
-  adminBooksSort: {
+  manageBooksSort: {
+    active: 'id',
+    direction: 'desc'
+  },
+
+  manageUsersPage: {
+    pageIndex: 0,
+    pageSize: 10
+  },
+
+  manageUsersSort: {
     active: 'id',
     direction: 'desc'
   }
