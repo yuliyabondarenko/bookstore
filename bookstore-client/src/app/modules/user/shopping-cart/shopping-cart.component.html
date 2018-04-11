@@ -44,7 +44,7 @@
   </mat-table>
 
   <mat-toolbar-row *ngIf="hasAbsentBook()" >
-    <p class="warning">Unable to submit order. Shopping cart contains absent books</p>
+    <mat-error class="globalError">{{globalError}}</mat-error>
   </mat-toolbar-row>
 
   <mat-toolbar-row>

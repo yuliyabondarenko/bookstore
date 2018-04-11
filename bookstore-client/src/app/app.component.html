@@ -1,7 +1,7 @@
-<mat-toolbar color="primary" class="app-header">
+<mat-toolbar color="primary" class="app-header mat-elevation-z2">
   <mat-toolbar-row>
     <span *ngIf="isAuthorized">Hello, {{userName}}!</span>
-    <span class="text-center">BOOKSTORE</span>
+    <span class="centered">BOOKSTORE</span>
     <button *ngIf="isUser && !isAdmin" mat-button routerLink="user/shopcart">
       Shopping cart ({{shoppingCartItemsCount}})</button>
     <button *ngIf="isAuthorized" mat-button routerLink="home">Home</button>

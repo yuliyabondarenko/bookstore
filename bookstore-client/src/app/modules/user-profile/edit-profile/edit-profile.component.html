@@ -1,3 +1,59 @@
-<p>
-  edit-profile works!
-</p>
+<mat-card class="container">
+  <mat-card-title>Edit profile</mat-card-title>
+  <form #userForm="ngForm" (ngSubmit)="save(user)">
+    <mat-error class="globalError">{{globalError}}</mat-error>
+  <mat-form-field  class="full-width mutable-field">
+    <input matInput [(ngModel)]="user.username" placeholder="Username"
+           [errorStateMatcher]="matcher" required name="username" #username=ngModel>
+    <mat-error *ngIf="username.errors?.required">
+      Username is required
+    </mat-error>
+    <mat-error *ngIf="username.errors?.incorrect">
+      {{username.errors.incorrect}}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field  class="full-width mutable-field">
+    <input matInput [(ngModel)]="user.email" placeholder="Email"
+           [errorStateMatcher]="matcher" required name="email" #email=ngModel>
+    <mat-error *ngIf="email.errors?.required">
+      Email is required
+    </mat-error>
+    <mat-error *ngIf="email.errors?.incorrect">
+      {{email.errors.incorrect}}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field  class="full-width mutable-field">
+    <mat-select [(ngModel)]="user.gender"
+                [errorStateMatcher]="matcher" required name="gender" #gender=ngModel>
+      <mat-option></mat-option>
+      <mat-option value="MALE"> Male </mat-option>
+      <mat-option value="FEMALE"> Female </mat-option>
+    </mat-select>
+    <mat-error *ngIf="gender.errors?.required">
+      Gender is required
+    </mat-error>
+    <mat-error *ngIf="gender.errors?.incorrect">
+      {{username.errors.incorrect}}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field  class="full-width mutable-field">
+    <input type="date" matInput [(ngModel)]="user.birthday" placeholder="Birthday"
+           [errorStateMatcher]="matcher" required name="birthday" #birthday=ngModel>
+    <mat-error *ngIf="birthday.errors?.required">
+      Birthday is required
+    </mat-error>
+    <mat-error *ngIf="gender.errors?.incorrect">
+      {{birthday.errors.incorrect}}
+    </mat-error>
+  </mat-form-field>
+
+    <mat-card-footer>
+      <mat-toolbar-row>
+        <button mat-raised-button (click)="reset()" color="primary">Reset changes</button>
+        <span class="centered"></span>
+        <button type="submit" mat-raised-button color="primary"
+                [disabled]="userForm.invalid">Save</button>
+      </mat-toolbar-row>
+    </mat-card-footer>
+  </form>
+</mat-card>

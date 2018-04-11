@@ -9,10 +9,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity
-public class UserRole
+public class UserRole implements Serializable
 {
+  private static final long serialVersionUID = -1382181341969756615L;
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;

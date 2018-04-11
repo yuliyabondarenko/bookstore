@@ -6,7 +6,7 @@ import {
   MatDividerModule,
   MatGridListModule, MatInputModule,
   MatListModule,
-  MatPaginatorModule,
+  MatPaginatorModule, MatSelectModule,
   MatSidenavModule,
   MatSortModule,
   MatTableModule,
@@ -31,6 +31,7 @@ import {
     MatCheckboxModule,
     MatDialogModule,
     MatListModule,
+    MatSelectModule,
 
   ],
   exports: [
@@ -49,6 +50,7 @@ import {
     MatCheckboxModule,
     MatDialogModule,
     MatListModule,
+    MatSelectModule,
   ]
 })
 export class MaterialModule {
