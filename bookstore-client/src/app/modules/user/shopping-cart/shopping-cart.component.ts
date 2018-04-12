@@ -77,11 +77,11 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   hasAbsentBook() {
-    debugger;
-    let shoppingCartItems2 = this.localShoppingCartService.storedShoppingCartItems;
-    let b = shoppingCartItems2
-      .some(item => item.book.absent);
-    return b;
+    let hasAbsent = this.localShoppingCartService.storedShoppingCartItems.some(item => item.book.absent);
+    if (hasAbsent) {
+      this.globalError = 'Unable to submit order. Shopping cart contains absent books';
+    }
+    return hasAbsent;
   }
 
   get disableClear(): boolean {

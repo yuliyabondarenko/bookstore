@@ -9,33 +9,26 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  getUser(userUrl): Promise<any> {
+  getUser(userUrl): Promise<User> {
     return this.http
       .get(userUrl)
       .toPromise()
       .then(response => response as User)
-      .catch(response => this.handleError(response.error));
+      .catch(response => Promise.reject(response.error));
   }
 
   deleteUser(user: User): Promise<any> {
     return this.http
       .delete(user._links.self.href)
       .toPromise()
-      .catch(response => this.handleError(response.error));
+      .catch(response => Promise.reject(response.error));
   }
 
-  updateUser(userUrl: string, user: User): Promise<any> {
+  updateUser(userUrl: string, user: User): Promise<User> {
     return this.http
       .put(userUrl, JSON.stringify(user), HttpOptions.authorizedJsonBody)
       .toPromise()
       .then(response => response as User)
-      .catch(response => this.handleError(response.error));
-  }
-
-  private handleError(error) {
-    if (error.validationErrors) {
-      return Promise.reject(error.validationErrors);
-    }
-    return Promise.reject(error);
+      .catch(response => Promise.reject(response.error));
   }
 }

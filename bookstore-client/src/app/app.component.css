@@ -1,12 +1,10 @@
-.text-center {
-  margin: 0 auto;
-}
-
 .app-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+
+  z-index: 10;
 }
 
 .app-content {
