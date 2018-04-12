@@ -1,0 +1,11 @@
+server:
+    port: 7070
+
+spring:
+
+    application:
+        name: bookstore
+
+    data:
+        rest:
+          base-path: "/api"

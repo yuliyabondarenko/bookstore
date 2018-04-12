@@ -13,13 +13,12 @@ import { BookService } from './service/api/book.service';
 import { RegisterService } from './service/api/register.user.service';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AdminGuard } from './service/admin-guard.service';
-import { UserGuard } from './service/user-guard.service';
+import { AdminGuard } from './route.guard/admin-guard';
+import { CustomerGuard } from './route.guard/customer-guard';
 import { OrderService } from './service/api/order.service';
 import { XhrInterceptor } from "./service/xhr-interceptor.service";
 import { LoginService } from './service/api/login.service';
 import { BooksPageService } from './service/api/page.service/books.page.service';
-import { OrdersPageService } from './service/api/page.service/orders.page.service';
 
 
 @NgModule({
@@ -43,7 +42,7 @@ import { OrdersPageService } from './service/api/page.service/orders.page.servic
     UserService,
     XhrInterceptor,
     AdminGuard,
-    UserGuard,
+    CustomerGuard,
     BookService,
     OrderService,
     RegisterService

@@ -14,8 +14,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     if (SessionService.isAdmin) {
       this.router.navigateByUrl('admin');
-    } else if (SessionService.isUser) {
-      this.router.navigateByUrl('user');
+    } else if (SessionService.isCustomer) {
+      this.router.navigateByUrl('customer');
     }
   }
 }

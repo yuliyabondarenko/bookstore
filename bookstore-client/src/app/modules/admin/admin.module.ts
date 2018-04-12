@@ -4,7 +4,7 @@ import { AdminComponent } from './admin.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { ManageBooksComponent } from './manage-books/manage-books.component';
-import { AdminGuard } from '../../service/admin-guard.service';
+import { AdminGuard } from '../../route.guard/admin-guard';
 import { MaterialModule } from '../../material.module';
 import { FormsModule } from '@angular/forms';
 import { BookFormDialogComponent } from './manage-books/book.form/book.form';

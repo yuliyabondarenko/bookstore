@@ -11,7 +11,7 @@ export class UserService {
 
   getUser(userUrl): Promise<User> {
     return this.http
-      .get(userUrl)
+      .get(userUrl, HttpOptions.authorizedEmptyBody)
       .toPromise()
       .then(response => response as User)
       .catch(response => Promise.reject(response.error));
@@ -19,7 +19,7 @@ export class UserService {
 
   deleteUser(user: User): Promise<any> {
     return this.http
-      .delete(user._links.self.href)
+      .delete(user._links.self.href, HttpOptions.authorizedEmptyBody)
       .toPromise()
       .catch(response => Promise.reject(response.error));
   }

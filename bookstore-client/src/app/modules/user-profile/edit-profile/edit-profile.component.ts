@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../../service/api/user.service';
 import { User } from '../../../entity/user';
-import { LinkHelper } from '../../../service/link.helper';
+import { LinkHelper } from '../../../service/api/link.helper';
 import { SessionService } from '../../../service/session.service';
 import { ErrorStateMatcher } from '@angular/material';
 
@@ -40,7 +40,10 @@ export class EditProfileComponent implements OnInit {
 
   save(user: User) {
     this.userService.updateUser(this.user._links.self.href, user)
-      .then(user => this.initUser(user))
+      .then(user => {
+        //TODO НУЖНО ввести пароль если менять email
+        this.initUser(user);
+      })
       .catch(error => {
         if (error.fieldErrors) {
           this.showValidationErrors(error.fieldErrors);

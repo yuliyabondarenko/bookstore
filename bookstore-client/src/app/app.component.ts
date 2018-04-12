@@ -29,15 +29,15 @@ export class AppComponent implements OnInit {
     return SessionService.isAuthorized;
   }
 
-  get isUser(): boolean {
-    return SessionService.isUser;
+  get isCustomer(): boolean {
+    return SessionService.isCustomer;
   }
 
   get isAdmin(): boolean {
     return SessionService.isAdmin;
   }
 
-  get userName(): String {
+  get userName(): string {
     return SessionService.userName;
   }
 

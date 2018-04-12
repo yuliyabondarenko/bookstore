@@ -36,7 +36,7 @@ public class Order implements Serializable
   @ManyToOne(optional = false)
   private User user;
 
-  @Formula("select sum(obp.price) from order_book_price obp where obp.order_id = id")
+  @Formula("select sum(obp.price * obp.count) from order_book_price obp where obp.order_id = id")
   private Double totalAmount;
 
   public Order()

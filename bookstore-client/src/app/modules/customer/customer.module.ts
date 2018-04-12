@@ -1,24 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserComponent } from './user.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from '../../material.module';
 import { OrdersComponent } from './orders/orders.component';
 import { BooksComponent } from './books/books.component';
-import { UserGuard } from '../../service/user-guard.service';
 import { BookPriceCountComponent } from './book-price-count/book-price-count.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingCartService } from '../../service/api/shopping.cart.service';
 import { BookCardComponent } from './book-card/book-card.component';
 import { LocalShoppingCartService } from '../../service/local-shopping-cart.service';
 import { OrdersPageService } from '../../service/api/page.service/orders.page.service';
+import { CustomerGuard } from '../../route.guard/customer-guard';
+import { CustomerComponent } from './customer.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: UserComponent,
-    canActivate: [UserGuard],
+    component: CustomerComponent,
+    canActivate: [CustomerGuard],
     children: [
       {
         path: 'profile',
@@ -47,7 +47,7 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
-    UserComponent,
+    CustomerComponent,
     OrdersComponent,
     BooksComponent,
     BookPriceCountComponent,
@@ -60,5 +60,5 @@ const routes: Routes = [
     LocalShoppingCartService
   ]
 })
-export class UserModule {
+export class CustomerModule {
 }

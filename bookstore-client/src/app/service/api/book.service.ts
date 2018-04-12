@@ -6,7 +6,7 @@ import { HttpOptions } from './http-heares-helper';
 
 @Injectable()
 export class BookService {
-  baseBooksUrl = `${environment.apiUrl}/books`;
+  baseBooksUrl = `${environment.server.apiPath}/books`;
 
   constructor(private http: HttpClient) {
   }

@@ -12,7 +12,7 @@ import { BooksPageService } from '../../../service/api/page.service/books.page.s
 })
 export class BooksComponent implements OnInit {
   books: Array<Book>;
-  currentPage = environment.userBooksPage;
+  currentPage = environment.customerBooksPage;
   totalElements: number;
 
   displayedColumns = ['name', 'price', 'absent'];
@@ -22,8 +22,8 @@ export class BooksComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sort.active = environment.userBooksSort.active;
-    this.sort.direction = environment.userBooksSort.direction as SortDirection;
+    this.sort.active = environment.customerBooksSort.active;
+    this.sort.direction = environment.customerBooksSort.direction as SortDirection;
 
     this.getPage(this.currentPage, this.sort);
   }

@@ -6,7 +6,7 @@ import { HttpOptions } from './http-heares-helper';
 
 @Injectable()
 export class OrderService {
-  baseOrdersUrl = `${environment.apiUrl}/orders`;
+  baseOrdersUrl = `${environment.server.apiPath}/orders`;
 
   constructor(private http: HttpClient) {
   }

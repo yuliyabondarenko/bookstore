@@ -7,7 +7,7 @@ import { ShoppingCartItem } from '../../../entity/shopping-cart-item';
 import { LocalShoppingCartService } from '../../../service/local-shopping-cart.service';
 import { SessionService } from '../../../service/session.service';
 import { ShoppingCartService } from '../../../service/api/shopping.cart.service';
-import { LinkHelper } from '../../../service/link.helper';
+import { LinkHelper } from '../../../service/api/link.helper';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -40,7 +40,7 @@ export class ShoppingCartComponent implements OnInit {
     let order = this.buildOrder();
 
     this.ordersService.createOrder(order, () => {
-      this.router.navigateByUrl('user/orders');
+      this.router.navigateByUrl('customer/orders');
       this.shoppingCartService.cleanUserCart(SessionService.userId).then(() => {
         this.localShoppingCartService.fetchShoppingCartItems();
       });
@@ -77,7 +77,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   hasAbsentBook() {
-    let hasAbsent = this.localShoppingCartService.storedShoppingCartItems.some(item => item.book.absent);
+    let hasAbsent = SessionService.shoppingCartItems.some(item => item.book.absent);
     if (hasAbsent) {
       this.globalError = 'Unable to submit order. Shopping cart contains absent books';
     }
@@ -89,7 +89,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   private isCartEmpty() {
-    return this.localShoppingCartService.storedShoppingCartItems.length == 0;
+    return SessionService.shoppingCartItems.length == 0;
   }
 
   upCount(item: ShoppingCartItem) {

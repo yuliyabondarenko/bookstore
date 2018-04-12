@@ -4,7 +4,7 @@ import { ShoppingCartService } from './api/shopping.cart.service';
 import { Book } from '../entity/book';
 import { ShoppingCartItemDTO } from '../entity/shopping-cart-item-dto';
 import { SessionService } from './session.service';
-import { LinkHelper } from './link.helper';
+import { LinkHelper } from './api/link.helper';
 
 @Injectable()
 export class LocalShoppingCartService {
@@ -16,7 +16,7 @@ export class LocalShoppingCartService {
     return this.shoppingCartService.getShopCartItems(SessionService.userId)
       .then(response => {
         const cartItems = response;
-        sessionStorage.shoppingCart = JSON.stringify(cartItems);
+        SessionService.shoppingCartItems = cartItems;
         return cartItems;
       });
   }
@@ -42,10 +42,7 @@ export class LocalShoppingCartService {
   }
 
   isBookInCart(book: Book) {
-    return this.storedShoppingCartItems.some(item => item.book.id === book.id);
-  }
-
-  get storedShoppingCartItems(): ShoppingCartItem [] {
-    return JSON.parse(sessionStorage.shoppingCart) as ShoppingCartItem [];
+    return  SessionService.getUserSessionData().shoppingCartItems
+      .some(item => item.book.id === book.id);
   }
 }

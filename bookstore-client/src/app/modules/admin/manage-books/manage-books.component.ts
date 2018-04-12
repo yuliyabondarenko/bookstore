@@ -47,7 +47,9 @@ export class ManageBooksComponent implements OnInit {
         this.bookService.create(book)
           .then(() => {
             this.getPage(this.currentPage, this.sort);
-          });
+          }).catch(error => {
+          //TODO show validation errors if present;
+        });;
       });
   }
 
@@ -62,7 +64,9 @@ export class ManageBooksComponent implements OnInit {
         this.bookService.update(book)
           .then(() => {
             this.getPage(this.currentPage, this.sort);
-          });
+          }).catch(error => {
+            //TODO show validation errors if present;
+        });
       });
   }
 
