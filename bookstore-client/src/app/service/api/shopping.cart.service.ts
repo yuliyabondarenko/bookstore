@@ -7,7 +7,7 @@ import { HttpOptions } from './http-heares-helper';
 
 @Injectable()
 export class ShoppingCartService {
-  baseShopCartUrl = `${environment.apiUrl}/shopcart`;
+  baseShopCartUrl = `${environment.server.apiPath}/shopcart`;
 
   constructor(private http: HttpClient) {
   }

@@ -6,7 +6,7 @@ import { environment } from '../../../../environments/environment';
 
 @Injectable()
 export class CollectionPageService<T> {
-  basesUrl = `${environment.apiUrl}`;
+  basesUrl = `${environment.server.apiPath}`;
   collectionPath: string;
   searchName: string;
   searchParams: string;

@@ -4,7 +4,7 @@ import { ShoppingCartService } from './api/shopping.cart.service';
 import { Book } from '../entity/book';
 import { ShoppingCartItemDTO } from '../entity/shopping-cart-item-dto';
 import { SessionService } from './session.service';
-import { LinkHelper } from './link.helper';
+import { LinkHelper } from './api/link.helper';
 
 @Injectable()
 export class LocalShoppingCartService {

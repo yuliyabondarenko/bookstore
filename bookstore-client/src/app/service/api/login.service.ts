@@ -6,6 +6,8 @@ import { HttpOptions } from './http-heares-helper';
 
 @Injectable()
 export class LoginService {
+  loginUrl = `${environment.server.basePath}/user`;
+  logoutUrl = `${environment.server.basePath}/logout`;
 
   constructor(private http: HttpClient) {
   }
@@ -20,7 +22,7 @@ export class LoginService {
       })
     };
 
-    return this.http.get(`${environment.apiUrl}/user`, httpOptions)
+    return this.http.get(this.loginUrl, httpOptions)
       .toPromise()
       .then(userData => {
           if (!!userData['userId']) {
@@ -35,9 +37,7 @@ export class LoginService {
   }
 
   logout(): Promise<any> {
-    const logoutUrl = `${environment.apiUrl}/logout`;
-
-    return this.http.get(logoutUrl, HttpOptions.authorizedEmptyBody)
+    return this.http.get(this.logoutUrl, HttpOptions.authorizedEmptyBody)
       .toPromise()
       .then(response => {
         SessionService.clearAuthorization();

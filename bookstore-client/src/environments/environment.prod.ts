@@ -1,7 +1,10 @@
 export const environment = {
   production: true,
 
-  apiUrl: 'http://localhost:7070',
+  server: {
+    basePath: 'http://localhost:7070',
+    apiPath: 'http://localhost:7070/api'
+  },
 
   ordersPage: {
     pageIndex: 0,

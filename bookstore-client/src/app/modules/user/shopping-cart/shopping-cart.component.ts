@@ -7,7 +7,7 @@ import { ShoppingCartItem } from '../../../entity/shopping-cart-item';
 import { LocalShoppingCartService } from '../../../service/local-shopping-cart.service';
 import { SessionService } from '../../../service/session.service';
 import { ShoppingCartService } from '../../../service/api/shopping.cart.service';
-import { LinkHelper } from '../../../service/link.helper';
+import { LinkHelper } from '../../../service/api/link.helper';
 
 @Component({
   selector: 'app-shopping-cart',

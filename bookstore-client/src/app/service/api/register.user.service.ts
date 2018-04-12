@@ -6,7 +6,7 @@ import { HttpOptions } from './http-heares-helper';
 
 @Injectable()
 export class RegisterService {
-  registerUrl = `${environment.apiUrl}/register`;
+  registerUrl = `${environment.server.basePath}/register`;
 
   constructor(private http: HttpClient) {
   }

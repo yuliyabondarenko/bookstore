@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../../service/api/user.service';
 import { User } from '../../../entity/user';
-import { LinkHelper } from '../../../service/link.helper';
+import { LinkHelper } from '../../../service/api/link.helper';
 import { SessionService } from '../../../service/session.service';
 import { ErrorStateMatcher } from '@angular/material';
 
