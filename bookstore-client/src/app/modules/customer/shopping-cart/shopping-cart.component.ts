@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { BookPriceCount } from '../../../entity/book-price-count';
 import { Order } from '../../../entity/order';
 import { Router } from '@angular/router';
 import { ShoppingCartItem } from '../../../entity/shopping-cart-item';
 import { LocalShoppingCartService } from '../../../service/local-shopping-cart.service';
 import { SessionService } from '../../../service/session.service';
 import { ShoppingCartService } from '../../../service/api/shopping.cart.service';
-import { LinkHelper } from '../../../service/api/link.helper';
 import { DataRestService } from '../../../service/api/data.rest.service';
+import { OrderUtils } from '../order.utils';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -19,8 +18,8 @@ export class ShoppingCartComponent implements OnInit {
   displayedColumns = ['bookName', 'price', 'count', 'actions'];
   globalError: string;
   hasAbsentBookError = 'Unable to submit order. Shopping cart contains absent books';
-  _hasAbsentBook: boolean = false;
-  _totalAmount: number;
+  hasAbsentBook: boolean = false;
+  totalAmount: number;
 
   constructor(private localShoppingCartService: LocalShoppingCartService,
               private shoppingCartService: ShoppingCartService,
@@ -36,34 +35,19 @@ export class ShoppingCartComponent implements OnInit {
     this.localShoppingCartService.fetchShoppingCartItems()
       .then(items => {
         this.shoppingCartItems = items;
-        this.calculateTotalAmount();
-        this._hasAbsentBook = this.shoppingCartItems.some(item => item.book.absent);
+        this.totalAmount = OrderUtils.calculateTotalAmount(items).toFixed(2) as number;
+        this.hasAbsentBook = this.shoppingCartItems.some(item => item.book.absent);
       });
   }
 
-  calculateTotalAmount() {
-    this._totalAmount = this.shoppingCartItems
-      .map(item => item.book['price'] * item.count)
-      .reduce((sum, current) => sum + current, 0);
-  }
-
-  get totalAmount(): number {
-    return this._totalAmount;
-  }
-
-  get hasAbsentBook(): boolean {
-    return this._hasAbsentBook;
-  }
-
   submitOrder() {
-    let order = this.buildOrder();
+    let order = OrderUtils.buildOrder(this.shoppingCartItems);
 
     this.resourceService.create(order)
       .then(() => {
         this.router.navigateByUrl('customer/orders');
-        this.shoppingCartService.cleanUserCart(SessionService.userId).then(() => {
-          this.localShoppingCartService.fetchShoppingCartItems();
-        });
+        this.shoppingCartService.cleanUserCart(SessionService.userId)
+          .then(() => this.refreshItems());
       })
       .catch(error => {
         const errorMsg = error && error.message ? error.message : '';
@@ -71,26 +55,6 @@ export class ShoppingCartComponent implements OnInit {
       });
   }
 
-  //TODO move this logic somewhere
-  buildOrder() {
-    let orderBookPriceItems = [];
-    this.shoppingCartItems.forEach(
-      item => {
-        if (!item.book.absent) {
-          orderBookPriceItems.push(BookPriceCount.of(item));
-        }
-      }
-    );
-    let userLink = LinkHelper.getUserLink(SessionService.userId);
-    return new Order(null, userLink, new Date(Date.now()), orderBookPriceItems)
-  }
-
-  clearCart() {
-    this.shoppingCartService.cleanUserCart(SessionService.userId)
-      .then(() => {
-        this.refreshItems();
-      });
-  }
 
   get disableSubmit(): boolean {
     return this.hasAbsentBook || this.isCartEmpty;
@@ -118,6 +82,11 @@ export class ShoppingCartComponent implements OnInit {
 
   removeItem(item: ShoppingCartItem) {
     this.localShoppingCartService.deleteItem(item)
+      .then(() => this.refreshItems());
+  }
+
+  clearCart() {
+    this.shoppingCartService.cleanUserCart(SessionService.userId)
       .then(() => this.refreshItems());
   }
 }
