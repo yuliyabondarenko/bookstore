@@ -20,6 +20,7 @@ export class ShoppingCartComponent implements OnInit {
   globalError: string;
   hasAbsentBookError = 'Unable to submit order. Shopping cart contains absent books';
   _hasAbsentBook: boolean = false;
+  _totalAmount: number;
 
   constructor(private localShoppingCartService: LocalShoppingCartService,
               private shoppingCartService: ShoppingCartService,
@@ -35,8 +36,19 @@ export class ShoppingCartComponent implements OnInit {
     this.localShoppingCartService.fetchShoppingCartItems()
       .then(items => {
         this.shoppingCartItems = items;
+        this.calculateTotalAmount();
         this._hasAbsentBook = this.shoppingCartItems.some(item => item.book.absent);
       });
+  }
+
+  calculateTotalAmount() {
+    this._totalAmount = this.shoppingCartItems
+      .map(item => item.book['price'] * item.count)
+      .reduce((sum, current) => sum + current, 0);
+  }
+
+  get totalAmount(): number {
+    return this._totalAmount;
   }
 
   get hasAbsentBook(): boolean {
@@ -81,24 +93,26 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   get disableSubmit(): boolean {
-    return this.hasAbsentBook || this.isCartEmpty();
+    return this.hasAbsentBook || this.isCartEmpty;
   }
 
   get disableClear(): boolean {
-    return this.isCartEmpty();
+    return this.isCartEmpty;
   }
 
-  private isCartEmpty() {
+  get isCartEmpty() {
     return SessionService.shoppingCartItems.length == 0;
   }
 
   upCount(item: ShoppingCartItem) {
-    this.localShoppingCartService.updateCount(item, ++item.count);
+    this.localShoppingCartService.updateCount(item, ++item.count)
+      .then(() => this.refreshItems());
   }
 
   downCount(item: ShoppingCartItem) {
     if (item.count > 1) {
-      this.localShoppingCartService.updateCount(item, --item.count);
+      this.localShoppingCartService.updateCount(item, --item.count)
+        .then(() => this.refreshItems());
     }
   }
 

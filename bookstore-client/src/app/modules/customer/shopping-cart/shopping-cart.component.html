@@ -46,13 +46,16 @@
     </mat-error>
   </mat-toolbar-row>
 
-  <mat-toolbar-row>
-
+  <mat-toolbar-row style="margin: 15px 0">
     <button id="clearCart" mat-raised-button color="primary"
             [disabled]="disableClear" (click)="clearCart()">Clear cart</button>
+
+    <span></span><mat-card *ngIf="!isCartEmpty" class="centered" style="font-weight: bold">Total $ {{totalAmount}}</mat-card>
+
     <button id="submitOrder" mat-raised-button color="primary"
             [disabled]="disableSubmit" (click)="submitOrder()">Submit order</button>
   </mat-toolbar-row>
+
   <mat-error>{{globalError}}</mat-error>
 
 </mat-card>
