@@ -4,6 +4,8 @@ import { PasswordConfirmValidator } from './password.match.validator';
 import { Router } from '@angular/router';
 import { RegisterService } from '../../service/api/register.user.service';
 import { User } from '../../entity/user';
+import { SessionService } from '../../service/session.service';
+import { LoginService } from '../../service/api/login.service';
 
 @Component({
   selector: 'app-register',
@@ -24,6 +26,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private registerService: RegisterService,
+              private loginService: LoginService,
               private router: Router) {
     this.registerForm = this.formBuilder.group({
       'username': new FormControl('', [Validators.required]),
@@ -40,6 +43,9 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(SessionService.isAuthorized) {
+      this.loginService.logout();
+    }
   }
 
   onSubmit(userForm) {

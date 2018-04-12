@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from '../../material.module';
 import { OrdersComponent } from './orders/orders.component';
 import { BooksComponent } from './books/books.component';
-import { UserGuard } from '../../service/user-guard.service';
+import { UserGuard } from '../../route.guard/user-guard';
 import { BookPriceCountComponent } from './book-price-count/book-price-count.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingCartService } from '../../service/api/shopping.cart.service';

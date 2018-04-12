@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../../service/api/login.service';
+import { SessionService } from '../../service/session.service';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(SessionService.isAuthorized) {
+      this.loginService.logout();
+    }
   }
 
   onSubmit(loginForm) {
