@@ -14,7 +14,7 @@ import { RegisterService } from './service/api/register.user.service';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminGuard } from './route.guard/admin-guard';
-import { UserGuard } from './route.guard/user-guard';
+import { CustomerGuard } from './route.guard/customer-guard';
 import { OrderService } from './service/api/order.service';
 import { XhrInterceptor } from "./service/xhr-interceptor.service";
 import { LoginService } from './service/api/login.service';
@@ -42,7 +42,7 @@ import { BooksPageService } from './service/api/page.service/books.page.service'
     UserService,
     XhrInterceptor,
     AdminGuard,
-    UserGuard,
+    CustomerGuard,
     BookService,
     OrderService,
     RegisterService

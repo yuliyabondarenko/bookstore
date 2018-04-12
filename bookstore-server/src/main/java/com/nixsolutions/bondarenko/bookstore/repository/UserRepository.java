@@ -14,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 public interface UserRepository extends PagingAndSortingRepository<User, Long>
 {
     boolean existsByEmail(@Param("email") String username);
+
     User findOneByEmail(@Param("email") String username);
 
     @Override

@@ -4,10 +4,10 @@ import { LocalShoppingCartService } from '../../service/local-shopping-cart.serv
 
 @Component({
   selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  templateUrl: './customer.component.html',
+  styleUrls: ['./customer.component.css']
 })
-export class UserComponent implements OnInit {
+export class CustomerComponent implements OnInit {
 
   constructor(private router: Router,
               private localShoppingCartService: LocalShoppingCartService) { }
@@ -17,7 +17,7 @@ export class UserComponent implements OnInit {
   }
 
   isActive(path: string): boolean {
-    return this.router.isActive(`user/${path}`, true);
+    return this.router.isActive(`customer/${path}`, true);
   }
 
 }

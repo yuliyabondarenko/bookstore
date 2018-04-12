@@ -20,12 +20,12 @@ export const environment = {
     direction: 'desc'
   },
 
-  userBooksPage: {
+  customerBooksPage: {
     pageIndex: 0,
     pageSize: 12
   },
 
-  userBooksSort: {
+  customerBooksSort: {
     active: 'absent',
     direction: 'asc'
   },

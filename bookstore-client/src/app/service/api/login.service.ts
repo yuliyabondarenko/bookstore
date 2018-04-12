@@ -31,7 +31,7 @@ export class LoginService {
         }
       )
       .catch(response => {
-        SessionService.clearAuthorization();
+        SessionService.clearSession();
         return Promise.reject(response.error);
       });
   }
@@ -40,10 +40,10 @@ export class LoginService {
     return this.http.get(this.logoutUrl, HttpOptions.authorizedEmptyBody)
       .toPromise()
       .then(response => {
-        SessionService.clearAuthorization();
+        SessionService.clearSession();
       })
       .catch(error => {
-        SessionService.clearAuthorization();
+        SessionService.clearSession();
         console.log('Logout failed');
       });
   }

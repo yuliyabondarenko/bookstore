@@ -2,7 +2,7 @@
   <mat-toolbar-row>
     <span *ngIf="isAuthorized">Hello, {{userName}}!</span>
     <span class="centered">BOOKSTORE</span>
-    <button *ngIf="isUser && !isAdmin" mat-button routerLink="user/shopcart">
+    <button *ngIf="isCustomer" mat-button routerLink="customer/shopcart">
       Shopping cart ({{shoppingCartItemsCount}})</button>
     <button *ngIf="isAuthorized" mat-button routerLink="home">Home</button>
     <button *ngIf="isAuthorized" mat-button (click)="logout()">Logout</button>

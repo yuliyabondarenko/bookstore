@@ -3,12 +3,12 @@ import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angul
 import { SessionService } from '../service/session.service';
 
 @Injectable()
-export class UserGuard implements CanActivate {
+export class CustomerGuard implements CanActivate {
 
   constructor() {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    return SessionService.isUser && !SessionService.isAdmin;
+    return SessionService.isCustomer;
   }
 }
