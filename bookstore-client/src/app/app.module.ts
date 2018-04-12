@@ -13,7 +13,6 @@ import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminGuard } from './route.guard/admin-guard';
 import { CustomerGuard } from './route.guard/customer-guard';
-import { OrderService } from './service/api/order.service';
 import { XhrInterceptor } from "./service/xhr-interceptor.service";
 import { LoginService } from './service/api/login.service';
 import { BooksPageService } from './service/api/page.service/books.page.service';
@@ -42,7 +41,6 @@ import { DataRestService } from './service/api/data.rest.service';
     XhrInterceptor,
     AdminGuard,
     CustomerGuard,
-    OrderService,
     RegisterService
   ],
   bootstrap: [AppComponent]

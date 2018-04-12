@@ -1,6 +1,6 @@
 export interface Entity {
 
-  collectionName(): string;
+  collectionName: string;
 
-  _links(): any;
+  _links: any;
 }

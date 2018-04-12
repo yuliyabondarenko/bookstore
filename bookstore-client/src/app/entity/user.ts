@@ -1,6 +1,7 @@
 import { Entity } from './entity';
 
-export class User implements Entity{
+export class User implements Entity {
+  collectionName = 'users';
 
   constructor(public id: number = null,
               public username: string = null,
@@ -11,7 +12,4 @@ export class User implements Entity{
               public _links: any = null) {
   }
 
-  collectionName(): string {
-    return 'users';
-  }
 }

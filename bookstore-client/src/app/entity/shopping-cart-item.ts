@@ -2,6 +2,7 @@ import { Book } from './book';
 import { Entity } from './entity';
 
 export class ShoppingCartItem implements Entity {
+  collectionName = 'shopcart';
 
   constructor(public id: number = null,
               public book: Book = null,
@@ -9,7 +10,4 @@ export class ShoppingCartItem implements Entity {
               public _links: any = null) {
   }
 
-  collectionName(): string {
-    return 'shopcart';
-  }
 }

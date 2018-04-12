@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BookPriceCount } from '../../../entity/book-price-count';
-import { OrderService } from '../../../service/api/order.service';
 import { Order } from '../../../entity/order';
 import { Router } from '@angular/router';
 import { ShoppingCartItem } from '../../../entity/shopping-cart-item';
@@ -8,6 +7,7 @@ import { LocalShoppingCartService } from '../../../service/local-shopping-cart.s
 import { SessionService } from '../../../service/session.service';
 import { ShoppingCartService } from '../../../service/api/shopping.cart.service';
 import { LinkHelper } from '../../../service/api/link.helper';
+import { DataRestService } from '../../../service/api/data.rest.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -23,7 +23,7 @@ export class ShoppingCartComponent implements OnInit {
 
   constructor(private localShoppingCartService: LocalShoppingCartService,
               private shoppingCartService: ShoppingCartService,
-              private ordersService: OrderService,
+              private resourceService: DataRestService<Order>,
               private router: Router) {
   }
 
@@ -39,19 +39,20 @@ export class ShoppingCartComponent implements OnInit {
       });
   }
 
-  get hasAbsentBook() : boolean{
+  get hasAbsentBook(): boolean {
     return this._hasAbsentBook;
   }
 
   submitOrder() {
     let order = this.buildOrder();
 
-    this.ordersService.createOrder(order, () => {
-      this.router.navigateByUrl('customer/orders');
-      this.shoppingCartService.cleanUserCart(SessionService.userId).then(() => {
-        this.localShoppingCartService.fetchShoppingCartItems();
-      });
-    })
+    this.resourceService.create(order)
+      .then(() => {
+        this.router.navigateByUrl('customer/orders');
+        this.shoppingCartService.cleanUserCart(SessionService.userId).then(() => {
+          this.localShoppingCartService.fetchShoppingCartItems();
+        });
+      })
       .catch(error => {
         const errorMsg = error && error.message ? error.message : '';
         this.globalError = `Submit order failed. ${errorMsg}`;
