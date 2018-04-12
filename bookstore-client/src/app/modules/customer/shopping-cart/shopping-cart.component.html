@@ -28,12 +28,9 @@
       <mat-cell *matCellDef="let item">
         <!--<input type="number" matInput [(ngModel)]='book.price' placeholder="price">-->
 
-        <div *ngIf="!item.book.absent">
-          <button mat-raised-button class="count-btn" (click)="upCount(item)">Up</button>
-          <button mat-raised-button class="count-btn"
-                  [disabled]="item.count == 1" (click)="downCount(item)">Down</button>
-        </div>
-
+        <button *ngIf="!item.book.absent" mat-raised-button class="count-btn" (click)="upCount(item)">Up</button>
+        <button *ngIf="!item.book.absent" mat-raised-button class="count-btn"
+                [disabled]="item.count == 1" (click)="downCount(item)">Down</button>
         <button id="removeItem" mat-raised-button color="accent"
                 (click)="removeItem(item)">Remove</button>
       </mat-cell>

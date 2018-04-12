@@ -1,8 +1,5 @@
 .container {
-  margin: 5px 0;
-}
-.mat-column-bookName {
-  flex: 0 0 60%;
+  margin: 10px 0;
 }
 
 .mat-column-price {
