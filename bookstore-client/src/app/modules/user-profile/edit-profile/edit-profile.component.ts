@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UserService } from '../../../service/api/user.service';
 import { User } from '../../../entity/user';
 import { LinkHelper } from '../../../service/api/link.helper';
 import { SessionService } from '../../../service/session.service';
 import { ErrorStateMatcher } from '@angular/material';
+import { DataRestService } from '../../../service/api/data.rest.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -17,7 +17,7 @@ export class EditProfileComponent implements OnInit {
   matcher: ErrorStateMatcher;
   globalError: string;
 
-  constructor(private userService: UserService) {
+  constructor(private resourceService: DataRestService<User>) {
   }
 
   ngOnInit() {
@@ -25,7 +25,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   getUser() {
-    this.userService.getUser(LinkHelper.getUserLink(SessionService.userId))
+    this.resourceService.get(LinkHelper.getUserLink(SessionService.userId))
       .then(user => this.initUser(user))
   }
 
@@ -39,7 +39,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   save(user: User) {
-    this.userService.updateUser(this.user._links.self.href, user)
+    this.resourceService.update(user)
       .then(user => {
         //TODO НУЖНО ввести пароль если менять email
         this.initUser(user);

@@ -17,7 +17,8 @@ export class BookCardComponent implements OnInit {
   }
 
   addToCart() {
-    this.localShoppingCartService.addBookToCart(this.book);
+    this.localShoppingCartService.addBookToCart(this.book)
+      .then(() => this.localShoppingCartService.fetchShoppingCartItems());
   }
 
   get isInCart() {

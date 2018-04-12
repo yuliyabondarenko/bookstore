@@ -7,17 +7,14 @@
 }
 
 .mat-column-books {
-  flex: 0 0 55%;
+  flex: 0 0 65%;
 }
 
 .mat-column-total {
   text-align: center;
-  flex: 0 0 20%;
+  flex: 0 0 15%;
 }
 
-.mat-column-date {
-  flex: 0 0 20%;
-}
 
 .mat-header-cell {
   font-weight: bold;

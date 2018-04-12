@@ -1,6 +1,9 @@
 import { BookPriceCount } from './book-price-count';
+import { Entity } from './entity';
 
-export class Order {
+export class Order implements Entity{
+  collectionName = 'orders';
+
   constructor(public id: number = null,
               public user: any = null,
               public date: Date = null,
@@ -8,4 +11,5 @@ export class Order {
               public totalAmount: number = null,
               public _links: any = null) {
   }
+
 }

@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BookService } from '../../../service/api/book.service';
 import { Book } from '../../../entity/book';
 import { MatDialog, MatDialogConfig, MatSort, MatTableDataSource, Sort, SortDirection } from '@angular/material';
 import { BookFormDialogComponent } from './book.form/book.form';
 import { environment } from '../../../../environments/environment';
 import { Page } from '../../../../page';
-import { CollectionPageService } from '../../../service/api/page.service/collection.page.service';
 import { BooksPageService } from '../../../service/api/page.service/books.page.service';
+import { DataRestService } from '../../../service/api/data.rest.service';
 
 @Component({
   selector: 'app-manage-books',
@@ -21,7 +20,7 @@ export class ManageBooksComponent implements OnInit {
   displayedColumns = ['id', 'name', 'price', 'absent', 'actions'];
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private bookService: BookService,
+  constructor(private resourceService: DataRestService<Book>,
               public dialog: MatDialog,
               private collectionPageService: BooksPageService) {
   }
@@ -37,19 +36,22 @@ export class ManageBooksComponent implements OnInit {
   }
 
   openCreateBookDialog(): void {
-    const dialogConfig = {width: '250px', data: {book: new Book()}} as MatDialogConfig;
+    const newBook = new Book();
+    newBook.photo =  'http://urlid.ru/bao5';
+
+    const dialogConfig = {width: '500px', data: {book: newBook}} as MatDialogConfig;
     const dialogRef = this.dialog.open(BookFormDialogComponent, dialogConfig);
 
     dialogRef.afterClosed()
       .toPromise()
       .then(book => {
         if (!book) return;
-        this.bookService.create(book)
+        this.resourceService.create(book)
           .then(() => {
             this.getPage(this.currentPage, this.sort);
           }).catch(error => {
           //TODO show validation errors if present;
-        });;
+        });
       });
   }
 
@@ -61,7 +63,7 @@ export class ManageBooksComponent implements OnInit {
       .toPromise()
       .then(book => {
         if (!book) return;
-        this.bookService.update(book)
+        this.resourceService.update(book)
           .then(() => {
             this.getPage(this.currentPage, this.sort);
           }).catch(error => {

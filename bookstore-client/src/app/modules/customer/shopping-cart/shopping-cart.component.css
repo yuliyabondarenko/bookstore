@@ -16,9 +16,6 @@
 .mat-column-count {
   flex: 0 0 10%;
 }
-.mat-column-actions {
-  flex: 0 0 30%;
-}
 
 #performOrder{
   margin-top: 5px;

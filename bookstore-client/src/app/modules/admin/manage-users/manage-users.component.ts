@@ -2,10 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../../../entity/user';
 import { MatSort, MatTableDataSource, Sort, SortDirection } from '@angular/material';
 import { environment } from '../../../../environments/environment';
-import { UserService } from '../../../service/api/user.service';
 import { Page } from '../../../../page';
 import { UsersPageService } from '../../../service/api/page.service/users.page.service';
 import { SessionService } from '../../../service/session.service';
+import { DataRestService } from '../../../service/api/data.rest.service';
 
 @Component({
   selector: 'app-manage-users',
@@ -20,7 +20,7 @@ export class ManageUsersComponent implements OnInit {
   displayedColumns = ['id', 'name', 'email', 'gender', 'birthday', 'actions'];
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private userService: UserService,
+  constructor(private resourceService: DataRestService<User>,
               private collectionPageService: UsersPageService) {
   }
 
@@ -48,7 +48,7 @@ export class ManageUsersComponent implements OnInit {
   }
 
   deleteUser(user: User) {
-    this.userService.deleteUser(user).then(() => {
+    this.resourceService.delete(user).then(() => {
       this.getPage(this.currentPage, this.sort);
     })
   }

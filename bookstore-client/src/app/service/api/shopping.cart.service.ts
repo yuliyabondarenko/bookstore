@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ShoppingCartItem } from '../../entity/shopping-cart-item';
-import { ShoppingCartItemDTO } from '../../entity/shopping-cart-item-dto';
 import { environment } from '../../../environments/environment';
 import { HttpOptions } from './http-heares-helper';
 
@@ -49,7 +48,7 @@ export class ShoppingCartService {
       });
   }
 
-  createItem(shoppingCartItem: ShoppingCartItemDTO): Promise<any> {
+  createItem(shoppingCartItem: ShoppingCartItem): Promise<any> {
     return this.http
       .post(`${this.baseShopCartUrl}?projection=view`, JSON.stringify(shoppingCartItem), HttpOptions.authorizedJsonBody)
       .toPromise()
@@ -59,7 +58,7 @@ export class ShoppingCartService {
       });
   }
 
-  updateItem(shoppingCartItem: ShoppingCartItemDTO): Promise<any> {
+  updateItem(shoppingCartItem: ShoppingCartItem): Promise<any> {
     const itemUrl = `${this.baseShopCartUrl}/${shoppingCartItem.id}?projection=view`;
 
     return this.http
