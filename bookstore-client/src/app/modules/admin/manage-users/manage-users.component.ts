@@ -36,7 +36,7 @@ export class ManageUsersComponent implements OnInit {
 
   getPage(page: Page, sort: Sort) {
     const sortParam = `${sort.active},${sort.direction}`;
-
+    //const customerRoleUrl = `${environment.server.apiPath}/userRoles/search/findOneByName?name=CUSTOMER`;
     const customerRoleUrl = `${environment.server.apiPath}/userRoles/3`;
 
     this.usersPageService.getUsersPageByUserRole(customerRoleUrl, page.pageIndex, page.pageSize, sortParam)
