@@ -21,7 +21,7 @@ export class ManageUsersComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private resourceService: DataRestService<User>,
-              private collectionPageService: UsersPageService) {
+              private usersPageService: UsersPageService) {
   }
 
   ngOnInit(): void {
@@ -37,8 +37,11 @@ export class ManageUsersComponent implements OnInit {
   getPage(page: Page, sort: Sort) {
     const sortParam = `${sort.active},${sort.direction}`;
 
-    this.collectionPageService.getCollectionPage(page.pageIndex, page.pageSize, sortParam)
+    const customerRoleUrl = `${environment.server.apiPath}/userRoles/3`;
+
+    this.usersPageService.getUsersPageByUserRole(customerRoleUrl, page.pageIndex, page.pageSize, sortParam)
       .then(collectionPage => {
+        debugger;
         this.users = collectionPage.collection;
         this.totalElements = collectionPage.totalElements;
         this.dataSource = new MatTableDataSource<User>(this.users);
