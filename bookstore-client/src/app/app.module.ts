@@ -5,11 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './components/register/register.component';
-import { UserService } from './service/api/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
-import { BookService } from './service/api/book.service';
 import { RegisterService } from './service/api/register.user.service';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +17,7 @@ import { OrderService } from './service/api/order.service';
 import { XhrInterceptor } from "./service/xhr-interceptor.service";
 import { LoginService } from './service/api/login.service';
 import { BooksPageService } from './service/api/page.service/books.page.service';
+import { DataRestService } from './service/api/data.rest.service';
 
 
 @NgModule({
@@ -37,13 +36,12 @@ import { BooksPageService } from './service/api/page.service/books.page.service'
     FormsModule
   ],
   providers: [
+    DataRestService,
     BooksPageService,
     LoginService,
-    UserService,
     XhrInterceptor,
     AdminGuard,
     CustomerGuard,
-    BookService,
     OrderService,
     RegisterService
   ],
