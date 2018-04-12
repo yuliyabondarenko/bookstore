@@ -19,7 +19,7 @@ export class ShoppingCartComponent implements OnInit {
   globalError: string;
   hasAbsentBookError = 'Unable to submit order. Shopping cart contains absent books';
   hasAbsentBook: boolean = false;
-  totalAmount: number;
+  totalAmount: string;
 
   constructor(private localShoppingCartService: LocalShoppingCartService,
               private shoppingCartService: ShoppingCartService,
@@ -35,7 +35,7 @@ export class ShoppingCartComponent implements OnInit {
     this.localShoppingCartService.fetchShoppingCartItems()
       .then(items => {
         this.shoppingCartItems = items;
-        this.totalAmount = OrderUtils.calculateTotalAmount(items).toFixed(2) as number;
+        this.totalAmount = OrderUtils.calculateTotalAmount(items).toFixed(2);
         this.hasAbsentBook = this.shoppingCartItems.some(item => item.book.absent);
       });
   }

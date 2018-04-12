@@ -19,7 +19,7 @@ export class OrderUtils {
     return new Order(null, userLink, new Date(Date.now()), orderBookPriceItems)
   }
 
-  static calculateTotalAmount(shoppingCartItems: Array<ShoppingCartItem>) : number {
+  static calculateTotalAmount(shoppingCartItems: Array<ShoppingCartItem>): number {
     return shoppingCartItems
       .map(item => item.book['price'] * item.count)
       .reduce((sum, current) => sum + current, 0);
