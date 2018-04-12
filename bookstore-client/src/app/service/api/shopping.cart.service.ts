@@ -30,7 +30,7 @@ export class ShoppingCartService {
 
   deleteItem(item: ShoppingCartItem): Promise<any> {
     return this.http
-      .delete(item._links.self.href)
+      .delete(item._links.self.href, HttpOptions.authorizedEmptyBody)
       .toPromise()
       .catch(response => {
         console.log(`Delete shopping-cart failed`);

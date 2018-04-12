@@ -40,7 +40,10 @@ export class EditProfileComponent implements OnInit {
 
   save(user: User) {
     this.userService.updateUser(this.user._links.self.href, user)
-      .then(user => this.initUser(user))
+      .then(user => {
+        //TODO НУЖНО ввести пароль если менять email
+        this.initUser(user);
+      })
       .catch(error => {
         if (error.fieldErrors) {
           this.showValidationErrors(error.fieldErrors);

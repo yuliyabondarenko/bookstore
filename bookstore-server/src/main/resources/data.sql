@@ -1,3 +1,24 @@
+INSERT INTO user_role (id, name)
+VALUES (1, 'ADMIN'), (2, 'USER'), (3, 'CUSTOMER');
+
+INSERT INTO user_account (id, username, password, email, birthday, gender)
+VALUES (1, 'admin', 'Qwe123', 'admin@mail.ru', '2018-02-01', 'MALE');
+
+INSERT INTO user_account_roles (user_account_id, roles_id)
+VALUES (1, 1), (1, 2);
+
+INSERT INTO user_account (id, username, password, email, birthday, gender)
+VALUES (2, 'customer', 'Qwe123', 'customer@mail.ru', '2018-02-01', 'MALE');
+
+INSERT INTO user_account_roles (user_account_id, roles_id)
+VALUES (2, 2), (2, 3);
+
+INSERT INTO user_account (id, username, password, email, birthday, gender)
+VALUES (3, 'user', 'Qwe123', 'user@mail.ru', '2018-02-01', 'MALE');
+
+INSERT INTO user_account_roles (user_account_id, roles_id)
+VALUES (3, 2);
+
 INSERT INTO book (name, price, photo)
 VALUES ('Юлий Алкин "Цена познания"', 12.3, 'http://fb2-epub.ru/Fantstic/Alkin/Tsiena_poznaniia-Iurii_Alkin.jpg');
 INSERT INTO book (name, price, absent, photo)

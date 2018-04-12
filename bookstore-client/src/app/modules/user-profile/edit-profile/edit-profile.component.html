@@ -14,6 +14,7 @@
   </mat-form-field>
   <mat-form-field  class="full-width mutable-field">
     <input matInput [(ngModel)]="user.email" placeholder="Email"
+           readonly style="color: darkgray"
            [errorStateMatcher]="matcher" required name="email" #email=ngModel>
     <mat-error *ngIf="email.errors?.required">
       Email is required

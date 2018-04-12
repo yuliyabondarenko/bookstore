@@ -30,6 +30,7 @@ public class RegistrationController
   public ResponseEntity<User> register(@RequestBody @Valid @UniqueEmail User user)
   {
     user.getRoles().add(userRoleRepository.findOneByName(Role.USER));
+    user.getRoles().add(userRoleRepository.findOneByName(Role.CUSTOMER));
     User newUser = userRepository.save(user);
 
     return ResponseEntity.ok(newUser);

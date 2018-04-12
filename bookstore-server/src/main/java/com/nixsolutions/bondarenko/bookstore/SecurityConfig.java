@@ -3,6 +3,7 @@ package com.nixsolutions.bondarenko.bookstore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,6 +13,7 @@ import org.springframework.web.filter.CorsFilter;
 import com.nixsolutions.bondarenko.bookstore.security.SecurityUserDetailsService;
 
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
   @Autowired
@@ -41,12 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         .httpBasic()
       .and()
         .authorizeRequests()
-        .antMatchers("/resources/**", "/user")
+        .antMatchers("/resources/**", "/user", "/logout")
           .permitAll()
         .antMatchers(HttpMethod.POST, "/register")
           .anonymous()
-        .antMatchers("/api/**")
-        .authenticated()
+        .antMatchers("/api/**").hasAnyRole("ADMIN","USER","CUSTOMER")
       .and()
         .logout().logoutUrl("logout")
       .and()
