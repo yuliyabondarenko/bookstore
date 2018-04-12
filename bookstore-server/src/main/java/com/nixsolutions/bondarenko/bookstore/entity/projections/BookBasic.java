@@ -10,4 +10,6 @@ public interface BookBasic {
   String getName();
 
   Double getPrice();
+
+  boolean isAbsent();
 }

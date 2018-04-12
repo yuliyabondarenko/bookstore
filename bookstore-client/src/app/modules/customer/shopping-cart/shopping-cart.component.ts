@@ -18,6 +18,8 @@ export class ShoppingCartComponent implements OnInit {
   shoppingCartItems: ShoppingCartItem [];
   displayedColumns = ['bookName', 'price', 'count', 'actions'];
   globalError: string;
+  hasAbsentBookError = 'Unable to submit order. Shopping cart contains absent books';
+  _hasAbsentBook: boolean = false;
 
   constructor(private localShoppingCartService: LocalShoppingCartService,
               private shoppingCartService: ShoppingCartService,
@@ -33,7 +35,12 @@ export class ShoppingCartComponent implements OnInit {
     this.localShoppingCartService.fetchShoppingCartItems()
       .then(items => {
         this.shoppingCartItems = items;
+        this._hasAbsentBook = this.shoppingCartItems.some(item => item.book.absent);
       });
+  }
+
+  get hasAbsentBook() : boolean{
+    return this._hasAbsentBook;
   }
 
   submitOrder() {
@@ -73,15 +80,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   get disableSubmit(): boolean {
-    return this.hasAbsentBook() || this.isCartEmpty();
-  }
-
-  hasAbsentBook() {
-    let hasAbsent = SessionService.shoppingCartItems.some(item => item.book.absent);
-    if (hasAbsent) {
-      this.globalError = 'Unable to submit order. Shopping cart contains absent books';
-    }
-    return hasAbsent;
+    return this.hasAbsentBook || this.isCartEmpty();
   }
 
   get disableClear(): boolean {
