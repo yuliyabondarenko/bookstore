@@ -37,7 +37,7 @@ export class ManageBooksComponent implements OnInit {
 
   openCreateBookDialog(): void {
     const newBook = new Book();
-    newBook.photo =  'http://urlid.ru/bao5';
+    newBook.photo =  'https://visualpharm.com/assets/483/Saving%20Book-595b40b65ba036ed117d4586.svg';
 
     const dialogConfig = {width: '500px', data: {book: newBook}} as MatDialogConfig;
     const dialogRef = this.dialog.open(BookFormDialogComponent, dialogConfig);
