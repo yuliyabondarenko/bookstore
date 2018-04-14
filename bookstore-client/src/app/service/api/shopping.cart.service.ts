@@ -43,9 +43,7 @@ export class ShoppingCartService {
       .then(response => {
           return response;
         }
-      ).catch(response => {
-        console.log(`Clean shopping-cart failed`);
-      });
+      ).catch(response => Promise.reject(response.error));
   }
 
   createItem(shoppingCartItem: ShoppingCartItem): Promise<any> {

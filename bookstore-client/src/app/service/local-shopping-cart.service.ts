@@ -24,13 +24,13 @@ export class LocalShoppingCartService {
     return this.shoppingCartService.deleteItem(item);
   }
 
-  addBookToCart(book: Book) {
+  addBookToCart(book: Book) : Promise<any>{
     const userLink = LinkHelper.getUserLink(SessionService.userId);
     const shoppingCartItem = new ShoppingCartItem(null, userLink, book._links.self.href, 1);
     return this.shoppingCartService.createItem(shoppingCartItem);
   }
 
-  updateCount(item: ShoppingCartItem, targetCount: number = null) {
+  updateCount(item: ShoppingCartItem, targetCount: number = null) : Promise<any> {
     const userLink = LinkHelper.getUserLink(SessionService.userId);
     const itemDto = new ShoppingCartItem(item.id, userLink, item.book._links.self.href, targetCount);
     return this.shoppingCartService.updateItem(itemDto)
