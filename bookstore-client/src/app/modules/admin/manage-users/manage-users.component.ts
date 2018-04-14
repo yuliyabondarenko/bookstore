@@ -6,6 +6,7 @@ import { Page } from '../../../../page';
 import { UsersPageService } from '../../../service/api/page.service/users.page.service';
 import { SessionService } from '../../../service/session.service';
 import { DataRestService } from '../../../service/api/data.rest.service';
+import { RoleService } from '../../../service/api/page.service/role.service';
 
 @Component({
   selector: 'app-manage-users',
@@ -19,15 +20,22 @@ export class ManageUsersComponent implements OnInit {
   totalElements: number;
   displayedColumns = ['id', 'name', 'email', 'gender', 'birthday', 'actions'];
   @ViewChild(MatSort) sort: MatSort;
+  customerRoleUrl: string;
+  SEARCH_USER_ROLE = 'CUSTOMER';
 
   constructor(private resourceService: DataRestService<User>,
-              private collectionPageService: UsersPageService) {
+              private roleService: RoleService,
+              private usersPageService: UsersPageService) {
   }
 
   ngOnInit(): void {
     this.sort.active = environment.manageUsersSort.active;
     this.sort.direction = environment.manageUsersSort.direction as SortDirection;
-    this.getPage(this.currentPage, this.sort);
+    this.roleService.getRoleUrlByName(this.SEARCH_USER_ROLE)
+      .then(roleUrl => {
+        this.customerRoleUrl = roleUrl;
+        this.getPage(this.currentPage, this.sort);
+      });
   }
 
   sortData(sort: Sort) {
@@ -37,7 +45,7 @@ export class ManageUsersComponent implements OnInit {
   getPage(page: Page, sort: Sort) {
     const sortParam = `${sort.active},${sort.direction}`;
 
-    this.collectionPageService.getCollectionPage(page.pageIndex, page.pageSize, sortParam)
+    this.usersPageService.getUsersPageByUserRole(this.customerRoleUrl, page.pageIndex, page.pageSize, sortParam)
       .then(collectionPage => {
         this.users = collectionPage.collection;
         this.totalElements = collectionPage.totalElements;

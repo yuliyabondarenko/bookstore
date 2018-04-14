@@ -25,9 +25,11 @@ export class CollectionPageService<T> {
       .get(collectionUrl, HttpOptions.authorizedEmptyBody)
       .toPromise()
       .then(response => {
-          return new CollectionPage(
-            response['_embedded'][this.collectionPath] as Array<T>,
-            response['page'].totalElements
+        let collection = response['_embedded'][this.collectionPath] as Array<T>;
+        let totalElements =  response['page'] ? response['page'].totalElements : collection.length;
+        return new CollectionPage(
+            collection,
+            totalElements
           );
         }
       ).catch(error => {
