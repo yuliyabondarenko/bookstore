@@ -18,7 +18,8 @@ spring:
             hibernate:
                 dialect: org.hibernate.dialect.PostgreSQLDialect
 
-    h2:
-      console:
-        enabled: true
-        path: /h2-console
+    datasource:
+        driverClassName: org.postgresql.Driver
+        url: jdbc:postgresql://localhost:5432/devdb
+        username: dev
+        password: dev
