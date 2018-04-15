@@ -3,11 +3,19 @@ image: maven:latest
 stages:
   - build
 
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
 cache:
   paths:
-    - target/
+    - .m2/repository/
+    - bookstore-client/node_modules
+    - bookstore-server/target/
 
 build:
   stage: build
   script:
-    - mvn clean package
+    - mvn $MAVEN_CLI_OPTS clean package
+  artifacts:
+    paths:
+      - bookstore-server/target/
