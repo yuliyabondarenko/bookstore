@@ -9,3 +9,16 @@ spring:
     data:
         rest:
           base-path: "/api"
+
+    jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: create-drop
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+
+    h2:
+      console:
+        enabled: true
+        path: /h2-console
