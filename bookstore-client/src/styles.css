@@ -5,6 +5,31 @@ body {
   margin: 0;
 }
 
+.container {
+  margin: 20px auto;
+  padding: 10px 20px;
+}
+
+.centered {
+  margin: 0 auto;
+}
+
+.globalError {
+  margin: 10px 0;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mutable-field {
+  height: 7.5vh;
+}
+
+.mat-form-field {
+  margin: 5px 0;
+}
+
 a:link {
   text-decoration: none;
 }
@@ -22,6 +47,4 @@ a:hover {
   font-weight: bold;
 }
 
-.centered {
-  margin: 0 auto;
-}
+

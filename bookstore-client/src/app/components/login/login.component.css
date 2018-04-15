@@ -1,35 +1,4 @@
-@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
-
-form{
-  width: 400px;
-  margin: 0 auto;
-}
-
-#registerLink {
-  width: 100%;
-  text-align: right;
-}
-
-#btn-login{
-  margin-top: 10px;
-}
-
-.ng-valid[required], .ng-valid.required  {
-  border-left: 5px solid #42A948;
-}
-
-.ng-invalid:not(form)  {
-  border-left: 5px solid #a94442;
-}
-
-label{
-  float: left;;
-}
-
-.alert{
-  text-align: left;
-}
-
-.btn-primary{
-  float: right;
+.container {
+  margin-top: 40px;
+  max-width: 400px;
 }

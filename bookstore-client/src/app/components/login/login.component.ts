@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../service/api/login.service';
 import { SessionService } from '../../service/session.service';
+import { ErrorStateMatcher } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -10,49 +10,36 @@ import { SessionService } from '../../service/session.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-  loginFormError: string;
+  credentials = {
+    username: '',
+    password: ''
+  };
 
-  credentials = {username: '', password: ''};
+  @ViewChild('loginForm') loginForm: HTMLFormElement;
+  matcher: ErrorStateMatcher;
+  globalError: string;
 
   constructor(private loginService: LoginService,
               private router: Router) {
-    this.loginForm = new FormGroup({
-      'email': new FormControl('', [Validators.required]),
-      'password': new FormControl('', [Validators.required])
-    });
-
-    this.loginForm.valueChanges.subscribe(() => {
-      this.loginFormError = null;
-    });
   }
 
   ngOnInit() {
-    if(SessionService.isAuthorized) {
+    this.loginForm.valueChanges
+      .subscribe(() => this.globalError = null);
+
+    if (SessionService.isAuthorized) {
       this.loginService.logout();
     }
   }
 
-  onSubmit(loginForm) {
-    this.credentials.username = loginForm.get('email').value;
-    this.credentials.password = loginForm.get('password').value;
-
-    this.loginService.authenticate(this.credentials)
+  login(credentials) {
+    this.loginService.authenticate(credentials)
       .then(() => {
         this.router.navigateByUrl('/');
       })
       .catch((error) => {
-        const errorMsg =  error && error.message ? error.message : '';
-        this.loginFormError = `Login failed. ${errorMsg}`;
+        const errorMsg = error && error.message ? error.message : '';
+        this.globalError = `Login failed. ${errorMsg}`;
       });
   }
-
-  get email() {
-    return this.loginForm.get('email');
-  }
-
-  get password() {
-    return this.loginForm.get('password');
-  }
-
 }
