@@ -13,12 +13,12 @@ import { LoginService } from '../../service/api/login.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  static formFields = [
+  static registerUserFields = [
     'username',
     'email',
     'password',
-    'birthday',
-    'gender'
+    'gender',
+    'birthday'
   ];
 
   registerForm: FormGroup;
@@ -69,7 +69,7 @@ export class RegisterComponent implements OnInit {
     const self = this;
 
     Object.keys(fieldErrors).forEach(fieldPath => {
-      RegisterComponent.formFields.forEach(function (field) {
+      RegisterComponent.registerUserFields.forEach(function (field) {
         if (fieldPath.endsWith(field)) {
           self.setFieldError(field, fieldErrors[fieldPath])
         }
@@ -79,7 +79,7 @@ export class RegisterComponent implements OnInit {
 
   setFieldError(field: string, errorMessage: string): void {
     this.registerForm.get(field)
-      .setErrors({server: errorMessage});
+      .setErrors({incorrect: errorMessage});
   }
 
   get username() {
