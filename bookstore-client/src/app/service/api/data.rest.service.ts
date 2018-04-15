@@ -32,9 +32,8 @@ export class DataRestService<T extends Entity> {
       .post(resourcePath, JSON.stringify(resource), HttpOptions.authorizedJsonBody)
       .toPromise()
       .then(response => response as T)
-      .catch(error => Promise.reject(error));
+      .catch(response => Promise.reject(response.error));
   }
-
 
   update(resource: T): Promise<T> {
     return this.http
@@ -43,6 +42,6 @@ export class DataRestService<T extends Entity> {
       .toPromise()
       .then(response => response as T
       )
-      .catch(error => Promise.reject(error));
+      .catch(response => Promise.reject(response.error));
   }
 }

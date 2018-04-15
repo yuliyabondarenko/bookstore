@@ -9,10 +9,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Min;
+import java.io.Serializable;
 
 @Entity
 @Table(uniqueConstraints=@UniqueConstraint(columnNames={"user_id", "book_id"}))
-public class ShoppingCartItem {
+public class ShoppingCartItem implements Serializable{
+
+  private static final long serialVersionUID = -3056748216597896872L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)

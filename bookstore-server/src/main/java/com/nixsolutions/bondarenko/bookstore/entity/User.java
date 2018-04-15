@@ -29,9 +29,9 @@ public class User implements Serializable {
   @OneToMany(orphanRemoval = true, mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
   private List<ShoppingCartItem> shoppingCartItems = new ArrayList<>();
 
-  @Pattern(regexp = "^[a-zA-Z](([._-][a-zA-Z0-9])|[a-zA-Z0-9]){2,14}$",
-      message = "3-15 characters, beginning with letter. Can include letters, numbers, dashes, and underscores")
-  @Column(unique = true, nullable = false)
+  @Pattern(regexp = "^[\\p{L}]+[\\p{L} .'-]*$",
+      message = "Name should begin with letter and can contain only letters, dashes, dots, apostrophes or spaces.")
+  @Column(nullable = false)
   private String username;
 
   @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$",

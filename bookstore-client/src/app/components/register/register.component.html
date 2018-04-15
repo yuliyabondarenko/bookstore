@@ -7,15 +7,28 @@
     </mat-error>
 
     <div class="form-group">
-      <label for="username">Username</label>
+      <label for="username">Name</label>
       <input id="username" class="form-control"
              formControlName="username" required>
       <div *ngIf="username.invalid && (username.dirty || username.touched)"
            class="alert alert-danger">
         <div *ngIf="username.errors.required">
-          Username is required.
+          Name is required.
         </div>
         {{username.errors.server}}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" class="form-control"
+             formControlName="email" required>
+      <div *ngIf="email.invalid && (email.dirty || email.touched)"
+           class="alert alert-danger">
+        <div *ngIf="email.errors.required">
+          Email is required.
+        </div>
+        {{email.errors.server}}
       </div>
     </div>
 
@@ -45,19 +58,6 @@
           Should match with password.
         </div>
         {{passwordConfirm.errors.server}}
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input id="email" class="form-control"
-             formControlName="email" required>
-      <div *ngIf="email.invalid && (email.dirty || email.touched)"
-           class="alert alert-danger">
-        <div *ngIf="email.errors.required">
-          Email is required.
-        </div>
-        {{email.errors.server}}
       </div>
     </div>
 
