@@ -8,3 +8,10 @@ services:
       POSTGRES_USER: dev
       POSTGRES_PASSWORD: dev
       POSTGRES_DB: devdb
+
+  bookstore:
+    image: bookstore
+    ports:
+      - "7070:7070"
+    depends_on:
+      - db
