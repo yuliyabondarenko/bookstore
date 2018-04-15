@@ -26,7 +26,6 @@
   <mat-form-field  class="full-width mutable-field">
     <mat-select [(ngModel)]="user.gender"
                 [errorStateMatcher]="matcher" required name="gender" #gender=ngModel>
-      <mat-option></mat-option>
       <mat-option value="MALE"> Male </mat-option>
       <mat-option value="FEMALE"> Female </mat-option>
     </mat-select>

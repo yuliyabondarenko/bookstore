@@ -13,12 +13,12 @@ import { LoginService } from '../../service/api/login.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  static formFields = [
+  static registerUserFields = [
     'username',
     'email',
     'password',
-    'birthday',
-    'gender'
+    'gender',
+    'birthday'
   ];
 
   registerForm: FormGroup;
@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(SessionService.isAuthorized) {
+    if (SessionService.isAuthorized) {
       this.loginService.logout();
     }
   }
@@ -52,14 +52,14 @@ export class RegisterComponent implements OnInit {
     const user: User = userForm.value;
     this.registerService.registerUser(user)
       .then(() => {
-        alert('Registration successful! Please login');
-        this.router.navigateByUrl('login');
+        this.router.navigate(['login'],
+          {queryParams: {message: 'Registration successful. Please sign in'}});
       })
       .catch(error => {
         if (error.fieldErrors) {
           this.showValidationErrors(error.fieldErrors);
         } else {
-          const errorMsg =  error && error.message ? error.message : '';
+          const errorMsg = error && error.message ? error.message : '';
           this.globalError = `Registration failed. ${errorMsg}`;
         }
       });
@@ -69,7 +69,7 @@ export class RegisterComponent implements OnInit {
     const self = this;
 
     Object.keys(fieldErrors).forEach(fieldPath => {
-      RegisterComponent.formFields.forEach(function (field) {
+      RegisterComponent.registerUserFields.forEach(function (field) {
         if (fieldPath.endsWith(field)) {
           self.setFieldError(field, fieldErrors[fieldPath])
         }
@@ -79,7 +79,7 @@ export class RegisterComponent implements OnInit {
 
   setFieldError(field: string, errorMessage: string): void {
     this.registerForm.get(field)
-      .setErrors({server: errorMessage});
+      .setErrors({incorrect: errorMessage});
   }
 
   get username() {

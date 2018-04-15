@@ -1,104 +1,89 @@
-<div class="container">
-  <h1>Register</h1>
+<mat-card class="container">
+  <mat-card-title>Register</mat-card-title>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm)">
 
     <mat-error *ngIf="globalError">
       {{globalError}}
     </mat-error>
 
-    <div class="form-group">
-      <label for="username">Name</label>
-      <input id="username" class="form-control"
-             formControlName="username" required>
-      <div *ngIf="username.invalid && (username.dirty || username.touched)"
-           class="alert alert-danger">
-        <div *ngIf="username.errors.required">
-          Name is required.
-        </div>
-        {{username.errors.server}}
-      </div>
-    </div>
+    <mat-form-field  class="full-width mutable-field">
+      <input matInput formControlName="username"  placeholder="Name"
+             required name="username">
+      <mat-error *ngIf="username.errors?.required">
+        Name is required
+      </mat-error>
+      <mat-error *ngIf="username.errors?.incorrect">
+        {{username.errors.incorrect}}
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input id="email" class="form-control"
-             formControlName="email" required>
-      <div *ngIf="email.invalid && (email.dirty || email.touched)"
-           class="alert alert-danger">
-        <div *ngIf="email.errors.required">
-          Email is required.
-        </div>
-        {{email.errors.server}}
-      </div>
-    </div>
+    <mat-form-field  class="full-width mutable-field">
+      <input matInput formControlName="email"  placeholder="Email"
+             required name="email">
+      <mat-error *ngIf="email.errors?.required">
+        Email is required
+      </mat-error>
+      <mat-error *ngIf="email.errors?.incorrect">
+        {{email.errors.incorrect}}
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input id="password" class="form-control" type="password"
-             formControlName="password" required>
-      <div *ngIf="password.invalid && (password.dirty || password.touched)"
-           class="alert alert-danger">
-        <div *ngIf="password.errors.required">
-          Password is required.
-        </div>
-        {{password.errors.server}}
-      </div>
-    </div>
+    <mat-form-field  class="full-width mutable-field">
+      <input type="password" matInput formControlName="password"
+             placeholder="Password" required name="password">
+      <mat-error *ngIf="password.errors?.required">
+        Password is required
+      </mat-error>
+      <mat-error *ngIf="password.errors?.incorrect">
+        {{password.errors.incorrect}}
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <label for="passwordConfirm">Confirm password</label>
-      <input id="passwordConfirm" class="form-control" type="password"
-             formControlName="passwordConfirm" required>
-      <div *ngIf="passwordConfirm.invalid && (passwordConfirm.dirty || passwordConfirm.touched)"
-           class="alert alert-danger">
-        <div *ngIf="passwordConfirm.errors.required">
-          Confirm password is required.
-        </div>
-        <div *ngIf="passwordConfirm.errors.mismatch">
-          Should match with password.
-        </div>
-        {{passwordConfirm.errors.server}}
-      </div>
-    </div>
+    <mat-form-field  class="full-width mutable-field">
+      <input type="password" matInput formControlName="passwordConfirm"
+             placeholder="Confirm password" required name="passwordConfirm">
+      <mat-error *ngIf="passwordConfirm.errors?.required">
+        Confirm password is required
+      </mat-error>
+      <mat-error *ngIf="passwordConfirm.errors?.mismatch">
+        Should match with password.
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <label for="birthday">Birthday</label>
-      <input id="birthday" class="form-control" type="date"
-             formControlName="birthday" required>
-      <div *ngIf="birthday.invalid && (birthday.dirty || birthday.touched)"
-           class="alert alert-danger">
-        <div *ngIf="birthday.errors.required">
-          Birthday is required.
-        </div>
-        <div *ngIf="birthday.errors.pattern">
-          Not a well-formed date
-        </div>
-        {{birthday.errors.server}}
-      </div>
-    </div>
+    <mat-form-field  class="full-width mutable-field">
+      <mat-select formControlName="gender" required name="gender" placeholder="Gender">
+        <mat-option value="MALE"> Male </mat-option>
+        <mat-option value="FEMALE"> Female </mat-option>
+      </mat-select>
+      <mat-error *ngIf="gender.errors?.required">
+        Gender is required
+      </mat-error>
+      <mat-error *ngIf="gender.errors?.incorrect">
+        {{username.errors.incorrect}}
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <label for="gender">Gender</label>
-      <select id="gender" class="form-control"
-              formControlName="gender" required>
-        <option></option>
-        <option>Male</option>
-        <option>Famale</option>
-      </select>
-      <div *ngIf="gender.invalid && (gender.dirty || gender.touched)"
-           class="alert alert-danger">
-        <div *ngIf="gender.errors.required">
-          Gender is required.
-        </div>
-        {{gender.errors.server}}
-      </div>
-    </div>
+    <mat-form-field  class="full-width mutable-field">
+      <input type="date" matInput formControlName="birthday" placeholder="Birthday"
+             required name="birthday">
+      <mat-error *ngIf="birthday.errors?.required">
+        Birthday is required
+      </mat-error>
+      <mat-error *ngIf="birthday.errors?.pattern">
+        Not a well-formed date (format YYYY-mm-dd)
+      </mat-error>
+      <mat-error *ngIf="birthday.errors?.incorrect">
+        {{birthday.errors.incorrect}}
+      </mat-error>
+    </mat-form-field>
 
-    <button type="submit" class="btn btn-primary"
-            [disabled]="registerForm.invalid">Submit
-    </button>
+    <mat-toolbar-row>
+      <span></span><span class="centered"></span>
+      <button type="submit" mat-raised-button color="primary"
+              [disabled]="registerForm.invalid"> SUBMIT </button>
+    </mat-toolbar-row>
 
   </form>
-</div>
+</mat-card>
 
 
