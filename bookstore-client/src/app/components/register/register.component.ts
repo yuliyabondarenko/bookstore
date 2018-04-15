@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(SessionService.isAuthorized) {
+    if (SessionService.isAuthorized) {
       this.loginService.logout();
     }
   }
@@ -52,14 +52,14 @@ export class RegisterComponent implements OnInit {
     const user: User = userForm.value;
     this.registerService.registerUser(user)
       .then(() => {
-        alert('Registration successful! Please login');
-        this.router.navigateByUrl('login');
+        this.router.navigate(['login'],
+          {queryParams: {message: 'Registration successful. Please sign in'}});
       })
       .catch(error => {
         if (error.fieldErrors) {
           this.showValidationErrors(error.fieldErrors);
         } else {
-          const errorMsg =  error && error.message ? error.message : '';
+          const errorMsg = error && error.message ? error.message : '';
           this.globalError = `Registration failed. ${errorMsg}`;
         }
       });

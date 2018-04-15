@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from '../../service/api/login.service';
 import { SessionService } from '../../service/session.service';
 import { ErrorStateMatcher } from '@angular/material';
@@ -18,18 +18,23 @@ export class LoginComponent implements OnInit {
   @ViewChild('loginForm') loginForm: HTMLFormElement;
   matcher: ErrorStateMatcher;
   globalError: string;
+  message: string;
 
   constructor(private loginService: LoginService,
+              private route: ActivatedRoute,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.loginForm.valueChanges
-      .subscribe(() => this.globalError = null);
-
     if (SessionService.isAuthorized) {
       this.loginService.logout();
     }
+
+    this.route.queryParams
+      .subscribe(params => this.message = params['message']);
+
+    this.loginForm.valueChanges
+      .subscribe(() => this.globalError = null);
   }
 
   login(credentials) {

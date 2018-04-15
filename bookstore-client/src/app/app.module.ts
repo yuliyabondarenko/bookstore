@@ -19,7 +19,6 @@ import { BooksPageService } from './service/api/page.service/books.page.service'
 import { DataRestService } from './service/api/data.rest.service';
 import { RoleService } from './service/api/page.service/role.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,7 +1,8 @@
 <mat-card class="container">
-  <mat-card-title>Sing up</mat-card-title>
+  <mat-card-title>Sing in</mat-card-title>
   <form #loginForm="ngForm" (ngSubmit)="login(credentials)">
     <mat-error class="globalError">{{globalError}}</mat-error>
+    <mat-label *ngIf="message" class="message">{{message}}</mat-label>
 
     <mat-form-field class="full-width mutable-field">
       <input matInput [(ngModel)]="credentials.username" placeholder="Email"
