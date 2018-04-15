@@ -25,7 +25,7 @@ public class Order implements Serializable
   private static final long serialVersionUID = -4304333239034772283L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private long id;
 
   private Date date;
@@ -36,7 +36,7 @@ public class Order implements Serializable
   @ManyToOne(optional = false)
   private User user;
 
-  @Formula("select sum(obp.price * obp.count) from order_book_price obp where obp.order_id = id")
+  @Formula(value = "(select sum(obp.price * obp.count) from order_book_price obp where obp.order_id = id)")
   private Double totalAmount;
 
   public Order()

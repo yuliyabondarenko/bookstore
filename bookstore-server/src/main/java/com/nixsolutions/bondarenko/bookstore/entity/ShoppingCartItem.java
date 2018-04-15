@@ -18,7 +18,7 @@ public class ShoppingCartItem implements Serializable{
   private static final long serialVersionUID = -3056748216597896872L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private long id;
 
   @ManyToOne(optional = false)

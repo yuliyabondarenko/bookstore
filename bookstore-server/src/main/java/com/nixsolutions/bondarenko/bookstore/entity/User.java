@@ -20,7 +20,7 @@ public class User implements Serializable {
   private static final long serialVersionUID = -8521008567463876822L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private long id;
 
   @ManyToMany(fetch = FetchType.EAGER)

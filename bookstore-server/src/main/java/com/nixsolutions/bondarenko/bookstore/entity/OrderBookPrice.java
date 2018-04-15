@@ -13,7 +13,7 @@ public class OrderBookPrice implements Serializable {
   private static final long serialVersionUID = -6202609770901139946L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private long id;
 
   @ManyToOne

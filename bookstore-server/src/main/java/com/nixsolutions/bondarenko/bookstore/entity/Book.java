@@ -14,7 +14,7 @@ public class Book implements Serializable
   private static final long serialVersionUID = 5404904932186585449L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private long id;
 
   @Column(nullable = false)

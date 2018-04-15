@@ -15,8 +15,9 @@ import java.io.Serializable;
 public class UserRole implements Serializable
 {
   private static final long serialVersionUID = -1382181341969756615L;
+
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private long id;
 
   @Enumerated(EnumType.STRING)
