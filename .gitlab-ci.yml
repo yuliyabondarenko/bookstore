@@ -2,12 +2,36 @@ image: maven:latest
 
 stages:
   - build
+  - docker
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
 
 cache:
   paths:
+    - .m2/repository/
     - target/
 
 build:
   stage: build
   script:
     - mvn clean package
+
+docker:
+  image: docker:18.03
+  services:
+    - docker:dind
+
+  variables:
+    DOCKER_DRIVER: overlay
+
+  stage: docker
+  cache:
+       paths:
+         - .m2/repository/
+         - target/
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN hub.githost.io
+  script:
+    - docker build -t hub.githost.io/jubee/bookstore ./bookstore-server
+    - docker push hub.githost.io/jubee/bookstore
