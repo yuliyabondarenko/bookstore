@@ -10,12 +10,16 @@ variables:
 cache:
   paths:
     - .m2/repository/
-    - target/
+    - bookstore-client/node_modules
+    - bookstore-server/target/
 
 build:
   stage: build
   script:
-    - mvn clean package
+    - mvn $MAVEN_CLI_OPTS clean package
+  artifacts:
+    paths:
+      - bookstore-server/target/
 
 docker:
   image: docker:18.03
@@ -26,10 +30,6 @@ docker:
     DOCKER_DRIVER: overlay
 
   stage: docker
-  cache:
-       paths:
-         - .m2/repository/
-         - target/
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN hub.githost.io
   script:
