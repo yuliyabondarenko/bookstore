@@ -12,7 +12,7 @@ export class LocalShoppingCartService {
   }
 
   fetchShoppingCartItems(): Promise<ShoppingCartItem []> {
-    return this.shoppingCartService.getShopCartItems(SessionService.userId)
+    return this.shoppingCartService.getShopCartItems()
       .then(response => {
         const cartItems = response;
         SessionService.shoppingCartItems = cartItems;

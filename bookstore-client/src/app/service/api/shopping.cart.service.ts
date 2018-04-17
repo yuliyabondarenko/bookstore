@@ -11,8 +11,8 @@ export class ShoppingCartService {
   constructor(private http: HttpClient) {
   }
 
-  getShopCartItems(userId): Promise<ShoppingCartItem []> {
-    const getUserCartUrl = `${this.baseShopCartUrl}/search/findByUserId?userId=${userId}&projection=view`;
+  getShopCartItems(): Promise<ShoppingCartItem []> {
+    const getUserCartUrl = `${this.baseShopCartUrl}?projection=view`;
 
     return this.http
       .get(getUserCartUrl, HttpOptions.authorizedEmptyBody)
@@ -36,9 +36,9 @@ export class ShoppingCartService {
       });
   }
 
-  cleanUserCart(userId: number) {
+  cleanUserCart() {
     return this.http
-      .get(`${this.baseShopCartUrl}/clean?userId=${userId}`, HttpOptions.authorizedEmptyBody)
+      .get(`${this.baseShopCartUrl}/clean`, HttpOptions.authorizedEmptyBody)
       .toPromise()
       .then(response => {
           return response;
