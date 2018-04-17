@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.web.filter.CorsFilter;
 
-import com.nixsolutions.bondarenko.bookstore.repository.handlers.EntityEventHandler;
+import com.nixsolutions.bondarenko.bookstore.entity.handlers.EntityEventHandler;
 import com.nixsolutions.bondarenko.bookstore.security.SecurityEvaluationContextExtension;
 import com.nixsolutions.bondarenko.bookstore.security.SecurityUserDetailsService;
 
