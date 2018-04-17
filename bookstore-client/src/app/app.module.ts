@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './components/register/register.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterService } from './service/api/register.user.service';
@@ -39,7 +39,7 @@ import { RoleService } from './service/api/page.service/role.service';
     RoleService,
     BooksPageService,
     LoginService,
-    XhrInterceptor,
+    { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true },
     AdminGuard,
     CustomerGuard,
     RegisterService
