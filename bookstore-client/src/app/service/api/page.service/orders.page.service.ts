@@ -6,9 +6,7 @@ import { Order } from '../../../entity/order';
 export class OrdersPageService extends CollectionPageService<Order> {
   collectionPath = 'orders';
 
-  getOrderPageByUser(userId, page: number, size: number, sortParam: string){
-    this.searchName = 'findByUserId';
-    this.searchParams = `userId=${userId}`;
+  getOrders(page: number, size: number, sortParam: string){
     this.projection = `projection=view`;
 
     return this.getCollectionPage(page, size, sortParam);
