@@ -33,7 +33,7 @@ export class OrdersComponent implements OnInit {
   getPage(page: Page, sort: Sort) {
     const sortParam = `${sort.active},${sort.direction}`;
 
-    this.ordersPageService.getOrderPageByUser(SessionService.userId, page.pageIndex, page.pageSize, sortParam)
+    this.ordersPageService.getOrders(page.pageIndex, page.pageSize, sortParam)
       .then(collectionPage => {
         this.orders = collectionPage.collection;
         this.totalElements = collectionPage.totalElements;

@@ -5,7 +5,6 @@ export class Order implements Entity{
   collectionName = 'orders';
 
   constructor(public id: number = null,
-              public user: any = null,
               public date: Date = null,
               public orderBookPrices: BookPriceCount [] = null,
               public totalAmount: number = null,

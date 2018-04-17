@@ -10,6 +10,11 @@ spring:
         rest:
           base-path: "/api"
 
+    h2:
+      console:
+        enabled: true
+        path: /h2-console
+
     jpa:
         show-sql: true
         hibernate:
@@ -18,8 +23,8 @@ spring:
             hibernate:
                 dialect: org.hibernate.dialect.PostgreSQLDialect
 
-    datasource:
-        driverClassName: org.postgresql.Driver
-        url: jdbc:postgresql://db:5432/devdb
-        username: dev
-        password: dev
+#    datasource:
+#        driverClassName: org.postgresql.Driver
+#        url: jdbc:postgresql://db:5432/devdb
+#        username: dev
+#        password: dev

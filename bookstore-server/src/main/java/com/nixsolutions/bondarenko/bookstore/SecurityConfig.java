@@ -1,6 +1,8 @@
 package com.nixsolutions.bondarenko.bookstore;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.repository.query.spi.EvaluationContextExtension;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -10,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.web.filter.CorsFilter;
 
+import com.nixsolutions.bondarenko.bookstore.entity.handlers.EntityEventHandler;
+import com.nixsolutions.bondarenko.bookstore.security.SecurityEvaluationContextExtension;
 import com.nixsolutions.bondarenko.bookstore.security.SecurityUserDetailsService;
 
 @EnableWebSecurity
@@ -52,5 +56,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         .logout().logoutUrl("logout")
       .and()
         .csrf().disable();
+  }
+
+  @Bean
+  EvaluationContextExtension securityExtension() {
+    return new SecurityEvaluationContextExtension();
+  }
+
+  @Bean
+  EntityEventHandler entityEventHandler() {
+    return new EntityEventHandler();
   }
 }
