@@ -15,8 +15,7 @@ export class OrderUtils {
         }
       }
     );
-    let userLink = LinkHelper.getUserLink(SessionService.userId);
-    return new Order(null, userLink, new Date(Date.now()), orderBookPriceItems)
+    return new Order(null, new Date(Date.now()), orderBookPriceItems)
   }
 
   static calculateTotalAmount(shoppingCartItems: Array<ShoppingCartItem>): number {
