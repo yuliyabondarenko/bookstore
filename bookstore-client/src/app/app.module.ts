@@ -17,7 +17,6 @@ import { XhrInterceptor } from "./service/xhr-interceptor.service";
 import { LoginService } from './service/api/login.service';
 import { BooksPageService } from './service/api/page.service/books.page.service';
 import { DataRestService } from './service/api/data.rest.service';
-import { RoleService } from './service/api/page.service/role.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +35,6 @@ import { RoleService } from './service/api/page.service/role.service';
   ],
   providers: [
     DataRestService,
-    RoleService,
     BooksPageService,
     LoginService,
     { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true },
