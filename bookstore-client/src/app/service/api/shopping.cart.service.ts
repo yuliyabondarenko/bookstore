@@ -9,7 +9,7 @@ export class ShoppingCartService extends DataRestService<ShoppingCartItem>{
   baseShopCartUrl = `${environment.server.apiPath}/shopcart`;
 
   getShopCartItems(): Promise<ShoppingCartItem []> {
-    const getUserCartUrl = `${this.baseShopCartUrl}?projection=view`;
+    const getUserCartUrl = `${this.baseShopCartUrl}?sort=id,asc&projection=view`;
 
     return this.http
       .get(getUserCartUrl, HttpOptions.authorizedEmptyBody)
