@@ -4,6 +4,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from '../../material.module';
 import { FormsModule } from '@angular/forms';
+import { UserAccountService } from "../../service/api/user.account.service";
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [EditProfileComponent]
+  declarations: [EditProfileComponent],
+  providers: [UserAccountService]
 })
 export class UserProfileModule { }

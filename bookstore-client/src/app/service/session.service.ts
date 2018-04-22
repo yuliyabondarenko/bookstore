@@ -34,10 +34,6 @@ export class SessionService {
     return SessionService.getUserSessionData().authorization;
   }
 
-  static get userId(): number {
-    return SessionService.getUserSessionData().userId;
-  }
-
   static get userName(): string {
     return SessionService.getUserSessionData().userName;
   }

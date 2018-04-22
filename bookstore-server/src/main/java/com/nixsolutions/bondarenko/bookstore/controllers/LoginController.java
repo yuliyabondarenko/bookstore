@@ -30,7 +30,6 @@ public class LoginController {
     //((SecurityUserDetails)(((UsernamePasswordAuthenticationToken) principal).getPrincipal())).getUser()
     User user = userRepository.findOneByEmail(principal.getName());
     UserData userData = new UserData();
-    userData.setUserId(user.getId());
     userData.setUserName(user.getUsername());
     userData.setRoles(user.getRoles().stream()
         .map(UserRole::getName).collect(Collectors.toList()));

@@ -1,8 +1,6 @@
 import { Order } from '../../entity/order';
 import { ShoppingCartItem } from '../../entity/shopping-cart-item';
 import { BookPriceCount } from '../../entity/book-price-count';
-import { LinkHelper } from '../../service/api/link.helper';
-import { SessionService } from '../../service/session.service';
 
 export class OrderUtils {
 

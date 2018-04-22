@@ -3,7 +3,6 @@ import { ShoppingCartItem } from '../entity/shopping-cart-item';
 import { ShoppingCartService } from './api/shopping.cart.service';
 import { Book } from '../entity/book';
 import { SessionService } from './session.service';
-import { LinkHelper } from './api/link.helper';
 
 @Injectable()
 export class LocalShoppingCartService {

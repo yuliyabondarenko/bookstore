@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Book } from '../../entity/book';
 import { environment } from '../../../environments/environment';
 import { HttpOptions } from './http-heares-helper';
 import { Entity } from '../../entity/entity';
 
 @Injectable()
 export class DataRestService<T extends Entity> {
-  constructor(private http: HttpClient) {
+  constructor(protected http: HttpClient) {
   }
 
   get(resourceUrl: string): Promise<T> {

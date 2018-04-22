@@ -25,7 +25,7 @@ export class LoginService {
     return this.http.get(this.loginUrl, httpOptions)
       .toPromise()
       .then(userData => {
-          if (!!userData['userId']) {
+          if (!!userData['userName']) {
             SessionService.initSession(basicAuth, userData);
           }
         }
