@@ -16,10 +16,10 @@ public class OrderBookPrice implements Serializable {
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private long id;
 
-  @ManyToOne
+  @ManyToOne(optional = false)
   private Order order;
 
-  @ManyToOne
+  @ManyToOne(optional = false)
   private Book book;
 
   @Column(nullable = false)

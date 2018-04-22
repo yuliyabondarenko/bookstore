@@ -20,17 +20,17 @@ export class LocalShoppingCartService {
   }
 
   deleteItem(item: ShoppingCartItem): Promise<any> {
-    return this.shoppingCartService.deleteItem(item);
+    return this.shoppingCartService.delete(item);
   }
 
   addBookToCart(book: Book) : Promise<any>{
     const shoppingCartItem = new ShoppingCartItem(null, book._links.self.href, 1);
-    return this.shoppingCartService.createItem(shoppingCartItem);
+    return this.shoppingCartService.create(shoppingCartItem);
   }
 
-  updateCount(item: ShoppingCartItem, targetCount: number = null) : Promise<any> {
-    const itemDto = new ShoppingCartItem(item.id, item.book._links.self.href, targetCount);
-    return this.shoppingCartService.updateItem(itemDto)
+  updateCount(item: ShoppingCartItem, targetCount: number) : Promise<any> {
+    item.count = targetCount;
+    return this.shoppingCartService.update(item);
   }
 
   isBookInCart(book: Book) {

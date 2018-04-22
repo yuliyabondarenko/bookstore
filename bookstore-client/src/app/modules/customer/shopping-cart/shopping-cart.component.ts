@@ -46,7 +46,7 @@ export class ShoppingCartComponent implements OnInit {
     this.resourceService.create(order)
       .then(() => {
         this.router.navigateByUrl('customer/orders');
-        this.shoppingCartService.cleanUserCart()
+        this.shoppingCartService.cleanCart()
           .then(() => this.refreshItems());
       })
       .catch(error => {
@@ -86,7 +86,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   clearCart() {
-    this.shoppingCartService.cleanUserCart()
+    this.shoppingCartService.cleanCart()
       .then(() => this.refreshItems());
   }
 }

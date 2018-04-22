@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ShoppingCartItem } from '../../entity/shopping-cart-item';
 import { environment } from '../../../environments/environment';
 import { HttpOptions } from './http-heares-helper';
+import { DataRestService } from "./data.rest.service";
 
 @Injectable()
-export class ShoppingCartService {
+export class ShoppingCartService extends DataRestService<ShoppingCartItem>{
   baseShopCartUrl = `${environment.server.apiPath}/shopcart`;
-
-  constructor(private http: HttpClient) {
-  }
 
   getShopCartItems(): Promise<ShoppingCartItem []> {
     const getUserCartUrl = `${this.baseShopCartUrl}?projection=view`;
@@ -27,16 +24,7 @@ export class ShoppingCartService {
       });
   }
 
-  deleteItem(item: ShoppingCartItem): Promise<any> {
-    return this.http
-      .delete(item._links.self.href, HttpOptions.authorizedEmptyBody)
-      .toPromise()
-      .catch(response => {
-        console.log(`Delete shopping-cart failed`);
-      });
-  }
-
-  cleanUserCart() {
+  cleanCart() {
     return this.http
       .get(`${this.baseShopCartUrl}/clean`, HttpOptions.authorizedEmptyBody)
       .toPromise()
@@ -44,27 +32,5 @@ export class ShoppingCartService {
           return response;
         }
       ).catch(response => Promise.reject(response.error));
-  }
-
-  createItem(shoppingCartItem: ShoppingCartItem): Promise<any> {
-    return this.http
-      .post(`${this.baseShopCartUrl}?projection=view`, JSON.stringify(shoppingCartItem), HttpOptions.authorizedJsonBody)
-      .toPromise()
-      .then(response => response as ShoppingCartItem)
-      .catch(response => {
-        console.log(`Create shopping-cart-item failed`);
-      });
-  }
-
-  updateItem(shoppingCartItem: ShoppingCartItem): Promise<any> {
-    const itemUrl = `${this.baseShopCartUrl}/${shoppingCartItem.id}?projection=view`;
-
-    return this.http
-      .put(itemUrl, JSON.stringify(shoppingCartItem), HttpOptions.authorizedJsonBody)
-      .toPromise()
-      .then(response => response as ShoppingCartItem)
-      .catch(() => {
-        console.log(`Update shopping-cart-item failed`);
-      });
   }
 }
