@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Pattern;
+
+import com.nixsolutions.bondarenko.bookstore.entity.enums.Gender;
 
 @Entity(name = "user_account")
 public class User implements Serializable {
@@ -49,8 +53,9 @@ public class User implements Serializable {
   @Column(nullable = false)
   private String birthday;
 
+  @Enumerated(EnumType.STRING)
   @Column(nullable = false)
-  private String gender;
+  private Gender gender;
 
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
       mappedBy = "user", orphanRemoval = true)
@@ -96,11 +101,11 @@ public class User implements Serializable {
     this.birthday = birthday;
   }
 
-  public String getGender() {
+  public Gender getGender() {
     return gender;
   }
 
-  public void setGender(String gender) {
+  public void setGender(Gender gender) {
     this.gender = gender;
   }
 
