@@ -3,6 +3,7 @@ image: maven:latest
 stages:
   - build
   - docker
+  - deploy
 
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
@@ -35,3 +36,12 @@ docker:
   script:
     - docker build -t hub.githost.io/jubee/bookstore ./bookstore-server
     - docker push hub.githost.io/jubee/bookstore
+
+
+deploy:
+  stage: deploy
+
+  script:
+    - docker-compose -H njt.earth3.nixsolutions.com:5000/hub.githost.io/jubee/bookstore -f docker-compose.yml down --remove-orphans
+    - docker-compose -H njt.earth3.nixsolutions.com:5000/hub.githost.io/jubee/bookstore -f docker-compose.yml down --rmi all
+    - docker-compose -H njt.earth3.nixsolutions.com:5000/hub.githost.io/jubee/bookstore -f docker-compose.yml up -d
