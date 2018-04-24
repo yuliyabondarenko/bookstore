@@ -15,6 +15,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.nixsolutions.bondarenko.bookstore.entity.User;
 import com.nixsolutions.bondarenko.bookstore.entity.UserRole;
 import com.nixsolutions.bondarenko.bookstore.model.UserData;

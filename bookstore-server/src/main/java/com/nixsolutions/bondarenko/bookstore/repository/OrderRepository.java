@@ -5,9 +5,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.nixsolutions.bondarenko.bookstore.entity.Order;
-import org.springframework.security.access.prepost.PreAuthorize;
 
 @PreAuthorize("hasRole('ROLE_CUSTOMER')")
 @RepositoryRestResource(collectionResourceRel = "orders", path = "orders")

@@ -39,17 +39,6 @@ public class Order implements Serializable
   @Formula(value = "(select sum(obp.price * obp.count) from order_book_price obp where obp.order_id = id)")
   private Double totalAmount;
 
-  public Order()
-  {
-  }
-
-  public Order(Date date, User user, List<OrderBookPrice> orderBookPrice)
-  {
-    this.date = date;
-    this.user = user;
-    this.orderBookPrices = orderBookPrice;
-  }
-
   @PrePersist
   @PreUpdate
   public void updateBookPriceAssociation(){

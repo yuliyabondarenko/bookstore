@@ -3,7 +3,6 @@ package com.nixsolutions.bondarenko.bookstore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.repository.query.spi.EvaluationContextExtension;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,27 +17,23 @@ import com.nixsolutions.bondarenko.bookstore.security.SecurityUserDetailsService
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter
-{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired
   private CorsFilter corsFilter;
 
   private SecurityUserDetailsService userDetailsService;
 
-  public SecurityConfig(SecurityUserDetailsService userDetailsService)
-  {
+  public SecurityConfig(SecurityUserDetailsService userDetailsService) {
     this.userDetailsService = userDetailsService;
   }
 
   @Autowired
-  public void configAuthBuilder(AuthenticationManagerBuilder builder) throws Exception
-  {
+  public void configAuthBuilder(AuthenticationManagerBuilder builder) throws Exception {
     builder.userDetailsService(userDetailsService);
   }
 
   @Override
-  protected void configure(HttpSecurity http) throws Exception
-  {
+  protected void configure(HttpSecurity http) throws Exception {
     http
         .addFilterBefore(corsFilter, ChannelProcessingFilter.class)
         .headers()
@@ -49,8 +44,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         .authorizeRequests()
         .antMatchers("/resources/**", "/register", "/user", "/logout")
           .permitAll()
-        .antMatchers(HttpMethod.POST, "/register")
-          .anonymous()
         .antMatchers("/api/**").authenticated()
       .and()
         .logout().logoutUrl("logout")
