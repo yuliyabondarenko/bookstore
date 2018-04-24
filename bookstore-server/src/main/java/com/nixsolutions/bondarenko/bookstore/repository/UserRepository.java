@@ -13,26 +13,25 @@ import com.nixsolutions.bondarenko.bookstore.entity.enums.Role;
 import com.nixsolutions.bondarenko.bookstore.entity.User;
 
 @RepositoryRestResource(collectionResourceRel = "users", path = "users")
-public interface UserRepository extends PagingAndSortingRepository<User, Long>
-{
-    @RestResource(exported=false)
-    boolean existsByEmail(@Param("email") String username);
+public interface UserRepository extends PagingAndSortingRepository<User, Long> {
+  @RestResource(exported = false)
+  boolean existsByEmail(@Param("email") String username);
 
-    @RestResource(exported=false)
-    User findOneByEmail(@Param("email") String username);
+  @RestResource(exported = false)
+  User findOneByEmail(@Param("email") String username);
 
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @Query("select u from user_account u where u.email like ?#{principal.username}")
-    User findUserAccount();
+  @PreAuthorize("hasRole('ROLE_USER')")
+  @Query("select u from user_account u where u.email like ?#{principal.username}")
+  User findUserAccount();
 
-    @Override
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    void delete(User user);
+  @Override
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  void delete(User user);
 
-    @Override
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    Page<User> findAll(Pageable pageable);
+  @Override
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  Page<User> findAll(Pageable pageable);
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    Page<User> findByRolesName(@Param("role") Role role, Pageable pageable);
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  Page<User> findByRolesName(@Param("role") Role role, Pageable pageable);
 }

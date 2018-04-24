@@ -9,8 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Book implements Serializable
-{
+public class Book implements Serializable {
   private static final long serialVersionUID = 5404904932186585449L;
 
   @Id
@@ -33,43 +32,35 @@ public class Book implements Serializable
     return id;
   }
 
-  public String getName()
-  {
+  public String getName() {
     return name;
   }
 
-  public void setName(String name)
-  {
+  public void setName(String name) {
     this.name = name;
   }
 
-  public String getPhoto()
-  {
+  public String getPhoto() {
     return photo;
   }
 
-  public void setPhoto(String photo)
-  {
+  public void setPhoto(String photo) {
     this.photo = photo;
   }
 
-  public boolean isAbsent()
-  {
+  public boolean isAbsent() {
     return absent;
   }
 
-  public void setAbsent(boolean absent)
-  {
+  public void setAbsent(boolean absent) {
     this.absent = absent;
   }
 
-  public Double getPrice()
-  {
+  public Double getPrice() {
     return price;
   }
 
-  public void setPrice(Double price)
-  {
+  public void setPrice(Double price) {
     this.price = price;
   }
 }

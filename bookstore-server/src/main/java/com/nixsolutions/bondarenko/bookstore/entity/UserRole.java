@@ -1,6 +1,6 @@
 package com.nixsolutions.bondarenko.bookstore.entity;
 
-import com.nixsolutions.bondarenko.bookstore.entity.enums.Role;
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,11 +9,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.io.Serializable;
+
+import com.nixsolutions.bondarenko.bookstore.entity.enums.Role;
 
 @Entity
-public class UserRole implements Serializable
-{
+public class UserRole implements Serializable {
   private static final long serialVersionUID = -1382181341969756615L;
 
   @Id
@@ -24,23 +24,11 @@ public class UserRole implements Serializable
   @Column(unique = true, nullable = false)
   private Role name;
 
-  public UserRole()
-  {
-  }
-
-  public UserRole(long id, Role role)
-  {
-    this.id = id;
-    this.name = role;
-  }
-
-  public Role getName()
-  {
+  public Role getName() {
     return name;
   }
 
-  public void setName(Role role)
-  {
+  public void setName(Role role) {
     this.name = role;
   }
 }

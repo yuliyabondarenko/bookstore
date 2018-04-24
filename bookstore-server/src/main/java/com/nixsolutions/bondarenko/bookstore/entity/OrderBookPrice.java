@@ -1,6 +1,7 @@
 package com.nixsolutions.bondarenko.bookstore.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,16 +28,6 @@ public class OrderBookPrice implements Serializable {
 
   @Column(nullable = false)
   private int count;
-
-  public OrderBookPrice() {
-  }
-
-  public OrderBookPrice(Order order, Book book, Double price, int count) {
-    this.order = order;
-    this.book = book;
-    this.price = price;
-    this.count = count;
-  }
 
   public long getId() {
     return id;
