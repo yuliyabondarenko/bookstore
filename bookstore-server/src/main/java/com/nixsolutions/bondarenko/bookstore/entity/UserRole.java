@@ -11,8 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.nixsolutions.bondarenko.bookstore.entity.enums.Role;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class UserRole implements Serializable {
   private static final long serialVersionUID = -1382181341969756615L;
 
