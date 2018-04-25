@@ -16,10 +16,14 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Formula;
 
 @Entity
 @Table(name = "user_order")
+@Getter
+@Setter
 public class Order implements Serializable
 {
   private static final long serialVersionUID = -4304333239034772283L;
@@ -45,45 +49,5 @@ public class Order implements Serializable
     for(OrderBookPrice item : this.orderBookPrices){
       item.setOrder(this);
     }
-  }
-
-  public long getId()
-  {
-    return id;
-  }
-
-  public Date getDate()
-  {
-    return date;
-  }
-
-  public void setDate(Date date)
-  {
-    this.date = date;
-  }
-
-  public User getUser()
-  {
-    return user;
-  }
-
-  public void setUser(User user)
-  {
-    this.user = user;
-  }
-
-  public List<OrderBookPrice> getOrderBookPrices()
-  {
-    return orderBookPrices;
-  }
-
-  public void setOrderBookPrices(List<OrderBookPrice> orderBookPrices)
-  {
-    this.orderBookPrices = orderBookPrices;
-  }
-
-  public Double getTotalAmount()
-  {
-    return this.totalAmount;
   }
 }

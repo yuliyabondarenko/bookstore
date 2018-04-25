@@ -12,8 +12,13 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Min;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "book_id"}))
+@Getter
+@Setter
 public class ShoppingCartItem implements Serializable {
 
   private static final long serialVersionUID = -3056748216597896872L;

@@ -9,7 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 public class OrderBookPrice implements Serializable {
   private static final long serialVersionUID = -6202609770901139946L;
 
@@ -28,40 +33,4 @@ public class OrderBookPrice implements Serializable {
 
   @Column(nullable = false)
   private int count;
-
-  public long getId() {
-    return id;
-  }
-
-  public Order getOrder() {
-    return order;
-  }
-
-  public void setOrder(Order order) {
-    this.order = order;
-  }
-
-  public Book getBook() {
-    return book;
-  }
-
-  public void setBook(Book book) {
-    this.book = book;
-  }
-
-  public Double getPrice() {
-    return price;
-  }
-
-  public void setPrice(Double price) {
-    this.price = price;
-  }
-
-  public int getCount() {
-    return count;
-  }
-
-  public void setCount(int count) {
-    this.count = count;
-  }
 }

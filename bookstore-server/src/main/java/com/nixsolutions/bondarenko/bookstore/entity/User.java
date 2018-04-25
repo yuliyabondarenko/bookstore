@@ -17,7 +17,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Pattern;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nixsolutions.bondarenko.bookstore.entity.enums.Gender;
 
 @Entity(name = "user_account")
@@ -39,7 +38,6 @@ public class User implements Serializable {
   @Column(nullable = false)
   private String username;
 
-  @JsonIgnore
   @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$",
       message = "Minimum 6 characters, at least one uppercase letter, one lowercase letter and one number")
   @Column(nullable = false)

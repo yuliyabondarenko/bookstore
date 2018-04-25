@@ -11,9 +11,10 @@ import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.nixsolutions.bondarenko.bookstore.entity.ShoppingCartItem;
+import com.nixsolutions.bondarenko.bookstore.entity.projections.ShopCartView;
 
 @PreAuthorize("hasRole('ROLE_CUSTOMER')")
-@RepositoryRestResource(collectionResourceRel = "shopcart", path = "shopcart")
+@RepositoryRestResource(collectionResourceRel = "shopcart", path = "shopcart", excerptProjection = ShopCartView.class)
 public interface ShoppingCartRepository extends PagingAndSortingRepository<ShoppingCartItem, Long> {
 
   @Override
