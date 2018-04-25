@@ -9,7 +9,6 @@ export class UsersPageService extends CollectionPageService<User> {
   getUsersPageByRole(roleName: string, page: number, size: number, sortParam: string) {
     this.searchName = roleName ? 'findByRolesName' : '';
     this.searchParams = roleName ? `role=${roleName}` : '';
-    this.projection = `projection=view`;
 
     return this.getCollectionPage(page, size, sortParam);
   }

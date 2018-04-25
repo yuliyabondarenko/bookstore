@@ -10,7 +10,6 @@ export class CollectionPageService<T> {
   collectionPath: string;
   searchName: string;
   searchParams: string;
-  projection: string;
 
   constructor(private http: HttpClient) {
   }
@@ -18,8 +17,7 @@ export class CollectionPageService<T> {
   getCollectionPage(page: number, size: number, sortParam: string): Promise<CollectionPage<T>> {
     const searchName = this.searchName && this.searchParams ? `/search/${this.searchName}` : '';
     const searchParams = this.searchName && this.searchParams ? `${this.searchParams}&` : '';
-    const projection = this.projection ? `&${this.projection}` : '';
-    const collectionUrl = `${this.basesUrl}/${this.collectionPath}${searchName}?${searchParams}sort=${sortParam}&page=${page}&size=${size}${projection}`;
+    const collectionUrl = `${this.basesUrl}/${this.collectionPath}${searchName}?${searchParams}sort=${sortParam}&page=${page}&size=${size}`;
 
     return this.http
       .get(collectionUrl, HttpOptions.authorizedEmptyBody)

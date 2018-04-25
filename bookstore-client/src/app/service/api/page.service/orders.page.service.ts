@@ -7,8 +7,6 @@ export class OrdersPageService extends CollectionPageService<Order> {
   collectionPath = 'orders';
 
   getOrders(page: number, size: number, sortParam: string){
-    this.projection = `projection=view`;
-
     return this.getCollectionPage(page, size, sortParam);
   }
 }
